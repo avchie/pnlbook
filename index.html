@@ -29,6 +29,21 @@ function formatCompactNumber(value){
   </script>
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+/* Modal field overflow fix */
+.pnModalBody > .pnFieldRow[style*="grid-template-columns"]{
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+}
+.pnModalBody .pnFieldRow{
+  min-width: 0;
+}
+.pnInput{
+  width: 100%;
+  min-width: 0;
+}
+
+
     :root{
       /* ===== Shared theme (from your dashboard) ===== */
       --bg: #07090c;
@@ -49,8 +64,8 @@ function formatCompactNumber(value){
 
       --shadow: 0 18px 55px rgba(0,0,0,0.70);
       --radius: 18px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --mono: "Inter", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
 
       /* ===== Profit tracking accents (mapped into same theme) ===== */
       --pillGreenBg: rgba(43,213,118,0.14);
@@ -195,13 +210,10 @@ function formatCompactNumber(value){
         box-shadow 0.25s ease;
     }
     .tabBtn:hover{
-      background: rgba(255,255,255,0.12);
-      border-color: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.11);
       transform: translateY(-3px);
-      box-shadow:
-        0 8px 22px rgba(0,0,0,0.45),
-        0 0 0 1px rgba(255,255,255,0.08),
-        0 0 18px rgba(210,214,224,0.18);
+      box-shadow: var(--shadow);
     }
 
     .tabBtn:active{
@@ -279,7 +291,7 @@ function formatCompactNumber(value){
     input, button{ font: inherit; }
     .input{
       background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       border-radius: 12px;
       padding: 10px 11px;
       color: rgba(255,255,255,0.92);
@@ -304,7 +316,7 @@ function formatCompactNumber(value){
 
     .ghostBtn{
       background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       color: rgba(255,255,255,0.92);
       padding: 9px 11px;
       border-radius: 12px;
@@ -371,7 +383,7 @@ function formatCompactNumber(value){
       font-weight: 900;
     }
     .tag{
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       background: rgba(255,255,255,0.06);
       padding: 6px 9px;
       border-radius: 999px;
@@ -461,7 +473,7 @@ function formatCompactNumber(value){
     }
     .sessionCard{
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       background: rgba(255,255,255,0.05);
       padding: 12px;
       position:relative;
@@ -496,7 +508,7 @@ function formatCompactNumber(value){
       font-size: 12px;
       border-radius: 999px;
       padding: 7px 10px;
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       background: rgba(255,255,255,0.06);
       color: rgba(255,255,255,0.88);
       display:flex;
@@ -514,7 +526,7 @@ function formatCompactNumber(value){
       height: 10px;
       border-radius: 999px;
       background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       overflow:hidden;
       position:relative;
     }
@@ -621,7 +633,7 @@ function formatCompactNumber(value){
       justify-content: center;
       text-align: center;
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       background: rgba(255,255,255,0.05);
       padding: 12px;
       display:flex;
@@ -655,7 +667,7 @@ function formatCompactNumber(value){
       height: 12px;
       border-radius: 999px;
       background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       overflow:hidden;
       position:relative;
     }
@@ -693,7 +705,7 @@ function formatCompactNumber(value){
     }
     .idxRow{
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       background: rgba(255,255,255,0.05);
       padding: 12px;
       display:flex;
@@ -849,7 +861,7 @@ function formatCompactNumber(value){
       height:40px;
       border-radius: 12px;
       background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       display:flex;
       align-items:center;
       justify-content:center;
@@ -867,7 +879,7 @@ function formatCompactNumber(value){
 
     .cell{
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       background: rgba(255,255,255,0.05);
       min-height: 104px;
       position:relative;
@@ -875,21 +887,18 @@ function formatCompactNumber(value){
     }
     .cell.empty{
       background: rgba(255,255,255,0.03);
-      border: 1px dashed rgba(255,255,255,0.12);
+      border: 1px dashed rgba(255,255,255,0.22);
     }
     .dayCell{
       cursor:pointer;
       transition:
         transform .18s ease,
         box-shadow .18s ease,
-        background .18s ease,
         border-color .18s ease;
     }
     .dayCell:hover{
-      background: rgba(255,255,255,0.07);
       transform: translateY(-2px) scale(1.03);
       box-shadow: 0 10px 26px rgba(0,0,0,0.28);
-      border-color: rgba(255,255,255,0.18);
     }
 
     .dayCell .date{
@@ -929,20 +938,20 @@ function formatCompactNumber(value){
 
     .dayCell.green{
       background: rgba(43,213,118,0.12);
-      border: 2px solid rgba(43,213,118,0.60);
+      border: 2px solid rgba(43,213,118,0.80);
     }
     .dayCell.red{
       background: rgba(255,77,109,0.12);
-      border: 2px solid rgba(255,77,109,0.60);
+      border: 2px solid rgba(255,77,109,0.80);
     }
     .dayCell.neutral{
       background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
     }
 
     .weekCard{
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       background: rgba(255,255,255,0.05);
       padding:12px;
       display:flex;
@@ -1029,7 +1038,7 @@ function formatCompactNumber(value){
 
     .pnlMini{
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       background: rgba(255,255,255,0.05);
       padding: 12px;
       display:flex;
@@ -1065,7 +1074,7 @@ function formatCompactNumber(value){
       width: 22px; height: 22px;
       border-radius: 999px;
       display:grid; place-items:center;
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       background: rgba(255,255,255,0.06);
       color: rgba(255,255,255,0.72);
       font-family: var(--mono);
@@ -1100,7 +1109,7 @@ function formatCompactNumber(value){
       width: 54px; height: 54px;
       border-radius: 999px;
       background: conic-gradient(var(--good) calc(var(--pct) * 1turn), rgba(255,255,255,0.10) 0);
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       box-shadow: 0 14px 35px rgba(0,0,0,0.35);
       position:relative;
       flex: 0 0 auto;
@@ -1145,7 +1154,7 @@ function formatCompactNumber(value){
   background: rgba(255,255,255,0.05);
 
   /* Match standard widget border */
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
 
   pointer-events:none;
 }
@@ -1505,7 +1514,7 @@ mask: radial-gradient(farthest-side,
       height: 10px;
       border-radius: 999px;
       background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       overflow:hidden;
       flex: 0 0 120px;
       position:relative;
@@ -1519,13 +1528,13 @@ mask: radial-gradient(farthest-side,
     }
     /* Keep outer bar rounded, but make the red/green junction a straight edge */
     .pnlSplitGood{
-      background: rgba(43,213,118,0.85);
+      background: var(--good);
       position:relative; z-index:1;
       border-top-left-radius: 999px;
       border-bottom-left-radius: 999px;
     }
     .pnlSplitBad{
-      background: rgba(255,77,109,0.85);
+      background: var(--bad);
       margin-left: 0;
       position:relative; z-index:2;
       border-top-right-radius: 999px;
@@ -1679,7 +1688,7 @@ mask: radial-gradient(farthest-side,
     .pnlWide{
       margin-top: 12px;
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
       background: rgba(255,255,255,0.05);
       padding: 12px;
       overflow:hidden;
@@ -1957,7 +1966,7 @@ mask: radial-gradient(farthest-side,
 
     .monthTile{
   border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(255,255,255,0.05);
   padding:12px;
   display:flex;
@@ -1970,14 +1979,11 @@ mask: radial-gradient(farthest-side,
   transition:
     transform .18s ease,
     box-shadow .18s ease,
-    background .18s ease,
     border-color .18s ease;
 }
     .monthTile:hover{
-  background: rgba(255,255,255,0.07);
   transform: translateY(-2px) scale(1.03);
   box-shadow: 0 10px 26px rgba(0,0,0,0.28);
-  border-color: rgba(255,255,255,0.18);
 }
     .monthTile .mName{
   color: rgba(255,255,255,0.60);
@@ -2012,12 +2018,12 @@ mask: radial-gradient(farthest-side,
 
     .monthTile.green{
   background: rgba(43,213,118,0.12);
-  border: 2px solid rgba(43,213,118,0.60);
+  border: 2px solid rgba(43,213,118,0.80);
 }
     .monthTile.green .mSum{ color: rgba(255,255,255,0.96); }
     .monthTile.red{
   background: rgba(255,77,109,0.12);
-  border: 2px solid rgba(255,77,109,0.60);
+  border: 2px solid rgba(255,77,109,0.80);
 }
     .monthTile.red .mSum{ color: rgba(255,255,255,0.96); }
     .monthTile.neutral .mSum{ color: rgba(255,255,255,0.88); }
@@ -2048,13 +2054,10 @@ mask: radial-gradient(farthest-side,
         box-shadow 0.25s ease;
     }
 .subTabBtn:hover{
-      background: rgba(255,255,255,0.12);
-      border-color: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.11);
       transform: translateY(-3px);
-      box-shadow:
-        0 8px 22px rgba(0,0,0,0.45),
-        0 0 0 1px rgba(255,255,255,0.08),
-        0 0 18px rgba(210,214,224,0.18);
+      box-shadow: var(--shadow);
     }
 
     .subTabBtn:active{
@@ -2128,15 +2131,15 @@ mask: radial-gradient(farthest-side,
 /* State styling (same logic as calendar + month tiles) */
 .yearBtn.green{
   background: rgba(43,213,118,0.12);
-  border: 2px solid rgba(43,213,118,0.60);
+  border: 2px solid rgba(43,213,118,0.80);
 }
 .yearBtn.red{
   background: rgba(255,77,109,0.12);
-  border: 2px solid rgba(255,77,109,0.60);
+  border: 2px solid rgba(255,77,109,0.80);
 }
 .yearBtn.neutral{
   background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
 }
 
 /* AI chat */
@@ -2149,7 +2152,7 @@ mask: radial-gradient(farthest-side,
       overflow:auto;
       padding-right:6px;
     }
-    .chatMsg{ border-radius: 16px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.05); padding: 12px; max-width: 900px; }
+    .chatMsg{ border-radius: 16px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.05); padding: 12px; max-width: 900px; }
     .chatMsg.user{ margin-left:auto; background: rgba(170,176,190,0.10); border-color: rgba(170,176,190,0.28); }
     .chatMsg.assistant{ margin-right:auto; }
     .chatMeta{ display:flex; gap:8px; align-items:center; margin-bottom:6px; font-family: var(--mono); font-size:12px; color: rgba(255,255,255,0.70); font-weight:900; }
@@ -2400,9 +2403,7 @@ mask: radial-gradient(farthest-side,
 #sectionDashboard .card:hover,
 #sectionDashboard .widgetCard:hover{
   transform: translateY(-4px) !important;
-  box-shadow:
-    0 18px 45px rgba(0,0,0,0.55),
-    0 0 0 1px rgba(255,255,255,0.06) !important;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.55) !important;
 }
 
 
@@ -2566,7 +2567,7 @@ mask: radial-gradient(farthest-side,
 .pnHint code{
   font-family: var(--mono);
   background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   padding: 2px 6px;
   border-radius: 999px;
 }
@@ -2878,8 +2879,11 @@ mask: radial-gradient(farthest-side,
   float: none !important;
   height: 100%;
 }
+#avgWinLossWidget .pnlSplitGood{
+  background: var(--good) !important;
+}
 #avgWinLossWidget .pnlSplitBad{
-  background: rgba(255,77,109,0.90) !important;
+  background: var(--bad) !important;
 }
 
 /* Win rate: place win/loss counts under arc ends; hide middle count */
@@ -3240,7 +3244,7 @@ mask: radial-gradient(farthest-side,
 #yearlyTopRow .yearBtn.cell,
 #yearlyTopRow .yearMonthBtn.cell{
   border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(255,255,255,0.05);
   min-height: 104px;
 }
@@ -3468,7 +3472,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -3490,7 +3494,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(0,0,0,0.92) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -3504,7 +3508,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
@@ -4021,7 +4025,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -4043,7 +4047,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(0,0,0,0.92) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -4057,7 +4061,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
@@ -4435,7 +4439,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -4457,7 +4461,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(0,0,0,0.92) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -4471,7 +4475,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
@@ -4821,7 +4825,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -4843,7 +4847,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(0,0,0,0.92) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -4857,7 +4861,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
@@ -5223,7 +5227,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -5245,7 +5249,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(0,0,0,0.92) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -5259,7 +5263,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
@@ -5592,7 +5596,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -5614,7 +5618,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(0,0,0,0.92) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -5628,7 +5632,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
@@ -5970,7 +5974,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -5992,7 +5996,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(0,0,0,0.92) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -6006,7 +6010,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
@@ -6338,7 +6342,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -6360,7 +6364,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(0,0,0,0.92) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -6374,7 +6378,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
@@ -6720,7 +6724,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -6742,7 +6746,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(0,0,0,0.92) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -6756,7 +6760,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
@@ -6911,7 +6915,7 @@ mask: radial-gradient(farthest-side,
   letter-spacing: 0.2px;
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -7116,7 +7120,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -7138,7 +7142,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(0,0,0,0.92) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -7152,7 +7156,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
@@ -7486,7 +7490,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -7508,7 +7512,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(0,0,0,0.92) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -7522,7 +7526,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
@@ -7872,7 +7876,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -7894,7 +7898,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(0,0,0,0.92) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -7908,7 +7912,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
@@ -8237,7 +8241,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -8259,7 +8263,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(0,0,0,0.92) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -8273,7 +8277,7 @@ mask: radial-gradient(farthest-side,
 #avgWinLossWidget .pnlBarNums span{
   padding: 6px 8px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70) !important;
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
@@ -9052,7 +9056,6 @@ body{
   will-change: transform !important;
   transition:
     transform 380ms cubic-bezier(.2,.9,.2,1),
-    background 180ms ease,
     border-color 180ms ease,
     box-shadow 220ms ease !important;
 }
@@ -9203,6 +9206,155 @@ body{
 }
 </style>
 
+
+<style id="matte-bw-override">
+:root{
+  --bg:#0a0a0a !important;
+  --panel:#111111 !important;
+  --stroke:#1f1f1f !important;
+  --text:#f5f5f5 !important;
+  --muted:#9a9a9a !important;
+  --muted2:#6f6f6f !important;
+  --good:#22c55e !important;
+  --bad:#ef4444 !important;
+  --warn:#eab308 !important;
+  --pre:#d4d4d4 !important;
+  --open:#22c55e !important;
+  --post:#a3a3a3 !important;
+  --closed:#262626 !important;
+  --shadow:none !important;
+  --radius:10px !important;
+  --pillGreenBg:#111111 !important;
+  --pillGreenText:#eaeaea !important;
+  --pillRedBg:#111111 !important;
+  --pillRedText:#eaeaea !important;
+  --pillPurpleBg:#111111 !important;
+  --pillPurpleText:#eaeaea !important;
+}
+
+html, body{
+  background:#0a0a0a !important;
+}
+
+body{
+  color:var(--text) !important;
+  letter-spacing:-0.01em;
+}
+
+.bgLayer, .bgDash, .bgProfit, .bgAI,
+.sessionCard:before{
+  display:none !important;
+  background:none !important;
+}
+
+.card, .widgetCard, .sessionCard, .gauge, .idxRow, .item, .cell, .dayCell,
+.monthTile, .statCard, .metricCard, .summaryCard, .panel,
+.pill, .pillStat, .chip, .badge, .tag, .dow, .input, .btn, .ghostBtn, .tabBtn, .navBtn,
+.subTabBtn, .yearBtn, .toggleBtn, .optionBtn, .modalCard, .floatingCard{
+  background:#111111 !important;
+  background-image:none !important;
+  border:1px solid #1f1f1f !important;
+  box-shadow:none !important;
+}
+
+.cardHead, .toolbar, .topbar, .sectionHead, .modalHead, .pager{
+  border-color:#1f1f1f !important;
+}
+
+.itemTop, .row, .gTop, .idxRow, .pnlTopbar, .tools, .tagRow{
+  box-shadow:none !important;
+}
+
+.tabBtn:hover, .btn:hover, .ghostBtn:hover, .navBtn:hover, .subTabBtn:hover,
+.dayCell:hover, .monthTile:hover, .card:hover, .widgetCard:hover, .idxRow:hover, .item:hover, .sessionCard:hover{
+  box-shadow:none !important;
+}
+
+.tabBtn.active, .subTabBtn.active, .monthTile.active, .navBtn.active{
+  background:#1a1a1a !important;
+  border-color:#343434 !important;
+  box-shadow:none !important;
+}
+
+.input, input, textarea, select{
+  background:#0f0f0f !important;
+  color:#f5f5f5 !important;
+  border:1px solid #1f1f1f !important;
+  box-shadow:none !important;
+}
+
+.input::placeholder, input::placeholder, textarea::placeholder{
+  color:#777 !important;
+}
+
+.title, .name, .gTitle, .idxName, .monthTitle, .cardHead h2, h1, h2, h3, h4, h5, h6{
+  color:#f5f5f5 !important;
+}
+
+.subtitle, .muted, .statLabel, .idxMeta, .gLabel, .ticks, .dayCell .date,
+.dayCell .pnlSub, .chip, .badge, .tag, .pill span{
+  color:#9a9a9a !important;
+}
+
+.mono, .pill b, .pillStat, .gValue, .idxPct, .dayCell .pnlVal{
+  color:#f5f5f5 !important;
+}
+
+.gBar, .bar{
+  background:#0d0d0d !important;
+  border:1px solid #1f1f1f !important;
+}
+
+.gFill{
+  background:#f5f5f5 !important;
+}
+
+.gNeedle, .arrow{
+  background:#f5f5f5 !important;
+  border-top-color:#f5f5f5 !important;
+  box-shadow:none !important;
+  filter:none !important;
+}
+
+.scrollArea::-webkit-scrollbar-thumb{
+  background:#2a2a2a !important;
+  border-color:#111 !important;
+}
+
+.scrollArea::-webkit-scrollbar-track{
+  background:#0d0d0d !important;
+}
+
+.pos{ color:#22c55e !important; }
+.neg{ color:#ef4444 !important; }
+
+.dayCell.green{
+  background:#101510 !important;
+  border:2px solid #2d5a3c !important;
+}
+
+.dayCell.red{
+  background:#151010 !important;
+  border:2px solid #5a2d36 !important;
+}
+
+.dayCell.neutral{
+  background:#101010 !important;
+  border:1px solid #2b2b2b !important;
+}
+
+.cell.empty{
+  background:#101010 !important;
+  border:1px dashed #3a3a3a !important;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation:none !important;
+    transition:none !important;
+  }
+}
+</style>
 </head>
 
 <body class="tab-dashboard">
@@ -13049,5 +13201,101 @@ document.addEventListener("DOMContentLoaded", function() {
 })();
 </script>
 
+
+<style id="daily-cells-reference-colors">
+/* Reference-style daily cell colors from uploaded screenshot */
+.dayCell{
+  background:#101010 !important;
+  border:1px solid #2b2b2b !important;
+  box-shadow:none !important;
+}
+
+.dayCell.green{
+  background:#0d2218 !important;
+  border:1px solid #1d8f5a !important;
+}
+
+.dayCell.red{
+  background:#261114 !important;
+  border:1px solid #9b3748 !important;
+}
+
+.dayCell.neutral{
+  background:#111111 !important;
+  border:1px solid #2b2b2b !important;
+}
+
+.dayCell .date,
+.dayCell .pnlSub{
+  color:#f3f5f7 !important;
+}
+
+.dayCell.green .pnlVal{
+  color:#24d27c !important;
+}
+
+.dayCell.red .pnlVal{
+  color:#ff5b5b !important;
+}
+
+.dayCell.neutral .pnlVal{
+  color:#f5f5f5 !important;
+}
+
+.dayCell:hover{
+  box-shadow:none !important;
+}
+</style>
+
 </body>
 </html>
+
+
+<style id="remove-hover-illumination-final">
+.tabBtn:hover,
+.subTabBtn:hover,
+.card:hover,
+.widgetCard:hover,
+.idxRow:hover,
+.item:hover,
+.sessionCard:hover,
+.cell:hover,
+.weekCard:hover,
+.gauge:hover,
+.pnlMini:hover,
+.pnlWide:hover,
+.statCard:hover,
+.metricCard:hover,
+.summaryCard:hover,
+.panel:hover,
+.floatingCard:hover{
+  background: #111111 !important;
+  background-image: none !important;
+  filter: none !important;
+}
+
+.dayCell,
+.card,
+.widgetCard,
+.idxRow,
+.item,
+.sessionCard,
+.cell,
+.weekCard,
+.gauge,
+.pnlMini,
+.pnlWide,
+.statCard,
+.metricCard,
+.summaryCard,
+.panel,
+.floatingCard{
+  transition-property: transform, box-shadow !important;
+}
+
+.dayCell:hover,
+.monthTile:hover{
+  background-image: none !important;
+  filter: none !important;
+}
+</style>
