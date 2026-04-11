@@ -139,7 +139,7 @@ function formatCompactNumber(value){
     .wrap{
       max-width: 1720px;
       margin: 0 auto;
-      padding: 26px 18px 44px;
+      padding: 26px 18px 20px;
     }
 
     /* ===== Global header + tabs ===== */
@@ -846,10 +846,234 @@ function formatCompactNumber(value){
     }
 
     .calGrid{
+      margin-bottom: 0;
       display:grid;
       grid-template-columns: repeat(7, minmax(118px, 1fr)) 240px;
       gap:10px;
       align-items:stretch;
+    }
+
+
+    .calendarStage{
+      position:relative;
+      isolation:isolate;
+    }
+    .journalHint{
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.045);
+      color: var(--muted);
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.15px;
+      opacity:0;
+      transform: translateY(8px);
+      pointer-events:none;
+      transition: opacity .34s ease, transform .34s ease;
+    }
+    .journalHint.show{
+      opacity:1;
+      transform: translateY(0);
+    }
+    .demoBadge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 11px;
+      border-radius:999px;
+      border:1px solid rgba(43,213,118,0.28);
+      background: rgba(43,213,118,0.09);
+      color: rgba(216,245,226,0.96);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.18px;
+      opacity:0;
+      transform: translateY(4px);
+      pointer-events:none;
+      transition: opacity .28s ease, transform .28s ease;
+    }
+    .demoBadge.show{
+      opacity:1;
+      transform: translateY(0);
+      pointer-events:auto;
+    }
+    .demoBadge .dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background: var(--good);
+      box-shadow: 0 0 0 6px rgba(43,213,118,0.08);
+    }
+    .calendarStageInner{
+      position:relative;
+      z-index:1;
+      transition: filter .45s cubic-bezier(.2,.8,.2,1), transform .45s cubic-bezier(.2,.8,.2,1), opacity .35s ease;
+      transform-origin: 50% 10%;
+    }
+    .calendarStage.demo-overlay-open .calendarStageInner{
+      filter: blur(2px) saturate(.94);
+      transform: scale(.992);
+    }
+    .demoOverlay{
+      position:absolute;
+      inset:0;
+      z-index:3;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transition: opacity .38s ease, visibility .38s ease;
+    }
+    .demoOverlay.show{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+    }
+    .demoOverlayBack{
+      position:absolute;
+      inset:0;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(7,9,12,0.40), rgba(7,9,12,0.82));
+      backdrop-filter: blur(10px);
+    }
+    .demoOverlayCard{
+      position:relative;
+      width:min(680px, 100%);
+      padding:26px 26px 24px;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(180deg, rgba(19,24,31,0.96), rgba(10,13,17,0.96));
+      box-shadow: 0 24px 80px rgba(0,0,0,0.48), 0 0 0 1px rgba(255,255,255,0.04) inset;
+      transform: translateY(16px) scale(.985);
+      opacity:0;
+      transition: transform .46s cubic-bezier(.2,.8,.2,1), opacity .34s ease;
+      overflow:hidden;
+    }
+    .demoOverlay.show .demoOverlayCard{
+      transform: translateY(0) scale(1);
+      opacity:1;
+    }
+    .demoOverlayCard::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(680px 220px at 12% 0%, rgba(43,213,118,0.14), transparent 58%),
+                  radial-gradient(680px 220px at 100% 0%, rgba(255,255,255,0.08), transparent 58%);
+      pointer-events:none;
+    }
+    .demoEyebrow{
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.82);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.26px;
+      text-transform:uppercase;
+    }
+    .demoTitle{
+      position:relative;
+      margin:14px 0 10px;
+      font-size:34px;
+      line-height:1.02;
+      letter-spacing:-0.03em;
+      font-weight:950;
+      color: rgba(255,255,255,0.98);
+    }
+    .demoLead{
+      position:relative;
+      margin:0 0 18px;
+      color: rgba(255,255,255,0.74);
+      font-size:15px;
+      font-weight:750;
+      line-height:1.6;
+      max-width:58ch;
+    }
+    .demoSteps{
+      position:relative;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:12px;
+      margin:0 0 18px;
+    }
+    .demoStep{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.09);
+      background: rgba(255,255,255,0.05);
+      padding:14px 14px 13px;
+    }
+    .demoStepNum{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:28px;
+      height:28px;
+      border-radius:999px;
+      background: rgba(43,213,118,0.10);
+      border:1px solid rgba(43,213,118,0.26);
+      color: var(--good);
+      font-size:12px;
+      font-weight:950;
+      font-family: var(--mono);
+      margin-bottom:10px;
+    }
+    .demoStepTitle{
+      color: rgba(255,255,255,0.96);
+      font-size:14px;
+      font-weight:900;
+      margin-bottom:4px;
+    }
+    .demoStepText{
+      color: rgba(255,255,255,0.68);
+      font-size:13px;
+      line-height:1.5;
+      font-weight:750;
+    }
+    .demoOverlayFooter{
+      position:relative;
+      display:block;
+      width:100%;
+    }
+    .demoFooterText{
+      color: rgba(255,255,255,0.62);
+      font-size:12px;
+      font-weight:850;
+      letter-spacing:.12px;
+    }
+    .demoActions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .demoBtnPrimary{
+      background: linear-gradient(180deg, rgba(43,213,118,0.22), rgba(43,213,118,0.15));
+      border:1px solid rgba(43,213,118,0.38);
+      color: rgba(238,255,245,0.98);
+      box-shadow: 0 14px 34px rgba(43,213,118,0.10);
+    }
+    .demoBtnPrimary:hover{
+      background: linear-gradient(180deg, rgba(43,213,118,0.28), rgba(43,213,118,0.18));
+    }
+    .demoBtnSecondary{
+      background: rgba(255,255,255,0.06);
+    }
+    @media (max-width: 760px){
+      .demoOverlay{ padding:16px; }
+      .demoOverlayCard{ padding:22px 18px 18px; border-radius:22px; }
+      .demoTitle{ font-size:28px; }
+      .demoSteps{ grid-template-columns:1fr; }
+      .demoOverlayFooter{ align-items:flex-start; }
     }
     @media (max-width: 980px){
       .widgetsGrid{ grid-template-columns: 1fr; 
@@ -1949,7 +2173,8 @@ mask: radial-gradient(farthest-side,
 @media (max-width: 900px){ .monthGrid{ grid-template-columns: repeat(2, minmax(118px, 1fr)); } }
 
     @media (max-width: 1180px){
-      .calGrid{ grid-template-columns: repeat(7, minmax(120px, 1fr)) 280px; }
+      .calGrid{
+      margin-bottom: 0; grid-template-columns: repeat(7, minmax(120px, 1fr)) 280px; }
       .monthGrid{ grid-template-columns: repeat(4, minmax(120px, 1fr)); }
       .yearPicker{ grid-template-columns: repeat(4, minmax(120px, 1fr)); }
     }
@@ -3826,6 +4051,50 @@ mask: radial-gradient(farthest-side,
     /* === Trade Win %: move win/loss pills slightly upward === */
     #winRateWidget .winGaugeCounts{
       margin-top: -6px !important;
+    }
+
+
+    .demoSnoozeRow{
+      margin-left:0;
+      padding-left:0;
+      margin:0;
+      
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      gap:10px;
+      color: var(--muted);
+      font-size:13px;
+      font-weight:850;
+      user-select:none;
+      cursor:pointer;
+    }
+    .demoSnoozeRow input{
+      width:16px;
+      height:16px;
+      accent-color: #AEB6C6;
+      cursor:pointer;
+    }
+    #openDemoBtn,
+    #demoBadge{
+      display:none !important;
+    }
+
+
+    #pillMonthlyPnl.is-negative{
+      background: rgba(255,77,109,0.12) !important;
+      border-color: rgba(255,77,109,0.45) !important;
+      color: #ffb3b3 !important;
+    }
+    #pillMonthlyPnl.is-positive{
+      background: rgba(43,213,118,0.08) !important;
+      border-color: rgba(43,213,118,0.45) !important;
+      color: var(--good) !important;
+    }
+    #pillMonthlyPnl.is-zero{
+      background: rgba(165,172,185,0.18) !important;
+      border-color: rgba(170,176,190,.30) !important;
+      color: rgba(235,238,245,0.96) !important;
     }
 
 </style>
@@ -9549,7 +9818,7 @@ body{
 
               <div class="pnlRightStats">
                 <div class="statLabel">Monthly stats:</div>
-                <div class="pillStat green" id="pillMonthlyPnl">$0.00</div>
+                <div class="pillStat purple" id="pillMonthlyPnl">$0.00</div>
                 <div class="pillStat purple" id="pillTradingDays">0 days</div>
               </div>
             </div>
@@ -9682,10 +9951,57 @@ body{
             <div class="card" id="monthView">
                       <div class="cardHead">
                         <h2>Calendar</h2>
-            
+                        
                       </div>
                       <div class="content">
-                        <div class="calGrid" id="calGrid"></div>
+                        <div class="calendarStage" id="calendarStage">
+                          <div class="calendarStageInner" id="calendarStageInner">
+                            <div class="calGrid" id="calGrid"></div>
+                            
+                          </div>
+                          <div class="demoOverlay" id="demoOverlay" aria-hidden="true">
+                            <div class="demoOverlayBack" id="demoOverlayBack"></div>
+                            <div class="demoOverlayCard" role="dialog" aria-modal="true" aria-labelledby="demoOverlayTitle">
+                              <div class="demoEyebrow">Welcome to PNL Book</div>
+                              <div class="demoTitle" id="demoOverlayTitle">Track your trading day in under 30 seconds.</div>
+                              <p class="demoLead"></p>
+                              <div class="demoSteps">
+                                <div class="demoStep">
+                                  <div class="demoStepNum">01</div>
+                                  <div class="demoStepTitle">Log your day</div>
+                                  <div class="demoStepText">Open any date and enter gross profit, gross loss, winning trades, and losing trades.</div>
+                                </div>
+                                <div class="demoStep">
+                                  <div class="demoStepNum">02</div>
+                                  <div class="demoStepTitle">See the result instantly</div>
+                                  <div class="demoStepText">PNL Book calculates the day’s net result and colors the calendar automatically.</div>
+                                </div>
+                                <div class="demoStep">
+                                  <div class="demoStepNum">03</div>
+                                  <div class="demoStepTitle">Review the month</div>
+                                  <div class="demoStepText">Use the widgets to understand profit factor, risk to reward, win rate and trade expectancy.</div>
+                                </div>
+                                <div class="demoStep">
+                                  <div class="demoStepNum">04</div>
+                                  <div class="demoStepTitle">Improve your trading</div>
+                                  <div class="demoStepText">Track your progress, tighten your discipline, and watch your trading improve over time.</div>
+                                </div>
+                              </div>
+                              <div class="demoOverlayFooter">
+                                
+                                
+<div class="demoActions" style="display:flex;justify-content:space-between;align-items:center;margin-top:18px;width:100%;">
+  <label class="demoSnoozeRow" for="demoSnoozeCheck" style="margin:0;">
+    <input type="checkbox" id="demoSnoozeCheck" />
+    <span>Don't show again for 30 days</span>
+  </label>
+  <button class="btn demoBtnPrimary" id="demoReadyBtn" type="button">Got it</button>
+</div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
 
@@ -10101,6 +10417,15 @@ const pnModalWins = document.getElementById("pnModalWins");
         e.preventDefault();
         commitPnLEditor();
       }
+    }
+  });
+
+
+  document.addEventListener("keydown", (e) => {
+    if(e.key !== "Escape") return;
+    if(demoOverlay?.classList.contains("show") && !shouldShowPnLOnboarding()){
+      e.preventDefault();
+      hideDemoOverlay();
     }
   });
 
@@ -10972,6 +11297,82 @@ const yearChart = document.getElementById("yearChart");
 
   const PNL_KEY = "ts_profit_tracking_v1";
 
+  const PNL_ONBOARD_KEY = "ts_profit_onboarding_hide_until_v1";
+
+  const openDemoBtn = document.getElementById("openDemoBtn");
+  const demoBadge = document.getElementById("demoBadge");
+  const journalHint = document.getElementById("journalHint");
+  const calendarStage = document.getElementById("calendarStage");
+  const demoOverlay = document.getElementById("demoOverlay");
+  const demoOverlayBack = document.getElementById("demoOverlayBack");
+  const demoPreviewBtn = document.getElementById("demoPreviewBtn");
+  const demoReadyBtn = document.getElementById("demoReadyBtn");
+  const demoSnoozeCheck = document.getElementById("demoSnoozeCheck");
+
+  function createDemoDaily(){
+    return {};
+  }
+
+  const pnlDemoDaily = {};
+  let pnlDemoMode = false;
+  let pnlPreDemoCursor = null;
+
+  function getActiveDailyStore(){
+    return pnlState.daily;
+  }
+  function hasRealJournalData(){
+    return Object.values(pnlState.daily || {}).some(rec => hasDayData(normalizeDayRec(rec)));
+  }
+  function shouldShowPnLOnboarding(){
+    try{
+      const hideUntil = Number(localStorage.getItem(PNL_ONBOARD_KEY) || 0);
+      return !hideUntil || Date.now() > hideUntil;
+    }catch(e){
+      return true;
+    }
+  }
+  function markPnLOnboardingSeen(){
+    try{
+      if(demoSnoozeCheck && demoSnoozeCheck.checked){
+        const thirtyDaysMs = 30 * 24 * 60 * 60 * 1000;
+        localStorage.setItem(PNL_ONBOARD_KEY, String(Date.now() + thirtyDaysMs));
+      }else{
+        localStorage.removeItem(PNL_ONBOARD_KEY);
+      }
+    }catch(e){}
+  }
+  function syncDemoUi(){
+    const isOpen = !!(demoOverlay && demoOverlay.classList.contains("show"));
+    if(calendarStage) calendarStage.classList.toggle("demo-overlay-open", isOpen);
+  }
+  function showDemoOverlay(){
+    if(!demoOverlay) return;
+    demoOverlay.setAttribute("aria-hidden", "false");
+    demoOverlay.classList.add("show");
+    syncDemoUi();
+  }
+  function hideDemoOverlay(){
+    if(!demoOverlay) return;
+    demoOverlay.classList.remove("show");
+    demoOverlay.setAttribute("aria-hidden", "true");
+    syncDemoUi();
+  }
+  function enterDemoMode(opts = {}){
+    renderMonthView();
+    renderMonthChart();
+    renderYearIfNeeded();
+    if(opts.showOverlay !== false) showDemoOverlay();
+    else hideDemoOverlay();
+    syncDemoUi();
+  }
+  function exitDemoMode(opts = {}){
+    hideDemoOverlay();
+    renderMonthView();
+    renderMonthChart();
+    renderYearIfNeeded();
+    syncDemoUi();
+  }
+
   function loadPnLState(){
     try{
       const raw = localStorage.getItem(PNL_KEY);
@@ -11029,6 +11430,7 @@ const yearChart = document.getElementById("yearChart");
     return !!rec && ((Number(rec.pnl) || 0) !== 0 || (rec.wins|0) > 0 || (rec.losses|0) > 0 || (Number(rec.gp)||0) !== 0 || (Number(rec.gl)||0) !== 0);
   }
 const pnlState = loadPnLState();
+  window.pnlState = pnlState;
 
   function fmtMoney(n){
     const x = Number(n) || 0;
@@ -11159,9 +11561,28 @@ const pnlState = loadPnLState();
 
   function setPillColor(el, val){
     el.classList.remove("green","red","purple");
-    if(val > 0) el.classList.add("green");
-    else if(val < 0) el.classList.add("red");
-    else el.classList.add("purple");
+
+    // Clear any older inline styling first
+    el.style.background = "";
+    el.style.borderColor = "";
+    el.style.color = "";
+
+    if(val > 0){
+      el.classList.add("green");
+      el.style.background = "rgba(43,213,118,0.08)";
+      el.style.borderColor = "rgba(43,213,118,0.45)";
+      el.style.color = "var(--good)";
+    }else if(val < 0){
+      el.classList.add("red");
+      el.style.background = "var(--pillRedBg)";
+      el.style.borderColor = "rgba(255,77,109,.30)";
+      el.style.color = "var(--pillRedText)";
+    }else{
+      el.classList.add("purple");
+      el.style.background = "var(--pillPurpleBg)";
+      el.style.borderColor = "rgba(170,176,190,.30)";
+      el.style.color = "var(--pillPurpleText)";
+    }
   }
   function dayKey(y,m,d){
     return `${String(y)}-${String(m).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
@@ -11183,7 +11604,31 @@ const pnlState = loadPnLState();
 
     const mt = monthTotal(pnlState.year, pnlState.month);
     animateCount(pillMonthlyPnl, mt.sum, fmtMoneyPlusOnly, 560);
-    setPillColor(pillMonthlyPnl, mt.sum);
+
+    // Force monthly total pill state explicitly on every render
+    if(pillMonthlyPnl){
+      pillMonthlyPnl.className = "pillStat";
+      pillMonthlyPnl.style.background = "";
+      pillMonthlyPnl.style.borderColor = "";
+      pillMonthlyPnl.style.color = "";
+
+      if(mt.sum > 0){
+        pillMonthlyPnl.classList.add("green");
+        pillMonthlyPnl.style.background = "rgba(43,213,118,0.08)";
+        pillMonthlyPnl.style.borderColor = "rgba(43,213,118,0.45)";
+        pillMonthlyPnl.style.color = "var(--good)";
+      }else if(mt.sum < 0){
+        pillMonthlyPnl.classList.add("red");
+        pillMonthlyPnl.style.background = "rgba(255,77,109,0.12)";
+        pillMonthlyPnl.style.borderColor = "rgba(255,77,109,0.45)";
+        pillMonthlyPnl.style.color = "#ffb3b3";
+      }else{
+        pillMonthlyPnl.classList.add("purple");
+        pillMonthlyPnl.style.background = "rgba(165,172,185,0.18)";
+        pillMonthlyPnl.style.borderColor = "rgba(170,176,190,.30)";
+        pillMonthlyPnl.style.color = "rgba(235,238,245,0.96)";
+      }
+    }
 
     const prevDays = Number(pillTradingDays.dataset.num ?? NaN);
     const nextDays = Number(mt.tradingDays) || 0;
@@ -11367,7 +11812,7 @@ prevBtn.addEventListener("click", () => {
     let tradingDays = 0;
     for(let d=1; d<=daysInMonth; d++){
       const k = dayKey(year, month, d);
-      const v = Number(normalizeDayRec(pnlState.daily[k]).pnl) || 0;
+      const v = Number(normalizeDayRec(getActiveDailyStore()[k]).pnl) || 0;
       if(Number.isFinite(v) && v !== 0){
         tradingDays++;
         sum += v;
@@ -11383,7 +11828,7 @@ prevBtn.addEventListener("click", () => {
     let wins = 0, losses = 0;
     for(let d=1; d<=daysInMonth; d++){
       const k = dayKey(year, month, d);
-      const rec = normalizeDayRec(pnlState.daily[k]);
+      const rec = normalizeDayRec(getActiveDailyStore()[k]);
       wins += (rec.wins|0);
       losses += (rec.losses|0);
     }
@@ -11396,9 +11841,9 @@ prevBtn.addEventListener("click", () => {
   function yearTotal(year){
     let sum = 0;
     let tradingDays = 0;
-    for(const k of Object.keys(pnlState.daily)){
+    for(const k of Object.keys(getActiveDailyStore())){
       if(k.startsWith(`${year}-`)){
-        const v = Number(normalizeDayRec(pnlState.daily[k]).pnl) || 0;
+        const v = Number(normalizeDayRec(getActiveDailyStore()[k]).pnl) || 0;
         if(Number.isFinite(v) && v !== 0){
           tradingDays++;
           sum += v;
@@ -11459,7 +11904,7 @@ prevBtn.addEventListener("click", () => {
         if(day > daysInMonth) break;
 
         const k = dayKey(y,m,day);
-        const rec = normalizeDayRec(pnlState.daily[k]);
+        const rec = normalizeDayRec(getActiveDailyStore()[k]);
         const has = hasDayData(rec);
         const val = Number(rec.pnl) || 0;
 
@@ -11482,6 +11927,10 @@ prevBtn.addEventListener("click", () => {
           </div>
         `;
         cell.addEventListener("click", () => {
+          if(pnlDemoMode){
+            showDemoOverlay();
+            return;
+          }
           const existing = pnlState.daily[k] ?? { pnl: 0, wins: 0, losses: 0 };
           showPnLEditor(k, existing, (recOut) => {
             const recNew = normalizeDayRec(recOut);
@@ -11523,7 +11972,10 @@ prevBtn.addEventListener("click", () => {
 
       col = 1;
     }
+    const monthHasAny = Array.from({length: daysInMonth}, (_, idx) => hasDayData(normalizeDayRec(getActiveDailyStore()[dayKey(y, m, idx + 1)]))).some(Boolean);
+    if(journalHint) journalHint.classList.toggle("show", !pnlDemoMode && !monthHasAny);
     renderMonthWidgets();
+    syncDemoUi();
   }
 
   // Simple canvas line chart renderer (smooth curve)
@@ -11801,7 +12253,7 @@ function resetMonthlyNumberAnimationState(){
 
     for(let d=1; d<=daysInMonth; d++){
       const k = dayKey(year, month, d);
-      const v = Number(normalizeDayRec(pnlState.daily[k]).pnl) || 0;
+      const v = Number(normalizeDayRec(getActiveDailyStore()[k]).pnl) || 0;
 
       if(v > 0){
         curWin += 1; curLoss = 0;
@@ -12150,7 +12602,7 @@ function updateWinRateGauge(wins, losses, ties=0){
       const { daysInMonth } = getMonthDays(year, m);
       for(let d=1; d<=daysInMonth; d++){
         const k = dayKey(year, m, d);
-        const rec = normalizeDayRec(pnlState.daily[k]);
+        const rec = normalizeDayRec(getActiveDailyStore()[k]);
         const v = Number(rec.pnl) || 0;
         daily.push(v);
 
@@ -12286,7 +12738,7 @@ function updateWinRateGauge(wins, losses, ties=0){
     const daily = [];
     for(let d=1; d<=daysInMonth; d++){
       const k = dayKey(year, month, d);
-      const rec = normalizeDayRec(pnlState.daily[k]);
+      const rec = normalizeDayRec(getActiveDailyStore()[k]);
       const v = Number(rec.pnl) || 0;
       daily.push(v);
 
@@ -12437,7 +12889,7 @@ const year = pnlState.year;
     const pts = [];
     for(let d=1; d<=daysInMonth; d++){
       const k = dayKey(year, month, d);
-      const v = Number(normalizeDayRec(pnlState.daily[k]).pnl) || 0;
+      const v = Number(normalizeDayRec(getActiveDailyStore()[k]).pnl) || 0;
       if(Number.isFinite(v)) cum += v;
       pts.push({ x: d, y: cum });
     }
@@ -12457,7 +12909,7 @@ drawLineChart(monthChart, pts, `${monthName(year, month)}`);
       const { daysInMonth } = getMonthDays(year, m);
       for(let d=1; d<=daysInMonth; d++){
         const k = dayKey(year, m, d);
-        const v = Number(normalizeDayRec(pnlState.daily[k]).pnl) || 0;
+        const v = Number(normalizeDayRec(getActiveDailyStore()[k]).pnl) || 0;
         if(Number.isFinite(v)) cum += v;
       }
       pts.push({ x: m, y: cum });
@@ -12473,7 +12925,7 @@ drawLineChart(yearChart, pts, `Year ${year}`);
     // Title stays fixed; years are selectable below
     if(yearLabel) yearLabel.textContent = "";
 
-    const years = Array.from(new Set(Object.keys(pnlState.daily)
+    const years = Array.from(new Set(Object.keys(getActiveDailyStore())
       .map(k => Number(String(k).slice(0,4)))
       .filter(y => Number.isFinite(y))))
       .sort((a,b)=>a-b);
@@ -12650,6 +13102,16 @@ drawLineChart(yearChart, pts, `Year ${year}`);
     }
   }
 
+  openDemoBtn?.addEventListener("click", () => {
+    showDemoOverlay();
+  });
+  demoPreviewBtn?.addEventListener("click", () => {});
+  demoReadyBtn?.addEventListener("click", () => {
+    markPnLOnboardingSeen();
+    exitDemoMode({ openEditor: false });
+  });
+  demoOverlayBack?.addEventListener("click", () => {});
+
   /* =============================
      Boot
   ============================== */
@@ -12666,6 +13128,10 @@ drawLineChart(yearChart, pts, `Year ${year}`);
   renderEarnings();
   renderMonthView();
   renderMonthChart();
+  renderYearIfNeeded();
+  syncDemoUi();
+  if(shouldShowPnLOnboarding()) showDemoOverlay();
+  else hideDemoOverlay();
 
   tickFeed();
   setInterval(tickFeed, 5000);
@@ -13246,6 +13712,44 @@ document.addEventListener("DOMContentLoaded", function() {
   box-shadow:none !important;
 }
 </style>
+
+
+<script>
+(function(){
+  function syncMonthlyPnlPill(){
+    const el = document.getElementById('pillMonthlyPnl');
+    if(!el) return;
+    const txt = (el.textContent || '').trim();
+    el.classList.remove('is-negative','is-positive','is-zero','green','red','purple');
+
+    if(txt.startsWith('-$') || txt.startsWith('-')){
+      el.classList.add('is-negative');
+    }else if(txt.startsWith('+$') || (txt.startsWith('$') && !/^\$0(?:\.0+)?$/.test(txt))){
+      el.classList.add('is-positive');
+    }else{
+      el.classList.add('is-zero');
+    }
+  }
+
+  function init(){
+    const el = document.getElementById('pillMonthlyPnl');
+    if(!el) return;
+    syncMonthlyPnlPill();
+
+    const mo = new MutationObserver(syncMonthlyPnlPill);
+    mo.observe(el, { childList: true, characterData: true, subtree: true });
+
+    window.addEventListener('load', syncMonthlyPnlPill);
+    document.addEventListener('visibilitychange', syncMonthlyPnlPill);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  }else{
+    init();
+  }
+})();
+</script>
 
 </body>
 </html>
