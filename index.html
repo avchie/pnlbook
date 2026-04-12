@@ -9624,9 +9624,61 @@ body{
   }
 }
 </style>
+
+<style>
+  #mobileBlocker {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: #07090c;
+    color: rgba(255,255,255,0.94);
+    font-family: Inter, system-ui, sans-serif;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+  }
+
+  #mobileBlockerInner {
+    max-width: 460px;
+  }
+
+  #mobileBlocker h1 {
+    margin: 0 0 12px;
+    font-size: 28px;
+    font-weight: 900;
+  }
+
+  #mobileBlocker p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.72);
+    font-weight: 700;
+  }
+
+  @media (max-width: 900px) {
+    body > *:not(#mobileBlocker) {
+      display: none !important;
+    }
+
+    #mobileBlocker {
+      display: flex !important;
+    }
+  }
+</style>
+
 </head>
 
 <body class="tab-dashboard">
+<div id="mobileBlocker">
+  <div id="mobileBlockerInner">
+    <h1>Desktop Only</h1>
+    <p>This site is currently incompatible with mobile devices. Please open it on a desktop or laptop browser.</p>
+  </div>
+</div>
+
   <div class="bgLayer bgDash"></div>
   <div class="bgLayer bgProfit"></div>
   <div class="bgLayer bgAI"></div>
