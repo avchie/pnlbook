@@ -1,22 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PNL Book</title>
-
-  <link rel="icon" href="data:image/svg+xml,
-  <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22>
-  <text y=%22.9em%22 font-size=%2290%22>📖</text>
-  </svg>">
-
-
-  
-
-
-  <!-- Luxon (timezone/DST-safe) -->
-  <script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
-  <script>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>PNL Book</title>
+<link href="data:image/svg+xml,
+  &lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;
+  &lt;text y=%22.9em%22 font-size=%2290%22&gt;📖&lt;/text&gt;
+  &lt;/svg&gt;" rel="icon"/>
+<!-- Luxon (timezone/DST-safe) -->
+<script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
+<script>
 // ===== Standard Number Formatting (Comma Separated + 2 Decimals) =====
 function formatCompactNumber(value){
   const n = Number(value);
@@ -27,8 +22,7 @@ function formatCompactNumber(value){
   });
 }
   </script>
-
-  <style>
+<style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
 
 /* Modal field overflow fix */
@@ -4098,8 +4092,6 @@ mask: radial-gradient(farthest-side,
     }
 
 </style>
-
-
 <style>
 /* Disable Profit Factor spinning center/sheen animation */
 .pfSweep {
@@ -4469,8 +4461,6 @@ mask: radial-gradient(farthest-side,
 }
 
 </style>
-
-
 <style>
 /* ===== Profit Factor widget tweaks =====
    - Title + number pinned top-left (like other widgets)
@@ -4883,8 +4873,6 @@ mask: radial-gradient(farthest-side,
 }
 
 </style>
-
-
 <style>
 /* ===== Trade Expectancy: align number like other widgets ===== */
 #tradeExpectancyWidget .pnlMiniBody{
@@ -5269,8 +5257,6 @@ mask: radial-gradient(farthest-side,
 }
 
 </style>
-
-
 <style>
 /* ===== Trade Expectancy: force same top-left stack layout as other widgets ===== */
 #tradeExpectancyWidget{
@@ -5671,8 +5657,6 @@ mask: radial-gradient(farthest-side,
 }
 
 </style>
-
-
 <style>
 /* Trade Expectancy: match header + value position with other widgets */
 #expectancyWidget .pnlWidgetLeft{ display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; gap:6px; }
@@ -6040,8 +6024,6 @@ mask: radial-gradient(farthest-side,
 }
 
 </style>
-
-
 <style>
 /* ===== Smooth Month <-> Year toggle (prevents 1-frame "show everything" flash) ===== */
 #profitMonthShell{
@@ -6418,8 +6400,6 @@ mask: radial-gradient(farthest-side,
 }
 
 </style>
-
-
 <style>
   /* Force-hide the Yearly Equity Curve card */
   #yearChartCard{ display:none !important; }
@@ -6786,9 +6766,6 @@ mask: radial-gradient(farthest-side,
 }
 
 </style>
-
-
-
 <style>
 /* === Align Yearly view top edge with Monthly view ===
    The Yearly root container is #yearlyTopRow (display:grid). Bring it up slightly
@@ -7168,8 +7145,6 @@ mask: radial-gradient(farthest-side,
 }
 
 </style>
-
-
 <style>
 /* === Profit Factor donut: arc-aligned gross profit/loss labels (safe patch) === */
 #wProfitFactorWrap{ position: relative; }
@@ -7564,8 +7539,6 @@ mask: radial-gradient(farthest-side,
 }
 
 </style>
-
-
 <style>
 /* === Remove grey gross profit/loss line under Profit Factor widget === */
 #profitFactorWidget .pnlMiniSub{
@@ -7934,8 +7907,6 @@ mask: radial-gradient(farthest-side,
 }
 
 </style>
-
-
 <style>
 /* === Center Profit Factor donut in right half of widget === */
 
@@ -8760,8 +8731,6 @@ body{
 
 
 </style>
-
-
 <!-- Glow tweak: remove pulsing, keep static segment-only glow -->
 <style id="avgWinLossGlowStaticOverride">
 /* Kill any pulse animations on the avg win/loss segments */
@@ -8824,8 +8793,6 @@ body{
   box-shadow: inset 0 0 12px rgba(239,68,68,.25);
 }
 </style>
-
-
 <style>
 /* Month navigation arrows: bigger and perfectly centered */
 .navBtn{
@@ -8841,20 +8808,12 @@ body{
   font-variant-ligatures: none;
 }
 </style>
-
-
-
-
 <style id="arrow-nudge-override">
 /* Further upward lift for arrows without affecting layout */
 #prevBtn.navBtn, #nextBtn.navBtn{
   padding-bottom: 6px !important;
 }
 </style>
-
-
-
-
 <style id="avg-winloss-flicker-fix">
 /* Targeted flicker fix: prevent sheen overlay flashing on avg win/loss gauge only */
 #avgWinLossWidget .pnlBarSheen{
@@ -9141,8 +9100,6 @@ body{
     }
 
 </style>
-
-
 <style id="year-selection-dot-override">
 /* Selected year tile: force a small white dot at the top-right */
 #yearView .yearBtn,
@@ -9203,8 +9160,6 @@ body{
   box-shadow: none !important;
 }
 </style>
-
-
 <style id="year-border-fix">
 /* Ensure year cells render full borders cleanly */
 #yearView .yearBtn,
@@ -9223,8 +9178,6 @@ body{
   overflow: visible !important;
 }
 </style>
-
-
 <style id="year-active-border-visibility-fix">
 /* Prevent the selected year tile from scaling on hover/focus.
    The scale transform was causing the bottom edge to render thinner/cropped. */
@@ -9267,8 +9220,6 @@ body{
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.10) !important;
 }
 </style>
-
-
 <style id="year-active-border-size-and-bounce-restore">
 /* Keep the selected year border at its original thickness and color */
 #yearView .yearBtn.green.active,
@@ -9309,10 +9260,6 @@ body{
   transform: translateY(0) scale(0.98) !important;
 }
 </style>
-
-
-
-
 <style id="year-click-pulse-real-fix">
 /* Make year tiles animate with a stronger, smoother press/release */
 #yearView .yearBtn,
@@ -9356,9 +9303,6 @@ body{
   100% { transform: scale(1); }
 }
 </style>
-
-
-
 <style id="year-overview-tile-motion-tweak">
 /* Year by Year Overview tiles: match the site's pressable button motion */
 #yearView .yearBtn,
@@ -9408,8 +9352,6 @@ body{
   }
 }
 </style>
-
-
 <style id="year-hover-no-color-fix">
 /* Year overview tiles: lift only, no color change */
 #yearView .yearBtn,
@@ -9439,8 +9381,6 @@ body{
   transform: translateY(0) scale(0.98) !important;
 }
 </style>
-
-
 <style id="pfFullGreenGlowFix">
 /* Green (full profit) */
 .pfDonut.green.full,
@@ -9450,8 +9390,6 @@ body{
     drop-shadow(0 0 20px rgba(43,213,118,0.25));
 }
 </style>
-
-
 <style id="pfAllGreenGlowRobustFix">
 /* Robust full-green PF glow fix:
    the live widget styles the donut via the wrapper state classes, not .pfDonut.green.full */
@@ -9474,8 +9412,6 @@ body{
   filter: none !important;
 }
 </style>
-
-
 <style id="matte-bw-override">
 :root{
   --bg:#0a0a0a !important;
@@ -9624,7 +9560,6 @@ body{
   }
 }
 </style>
-
 <style>
   #mobileBlocker {
     display: none;
@@ -9668,628 +9603,548 @@ body{
     }
   }
 </style>
-
-</head>
-
+<style id="monthly-total-label-white-fix">
+#monthlyTotalLabel{
+  color: #ffffff !important;
+}
+</style></head>
 <body class="tab-dashboard">
 <div id="mobileBlocker">
-  <div id="mobileBlockerInner">
-    <h1>Desktop Only</h1>
-    <p>This site is currently incompatible with mobile devices. Please open it on a desktop or laptop browser.</p>
-  </div>
+<div id="mobileBlockerInner">
+<h1>Desktop Only</h1>
+<p>This site is currently incompatible with mobile devices. Please open it on a desktop or laptop browser.</p>
 </div>
-
-  <div class="bgLayer bgDash"></div>
-  <div class="bgLayer bgProfit"></div>
-  <div class="bgLayer bgAI"></div>
-
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        
-        
-      </div>
-    </header>
-
-    <!-- =======================
+</div>
+<div class="bgLayer bgDash"></div>
+<div class="bgLayer bgProfit"></div>
+<div class="bgLayer bgAI"></div>
+<div class="wrap">
+<header>
+<div class="brand">
+</div>
+</header>
+<!-- =======================
          SECTION 1: DASHBOARD
          ======================= -->
-    <div class="section" id="sectionDashboard">
-      <div class="layout">
-
-        <!-- Sessions -->
-        <div class="card">
-          <div class="cardHead">
-            <h2>Market Sessions</h2>
-            
-          </div>
-          <div class="content">
-            <div class="sessionsGrid" id="sessionsGrid"></div>
-          </div>
-        </div>
-
-        <!-- Main widgets row -->
-        <div class="widgetsGrid">
-          <!-- News (daily) -->
-          <div class="widgetCard">
-            <div class="cardHead">
-              <h2>Economic Events</h2>
-              <div class="chip"><span class="dot"></span><span id="newsDateLabel">—</span></div>
-            </div>
-            <div class="content">
-              <div class="tools">
-                <div class="left">
-                  <input id="newsFilter" class="input" placeholder="Filter (JPY, CPI, AAPL…)" />
-                </div>
-                <div class="right">
-                  <button class="btn" id="newsRefresh">Refresh</button>
-                </div>
-              </div>
-
-              <div class="scrollArea">
-                <div class="list" id="newsList"></div>
-              </div>
-
-              <div class="pager">
-                <button class="ghostBtn" id="newsPrev">Prev</button>
-                <div class="tagRow">
-                  <span class="tag">📅</span><span id="newsDate" class="mono">—</span>
-                </div>
-                <button class="ghostBtn" id="newsNext">Next</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Earnings (weekly) -->
-          <div class="widgetCard">
-            <div class="cardHead">
-              <h2>Earnings Calendar</h2>
-              <div class="chip"><span class="dot"></span><span id="earnWeekLabel">—</span></div>
-            </div>
-            <div class="content">
-              <div class="tools">
-                <div class="left">
-                  <input id="earnFilter" class="input" placeholder="Filter (MSFT, TSLA…)" />
-                </div>
-                <div class="right">
-                  <button class="btn" id="earnRefresh">Refresh</button>
-                </div>
-              </div>
-
-              <div class="scrollArea">
-                <div class="list" id="earnList"></div>
-              </div>
-
-              <div class="pager">
-                <button class="ghostBtn" id="earnPrev">Prev</button>
-                <div class="tagRow">
-                  <span class="tag">🗓️</span><span id="earnWeek" class="mono">—</span>
-                </div>
-                <button class="ghostBtn" id="earnNext">Next</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Extra widgets row -->
-        <div class="widgetsRow2">
-          <!-- Fear & Greed -->
-          <div class="card">
-            <div class="cardHead">
-              <h2>Market Sentiment</h2>
-              
-            </div>
-            <div class="content">
-              <div class="fgWrap">
-                <div class="gauge" id="gCrypto">
-                  <div class="gTop">
-                    <div class="gTitle">Crypto</div>
-                    <div class="gValue" id="fgCryptoVal">—</div>
-                  </div>
-                  <div class="gBar">
-                    <div class="gFill"></div>
-                    <div class="gNeedle" id="fgCryptoNeedle" style="left:0%"></div>
-                  </div>
-                  <div class="gLabel">
-                    <span>Fear</span><span>Greed</span>
-                  </div>
+<div class="section" id="sectionDashboard">
+<div class="layout">
+<!-- Sessions -->
+<div class="card">
+<div class="cardHead">
+<h2>Market Sessions</h2>
 </div>
-
-                <div class="gauge" id="gSp">
-                  <div class="gTop">
-                    <div class="gTitle">S&amp;P 500</div>
-                    <div class="gValue" id="fgSpVal">—</div>
-                  </div>
-                  <div class="gBar">
-                    <div class="gFill"></div>
-                    <div class="gNeedle" id="fgSpNeedle" style="left:0%"></div>
-                  </div>
-                  <div class="gLabel">
-                    <span>Fear</span><span>Greed</span>
-                  </div>
+<div class="content">
+<div class="sessionsGrid" id="sessionsGrid"></div>
 </div>
-              </div>
-
-              <div class="gauge fgFull" id="gWui">
-                <div class="gTop">
-                  <div class="gTitle">World Uncertainty Index</div>
-                  <div class="gValue" id="wuiVal">—</div>
-                </div>
-                <div class="gBar">
-                  <div class="gFill" id="wuiFill" style="width:0%"></div>
-                  <div class="gNeedle" id="wuiNeedle" style="left:0%"></div>
-                </div>
-                <div class="gLabel">
-                  <span>Low</span><span>High</span>
-                </div>
 </div>
-            </div>
-          </div>
-
-          <!-- Global indices -->
-          <div class="card">
-            <div class="cardHead">
-              <h2>Global Indices</h2>
-              
-            </div>
-            <div class="content">
-              <div class="indicesGrid" id="indicesGrid"></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ==========================
+<!-- Main widgets row -->
+<div class="widgetsGrid">
+<!-- News (daily) -->
+<div class="widgetCard">
+<div class="cardHead">
+<h2>Economic Events</h2>
+<div class="chip"><span class="dot"></span><span id="newsDateLabel">—</span></div>
+</div>
+<div class="content">
+<div class="tools">
+<div class="left">
+<input class="input" id="newsFilter" placeholder="Filter (JPY, CPI, AAPL…)"/>
+</div>
+<div class="right">
+<button class="btn" id="newsRefresh">Refresh</button>
+</div>
+</div>
+<div class="scrollArea">
+<div class="list" id="newsList"></div>
+</div>
+<div class="pager">
+<button class="ghostBtn" id="newsPrev">Prev</button>
+<div class="tagRow">
+<span class="tag">📅</span><span class="mono" id="newsDate">—</span>
+</div>
+<button class="ghostBtn" id="newsNext">Next</button>
+</div>
+</div>
+</div>
+<!-- Earnings (weekly) -->
+<div class="widgetCard">
+<div class="cardHead">
+<h2>Earnings Calendar</h2>
+<div class="chip"><span class="dot"></span><span id="earnWeekLabel">—</span></div>
+</div>
+<div class="content">
+<div class="tools">
+<div class="left">
+<input class="input" id="earnFilter" placeholder="Filter (MSFT, TSLA…)"/>
+</div>
+<div class="right">
+<button class="btn" id="earnRefresh">Refresh</button>
+</div>
+</div>
+<div class="scrollArea">
+<div class="list" id="earnList"></div>
+</div>
+<div class="pager">
+<button class="ghostBtn" id="earnPrev">Prev</button>
+<div class="tagRow">
+<span class="tag">🗓️</span><span class="mono" id="earnWeek">—</span>
+</div>
+<button class="ghostBtn" id="earnNext">Next</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Extra widgets row -->
+<div class="widgetsRow2">
+<!-- Fear & Greed -->
+<div class="card">
+<div class="cardHead">
+<h2>Market Sentiment</h2>
+</div>
+<div class="content">
+<div class="fgWrap">
+<div class="gauge" id="gCrypto">
+<div class="gTop">
+<div class="gTitle">Crypto</div>
+<div class="gValue" id="fgCryptoVal">—</div>
+</div>
+<div class="gBar">
+<div class="gFill"></div>
+<div class="gNeedle" id="fgCryptoNeedle" style="left:0%"></div>
+</div>
+<div class="gLabel">
+<span>Fear</span><span>Greed</span>
+</div>
+</div>
+<div class="gauge" id="gSp">
+<div class="gTop">
+<div class="gTitle">S&amp;P 500</div>
+<div class="gValue" id="fgSpVal">—</div>
+</div>
+<div class="gBar">
+<div class="gFill"></div>
+<div class="gNeedle" id="fgSpNeedle" style="left:0%"></div>
+</div>
+<div class="gLabel">
+<span>Fear</span><span>Greed</span>
+</div>
+</div>
+</div>
+<div class="gauge fgFull" id="gWui">
+<div class="gTop">
+<div class="gTitle">World Uncertainty Index</div>
+<div class="gValue" id="wuiVal">—</div>
+</div>
+<div class="gBar">
+<div class="gFill" id="wuiFill" style="width:0%"></div>
+<div class="gNeedle" id="wuiNeedle" style="left:0%"></div>
+</div>
+<div class="gLabel">
+<span>Low</span><span>High</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Global indices -->
+<div class="card">
+<div class="cardHead">
+<h2>Global Indices</h2>
+</div>
+<div class="content">
+<div class="indicesGrid" id="indicesGrid"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ==========================
          SECTION 2: PROFIT TRACKING
          ========================== -->
-    <div class="section active" id="sectionProfit">
-      <div class="layout">
-
-        <div class="card">
-          <div class="cardHead">
-            <h2 id="pnlBookTitle">PNL Book</h2>
-
-            <div class="subTabs">
-              <button class="subTabBtn active" id="pnlTabMonth">Monthly</button>
-              <button class="subTabBtn" id="pnlTabYear">Yearly</button>
-            </div>
-          </div>
-
-          <div class="content">
-            <div class="pnlTopbar">
-              <div class="pnlLeftControls">
-                <div class="monthNav">
-                 <button class="navBtn" id="prevBtn" >‹</button>
-                 <div class="monthTitle" id="monthLabel">January 2024</div>
-                 <button class="navBtn" id="nextBtn" >›</button>
-                 </div>
-                
-              </div>
-
-              <div class="pnlRightStats">
-                <div class="statLabel">Monthly stats:</div>
-                <div class="pillStat purple" id="pillMonthlyPnl">$0.00</div>
-                <div class="pillStat purple" id="pillTradingDays">0 days</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- MONTH VIEW -->
-        <div class="profitMonthShell" id="profitMonthShell">
-          <div class="profitMonthLeft">
-            <div class="card" id="monthWidgetsCard">
-                      <div class="cardHead">
-                        <h2>Monthly Performance</h2>
-                        
-                      </div>
-                      <div class="content">
-                        <div class="pnlWidgetsGrid">
-                          <div class="pnlMini" id="profitFactorWidget">
-                            <div class="pnlMiniTop">
-                              <div class="pnlMiniTitle">Profit factor</div>
-                              <div class="pnlMiniIco" title="Gross profit ÷ gross loss">i</div>
-                            </div>
-                            <div class="pnlMiniBody">
-                              <div class="pnlWidgetLeft">
-                                <div class="pnlWidgetTitle">Profit factor</div>
-                                <div class="pnlWidgetValue" id="wProfitFactor">—</div>
-                              </div>
-                              <div class="pfDonutWrap pfLarge" id="wProfitFactorWrap" aria-hidden="true">
-  <span class="pfArcLabel pfArcLabelGreen" id="pfGrossProfitLabel"></span>
-  <span class="pfArcLabel pfArcLabelRed" id="pfGrossLossLabel"></span>
-
-                                  <div class="pfSweep" aria-hidden="true"></div>
-              <svg class="pfDonut" id="wProfitFactorRing" viewBox="0 0 74 74" focusable="false">
-                <circle class="pfTrack" cx="37" cy="37" r="27"></circle>
-                <circle class="pfRed" cx="37" cy="37" r="27"></circle>
-                <circle class="pfGreen" id="wProfitFactorGreen" cx="37" cy="37" r="27"></circle>
-              </svg>
-            </div>
-                            </div>
-                            <div class="pnlMiniSub muted" id="wProfitFactorSub">Gross profit ÷ gross loss</div>
-                          </div>
-
-              
-                          <div class="pnlMini" id="avgWinLossWidget">
-                            <div class="pnlMiniTop">
-                              <div class="pnlMiniTitle">Avg win/loss trade</div>
-                              <div class="pnlMiniIco" title="Average win and average loss based on realized results (approx. if inferred)">i</div>
-                            </div>
-
-                            <div class="pnlMiniBody pnlMiniBodyBar">
-                              <div class="pnlWidgetLeft">
-                                <div class="pnlWidgetTitle">Avg win/loss trade</div>
-                                <div class="pnlWidgetValue" id="wAvgWinLossRatio">—</div>
-                              </div>
-
-                              <div class="pnlBarStack" aria-hidden="true">
-                                <div class="pnlSplitBar pnlSplitBarLg">
-                                  <div class="pnlSplitGood" id="wAvgSplitGood" style="width:0%"></div>
-                                  <div class="pnlSplitBad" id="wAvgSplitBad" style="width:0%"></div>
-                                  <div class="pnlBarSheen" aria-hidden="true"></div>
-                                </div>
-
-                                <div class="pnlBarNums mono">
-                                  <span class="pnlNumGood" id="wAvgWinVal">—</span>
-                                  <span class="pnlNumBad" id="wAvgLossVal">—</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-
-                                        <div class="pnlMini" id="winRateWidget">
-                            <div class="pnlMiniTop">
-                              <div class="pnlMiniTitle">Trade win %</div>
-                              <div class="pnlMiniIco" title="Wins ÷ (wins + losses)">i</div>
-                            </div>
-                            <div class="pnlMiniBody">
-                              <div class="pnlWidgetLeft">
-                                <div class="pnlWidgetTitle">Trade win %</div>
-                                <div class="pnlWidgetValue" id="wWinRate">—</div>
-                              </div>
-
-                              <div class="winGaugeWrap" id="wWinGaugeWrap" aria-hidden="true">
-                                <svg class="winGauge" id="wWinGauge" viewBox="0 0 120 72" focusable="false">
-                                  <!-- Top arc: left -> right -->
-                                  <path class="winTrack" d="M 12 60 A 48 48 0 0 1 108 60"></path>
-                                  <path class="winRed" id="wWinGaugeRed" d="M 12 60 A 48 48 0 0 1 108 60"></path>
-                                  <path class="winGreen" id="wWinGaugeGreen" d="M 12 60 A 48 48 0 0 1 108 60"></path>
-                                </svg>
-
-                                <div class="winGaugeCounts mono">
-                                  <div class="winCount">
-                                    <span class="lbl">WINS</span>
-                                    <span class="val winGreenText" id="wWinGaugeWins">0</span>
-                                  </div>
-                                  <div class="lossCount">
-                                    <span class="lbl">LOSSES</span>
-                                    <span class="val winRedText" id="wWinGaugeLosses">0</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div class="pnlMiniSub muted" id="wWinRateSub">Based on logged wins/losses</div>
-                          </div>
-
-            
-
-                          
+<div class="section active" id="sectionProfit">
+<div class="layout">
+<div class="card">
+<div class="cardHead">
+<h2 id="pnlBookTitle">PNL Book</h2>
+<div class="subTabs">
+<button class="subTabBtn active" id="pnlTabMonth">Monthly</button>
+<button class="subTabBtn" id="pnlTabYear">Yearly</button>
+</div>
+</div>
+<div class="content">
+<div class="pnlTopbar">
+<div class="pnlLeftControls">
+<div class="monthNav">
+<button class="navBtn" id="prevBtn">‹</button>
+<div class="monthTitle" id="monthLabel">January 2024</div>
+<button class="navBtn" id="nextBtn">›</button>
+</div>
+</div>
+<div class="pnlRightStats">
+<div class="statLabel" id="monthlyTotalLabel" style="">Monthly Total:</div>
+<div class="pillStat purple" id="pillMonthlyPnl">$0.00</div>
+<div class="pillStat purple" id="pillTradingDays">0 days</div>
+</div>
+</div>
+</div>
+</div>
+<!-- MONTH VIEW -->
+<div class="profitMonthShell" id="profitMonthShell">
+<div class="profitMonthLeft">
+<div class="card" id="monthWidgetsCard">
+<div class="cardHead">
+<h2>Monthly Performance</h2>
+</div>
+<div class="content">
+<div class="pnlWidgetsGrid">
+<div class="pnlMini" id="profitFactorWidget">
+<div class="pnlMiniTop">
+<div class="pnlMiniTitle">Profit factor</div>
+<div class="pnlMiniIco" title="Gross profit ÷ gross loss">i</div>
+</div>
+<div class="pnlMiniBody">
+<div class="pnlWidgetLeft">
+<div class="pnlWidgetTitle">Profit factor</div>
+<div class="pnlWidgetValue" id="wProfitFactor">—</div>
+</div>
+<div aria-hidden="true" class="pfDonutWrap pfLarge" id="wProfitFactorWrap">
+<span class="pfArcLabel pfArcLabelGreen" id="pfGrossProfitLabel"></span>
+<span class="pfArcLabel pfArcLabelRed" id="pfGrossLossLabel"></span>
+<div aria-hidden="true" class="pfSweep"></div>
+<svg class="pfDonut" focusable="false" id="wProfitFactorRing" viewbox="0 0 74 74">
+<circle class="pfTrack" cx="37" cy="37" r="27"></circle>
+<circle class="pfRed" cx="37" cy="37" r="27"></circle>
+<circle class="pfGreen" cx="37" cy="37" id="wProfitFactorGreen" r="27"></circle>
+</svg>
+</div>
+</div>
+<div class="pnlMiniSub muted" id="wProfitFactorSub">Gross profit ÷ gross loss</div>
+</div>
+<div class="pnlMini" id="avgWinLossWidget">
+<div class="pnlMiniTop">
+<div class="pnlMiniTitle">Avg win/loss trade</div>
+<div class="pnlMiniIco" title="Average win and average loss based on realized results (approx. if inferred)">i</div>
+</div>
+<div class="pnlMiniBody pnlMiniBodyBar">
+<div class="pnlWidgetLeft">
+<div class="pnlWidgetTitle">Avg win/loss trade</div>
+<div class="pnlWidgetValue" id="wAvgWinLossRatio">—</div>
+</div>
+<div aria-hidden="true" class="pnlBarStack">
+<div class="pnlSplitBar pnlSplitBarLg">
+<div class="pnlSplitGood" id="wAvgSplitGood" style="width:0%"></div>
+<div class="pnlSplitBad" id="wAvgSplitBad" style="width:0%"></div>
+<div aria-hidden="true" class="pnlBarSheen"></div>
+</div>
+<div class="pnlBarNums mono">
+<span class="pnlNumGood" id="wAvgWinVal">—</span>
+<span class="pnlNumBad" id="wAvgLossVal">—</span>
+</div>
+</div>
+</div>
+</div>
+<div class="pnlMini" id="winRateWidget">
+<div class="pnlMiniTop">
+<div class="pnlMiniTitle">Trade win %</div>
+<div class="pnlMiniIco" title="Wins ÷ (wins + losses)">i</div>
+</div>
+<div class="pnlMiniBody">
+<div class="pnlWidgetLeft">
+<div class="pnlWidgetTitle">Trade win %</div>
+<div class="pnlWidgetValue" id="wWinRate">—</div>
+</div>
+<div aria-hidden="true" class="winGaugeWrap" id="wWinGaugeWrap">
+<svg class="winGauge" focusable="false" id="wWinGauge" viewbox="0 0 120 72">
+<!-- Top arc: left -> right -->
+<path class="winTrack" d="M 12 60 A 48 48 0 0 1 108 60"></path>
+<path class="winRed" d="M 12 60 A 48 48 0 0 1 108 60" id="wWinGaugeRed"></path>
+<path class="winGreen" d="M 12 60 A 48 48 0 0 1 108 60" id="wWinGaugeGreen"></path>
+</svg>
+<div class="winGaugeCounts mono">
+<div class="winCount">
+<span class="lbl">WINS</span>
+<span class="val winGreenText" id="wWinGaugeWins">0</span>
+</div>
+<div class="lossCount">
+<span class="lbl">LOSSES</span>
+<span class="val winRedText" id="wWinGaugeLosses">0</span>
+</div>
+</div>
+</div>
+</div>
+<div class="pnlMiniSub muted" id="wWinRateSub">Based on logged wins/losses</div>
+</div>
 <div class="pnlMini" id="expectancyWidget">
-  <div class="pnlMiniBody" style="align-items:flex-start; justify-content:flex-start;">
-    <div class="pnlWidgetLeft">
-      <div class="pnlWidgetTitle">Trade expectancy</div>
-      <div class="pnlWidgetValue mono" id="wExpectancy">—</div>
-    </div>
-  </div>
+<div class="pnlMiniBody" style="align-items:flex-start; justify-content:flex-start;">
+<div class="pnlWidgetLeft">
+<div class="pnlWidgetTitle">Trade expectancy</div>
+<div class="pnlWidgetValue mono" id="wExpectancy">—</div>
 </div>
-
-                        </div>
-
-                        <div class="pnlMini" id="dailyPnlWidget">
-  <div class="pnlMiniBody" style="flex-direction:column; align-items:stretch; justify-content:flex-start; gap:10px;">
-    <div class="pnlWidgetTitle">Net daily P&amp;L</div>
-    <canvas id="dailyPnlChart" style="width:100%; height:140px; display:block;"></canvas>
-  </div>
 </div>
-                      </div>
-                    </div>
-          </div>
-          <div class="profitMonthRight">
-            <div class="card" id="monthView">
-                      <div class="cardHead">
-                        <h2>Calendar</h2>
-                        
-                      </div>
-                      <div class="content">
-                        <div class="calendarStage" id="calendarStage">
-                          <div class="calendarStageInner" id="calendarStageInner">
-                            <div class="calGrid" id="calGrid"></div>
-                            
-                          </div>
-                          <div class="demoOverlay" id="demoOverlay" aria-hidden="true">
-                            <div class="demoOverlayBack" id="demoOverlayBack"></div>
-                            <div class="demoOverlayCard" role="dialog" aria-modal="true" aria-labelledby="demoOverlayTitle">
-                              <div class="demoEyebrow">Welcome to PNL Book</div>
-                              <div class="demoTitle" id="demoOverlayTitle">Track your trading day in under 30 seconds.</div>
-                              <p class="demoLead"></p>
-                              <div class="demoSteps">
-                                <div class="demoStep">
-                                  <div class="demoStepNum">01</div>
-                                  <div class="demoStepTitle">Log your day</div>
-                                  <div class="demoStepText">Open any date and enter gross profit, gross loss, winning trades, and losing trades.</div>
-                                </div>
-                                <div class="demoStep">
-                                  <div class="demoStepNum">02</div>
-                                  <div class="demoStepTitle">See the result instantly</div>
-                                  <div class="demoStepText">PNL Book calculates the day’s net result and colors the calendar automatically.</div>
-                                </div>
-                                <div class="demoStep">
-                                  <div class="demoStepNum">03</div>
-                                  <div class="demoStepTitle">Review the month</div>
-                                  <div class="demoStepText">Use the widgets to understand profit factor, risk to reward, win rate and trade expectancy.</div>
-                                </div>
-                                <div class="demoStep">
-                                  <div class="demoStepNum">04</div>
-                                  <div class="demoStepTitle">Improve your trading</div>
-                                  <div class="demoStepText">Track your progress, tighten your discipline, and watch your trading improve over time.</div>
-                                </div>
-                              </div>
-                              <div class="demoOverlayFooter">
-                                
-                                
+</div>
+</div>
+<div class="pnlMini" id="dailyPnlWidget">
+<div class="pnlMiniBody" style="flex-direction:column; align-items:stretch; justify-content:flex-start; gap:10px;">
+<div class="pnlWidgetTitle">Net daily P&amp;L</div>
+<canvas id="dailyPnlChart" style="width:100%; height:140px; display:block;"></canvas>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="profitMonthRight">
+<div class="card" id="monthView">
+<div class="cardHead">
+<h2>Calendar</h2>
+</div>
+<div class="content">
+<div class="calendarStage" id="calendarStage">
+<div class="calendarStageInner" id="calendarStageInner">
+<div class="calGrid" id="calGrid"></div>
+</div>
+<div aria-hidden="true" class="demoOverlay" id="demoOverlay">
+<div class="demoOverlayBack" id="demoOverlayBack"></div>
+<div aria-labelledby="demoOverlayTitle" aria-modal="true" class="demoOverlayCard" role="dialog">
+<div class="demoEyebrow">Welcome to PNL Book</div>
+<div class="demoTitle" id="demoOverlayTitle">Track your trading day in under 30 seconds.</div>
+<p class="demoLead"></p>
+<div class="demoSteps">
+<div class="demoStep">
+<div class="demoStepNum">01</div>
+<div class="demoStepTitle">Log your day</div>
+<div class="demoStepText">Open any date and enter gross profit, gross loss, winning trades, and losing trades.</div>
+</div>
+<div class="demoStep">
+<div class="demoStepNum">02</div>
+<div class="demoStepTitle">See the result instantly</div>
+<div class="demoStepText">PNL Book calculates the day’s net result and colors the calendar automatically.</div>
+</div>
+<div class="demoStep">
+<div class="demoStepNum">03</div>
+<div class="demoStepTitle">Review the month</div>
+<div class="demoStepText">Use the widgets to understand profit factor, risk to reward, win rate and trade expectancy.</div>
+</div>
+<div class="demoStep">
+<div class="demoStepNum">04</div>
+<div class="demoStepTitle">Improve your trading</div>
+<div class="demoStepText">Track your progress, tighten your discipline, and watch your trading improve over time.</div>
+</div>
+</div>
+<div class="demoOverlayFooter">
 <div class="demoActions" style="display:flex;justify-content:space-between;align-items:center;margin-top:18px;width:100%;">
-  <label class="demoSnoozeRow" for="demoSnoozeCheck" style="margin:0;">
-    <input type="checkbox" id="demoSnoozeCheck" />
-    <span>Don't show again for 30 days</span>
-  </label>
-  <button class="btn demoBtnPrimary" id="demoReadyBtn" type="button">Got it</button>
+<label class="demoSnoozeRow" for="demoSnoozeCheck" style="margin:0;">
+<input id="demoSnoozeCheck" type="checkbox"/>
+<span>Don't show again for 30 days</span>
+</label>
+<button class="btn demoBtnPrimary" id="demoReadyBtn" type="button">Got it</button>
 </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-            
-          </div>
-        </div>
-
-        <!-- YEAR VIEW -->
-        <div class="yearlyRevampGrid" id="yearlyTopRow" style="display:none;">
-          <div class="yearlyLeftStack">
-            <div class="card" id="yearView">
-              <div class="cardHead">
-                <h2>Year by Year Overview</h2>
-              </div>
-              <div class="content">
-                <div class="yearHead">
-                  <div class="yearTitle" id="yearLabel"></div>
-                </div>
-                <div class="yearPicker" id="yearPicker"></div>
-              </div>
-            </div>
-
-            <div class="card monthTotalsPanel" id="monthTotalsPanel">
-              <div class="cardHead">
-                <h2>Monthly Totals</h2>
-              </div>
-              <div class="content">
-                <div class="monthGrid" id="yearMonthGrid"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card" id="yearlyPerformanceCard">
-            <div class="cardHead">
-              <h2>Yearly Performance</h2>
-            </div>
-            <div class="content yearlyPerfContent">
-              <!-- Profit Factor -->
-              <div class="pnlMini pnlMiniTall" id="yProfitFactorWidget">
-                <div class="pnlMiniTop">
-                  <div class="pnlMiniTitle">Profit factor</div>
-                </div>
-                <div class="pnlMiniBody">
-                  <div>
-                    <div class="pnlMiniValue" id="yProfitFactor" data-num="0">—</div>
-                    <div class="pnlMiniSub mono" id="yProfitFactorSub">—</div>
-                  </div>
-
-                  <div class="pfDonutWrap pfLarge" id="yProfitFactorWrap" aria-hidden="true">
-                    <svg class="pfDonut" viewBox="0 0 74 74">
-                      <circle class="pfTrack" cx="37" cy="37" r="25"></circle>
-                      <circle class="pfRed" id="yProfitFactorRed" cx="37" cy="37" r="25"></circle>
-                      <circle class="pfGreen" id="yProfitFactorGreen" cx="37" cy="37" r="25"></circle>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Avg win/loss -->
-              <div class="pnlMini pnlMiniTall" id="yAvgWinLossWidget">
-                <div class="pnlMiniTop">
-                  <div class="pnlMiniTitle">Avg win/loss trade</div>
-                </div>
-                <div class="pnlMiniBody" style="gap:18px;">
-                  <div class="pnlWidgetLeft">
-                    <div class="pnlWidgetValue" id="yAvgWinLossRatio">—</div>
-                    <div class="pnlMiniSub mono" id="yAvgWinLossSub">—</div>
-                  </div>
-
-                  <div class="pnlBarStack" aria-hidden="true" style="flex:1;">
-                    <div class="pnlSplitBar pnlSplitBarLg">
-                      <div class="pnlSplitGood" id="yAvgSplitGood" style="width:0%"></div>
-                      <div class="pnlSplitBad" id="yAvgSplitBad" style="width:0%"></div>
-                    </div>
-                    <div class="pnlBarNums">
-                      <span class="pos" id="yAvgWinVal">+$0.00</span>
-                      <span class="neg" id="yAvgLossVal">-$0.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Trade win % -->
-              <div class="pnlMini pnlMiniTall" id="yWinRateWidget">
-                <div class="pnlMiniTop">
-                  <div class="pnlMiniTitle">Trade win %</div>
-                </div>
-                <div class="pnlMiniBody" style="gap:18px;">
-                  <div>
-                    <div class="pnlMiniValue" id="yWinRate">—</div>
-                    <div class="pnlMiniSub mono" id="yWinRateSub">—</div>
-                  </div>
-
-                  <div class="winGaugeWrap" id="yWinGaugeWrap" aria-hidden="true">
-                    <svg class="winGauge" viewBox="0 0 200 110">
-                      <path class="winTrack" d="M 20 90 A 80 80 0 0 1 180 90"></path>
-                      <path class="winRed" id="yWinGaugeRed" d="M 20 90 A 80 80 0 0 1 180 90"></path>
-                      <path class="winGreen" id="yWinGaugeGreen" d="M 20 90 A 80 80 0 0 1 180 90"></path>
-                    </svg>
-                    <div class="winGaugeNums">
-                      <span class="pos">WINS <b id="yWinGaugeWins">0</b></span>
-                      <span class="mid">|</span>
-                      <span class="neg">LOSSES <b id="yWinGaugeLosses">0</b></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Trade expectancy -->
-              <div class="pnlMini pnlMiniTall" id="yExpectancyWidget">
-                <div class="pnlMiniTop">
-                  <div class="pnlMiniTitle">Trade expectancy</div>
-                </div>
-                <div class="pnlMiniBody">
-                  <div class="pnlMiniValue mono" id="yExpectancy">—</div>
-                </div>
-              </div>
-
-              <!-- Net daily P&L -->
-              <div class="pnlMini pnlMiniTall" id="yDailyPnlWidget">
-                <div class="pnlMiniBody" style="flex-direction:column; align-items:stretch; justify-content:flex-start; gap:10px;">
-                  <div class="pnlMiniTitle">Net daily P&amp;L</div>
-                  <canvas id="yDailyPnlChart" style="width:100%; height:140px; display:block;"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- YEAR VIEW -->
+<div class="yearlyRevampGrid" id="yearlyTopRow" style="display:none;">
+<div class="yearlyLeftStack">
+<div class="card" id="yearView">
+<div class="cardHead">
+<h2>Year by Year Overview</h2>
+</div>
+<div class="content">
+<div class="yearHead">
+<div class="yearTitle" id="yearLabel"></div>
+</div>
+<div class="yearPicker" id="yearPicker"></div>
+</div>
+</div>
+<div class="card monthTotalsPanel" id="monthTotalsPanel">
+<div class="cardHead">
+<h2>Monthly Totals</h2>
+</div>
+<div class="content">
+<div class="monthGrid" id="yearMonthGrid"></div>
+</div>
+</div>
+</div>
+<div class="card" id="yearlyPerformanceCard">
+<div class="cardHead">
+<h2>Yearly Performance</h2>
+</div>
+<div class="content yearlyPerfContent">
+<!-- Profit Factor -->
+<div class="pnlMini pnlMiniTall" id="yProfitFactorWidget">
+<div class="pnlMiniTop">
+<div class="pnlMiniTitle">Profit factor</div>
+</div>
+<div class="pnlMiniBody">
+<div>
+<div class="pnlMiniValue" data-num="0" id="yProfitFactor">—</div>
+<div class="pnlMiniSub mono" id="yProfitFactorSub">—</div>
+</div>
+<div aria-hidden="true" class="pfDonutWrap pfLarge" id="yProfitFactorWrap">
+<svg class="pfDonut" viewbox="0 0 74 74">
+<circle class="pfTrack" cx="37" cy="37" r="25"></circle>
+<circle class="pfRed" cx="37" cy="37" id="yProfitFactorRed" r="25"></circle>
+<circle class="pfGreen" cx="37" cy="37" id="yProfitFactorGreen" r="25"></circle>
+</svg>
+</div>
+</div>
+</div>
+<!-- Avg win/loss -->
+<div class="pnlMini pnlMiniTall" id="yAvgWinLossWidget">
+<div class="pnlMiniTop">
+<div class="pnlMiniTitle">Avg win/loss trade</div>
+</div>
+<div class="pnlMiniBody" style="gap:18px;">
+<div class="pnlWidgetLeft">
+<div class="pnlWidgetValue" id="yAvgWinLossRatio">—</div>
+<div class="pnlMiniSub mono" id="yAvgWinLossSub">—</div>
+</div>
+<div aria-hidden="true" class="pnlBarStack" style="flex:1;">
+<div class="pnlSplitBar pnlSplitBarLg">
+<div class="pnlSplitGood" id="yAvgSplitGood" style="width:0%"></div>
+<div class="pnlSplitBad" id="yAvgSplitBad" style="width:0%"></div>
+</div>
+<div class="pnlBarNums">
+<span class="pos" id="yAvgWinVal">+$0.00</span>
+<span class="neg" id="yAvgLossVal">-$0.00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Trade win % -->
+<div class="pnlMini pnlMiniTall" id="yWinRateWidget">
+<div class="pnlMiniTop">
+<div class="pnlMiniTitle">Trade win %</div>
+</div>
+<div class="pnlMiniBody" style="gap:18px;">
+<div>
+<div class="pnlMiniValue" id="yWinRate">—</div>
+<div class="pnlMiniSub mono" id="yWinRateSub">—</div>
+</div>
+<div aria-hidden="true" class="winGaugeWrap" id="yWinGaugeWrap">
+<svg class="winGauge" viewbox="0 0 200 110">
+<path class="winTrack" d="M 20 90 A 80 80 0 0 1 180 90"></path>
+<path class="winRed" d="M 20 90 A 80 80 0 0 1 180 90" id="yWinGaugeRed"></path>
+<path class="winGreen" d="M 20 90 A 80 80 0 0 1 180 90" id="yWinGaugeGreen"></path>
+</svg>
+<div class="winGaugeNums">
+<span class="pos">WINS <b id="yWinGaugeWins">0</b></span>
+<span class="mid">|</span>
+<span class="neg">LOSSES <b id="yWinGaugeLosses">0</b></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Trade expectancy -->
+<div class="pnlMini pnlMiniTall" id="yExpectancyWidget">
+<div class="pnlMiniTop">
+<div class="pnlMiniTitle">Trade expectancy</div>
+</div>
+<div class="pnlMiniBody">
+<div class="pnlMiniValue mono" id="yExpectancy">—</div>
+</div>
+</div>
+<!-- Net daily P&L -->
+<div class="pnlMini pnlMiniTall" id="yDailyPnlWidget">
+<div class="pnlMiniBody" style="flex-direction:column; align-items:stretch; justify-content:flex-start; gap:10px;">
+<div class="pnlMiniTitle">Net daily P&amp;L</div>
+<canvas id="yDailyPnlChart" style="width:100%; height:140px; display:block;"></canvas>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="card chartPanel" id="yearChartCard" style="display:none;">
-          <div class="cardHead">
-            <h2>Yearly Equity Curve</h2>
-            <span id="yearChartMeta" style="display:none;">—</span>
-          </div>
-          <div class="content">
-            <div class="chartHeader">
-              <div>
-                <div class="chartTitle">Cumulative PnL through the year</div>
-                
-              </div>
-              <div class="chartSub" id="yearChartMeta2"></div>
-            </div>
-            <canvas id="yearChart"></canvas>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="section" id="sectionAI">
-      <div class="layout">
-        <div class="card">
-          <div class="cardHead">
-            <h2>AI Trade Assistant</h2>
-            
-          </div>
-          <div class="content">
-            <div class="chatWrap">
+<div class="cardHead">
+<h2>Yearly Equity Curve</h2>
+<span id="yearChartMeta" style="display:none;">—</span>
+</div>
+<div class="content">
+<div class="chartHeader">
+<div>
+<div class="chartTitle">Cumulative PnL through the year</div>
+</div>
+<div class="chartSub" id="yearChartMeta2"></div>
+</div>
+<canvas id="yearChart"></canvas>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="sectionAI">
+<div class="layout">
+<div class="card">
+<div class="cardHead">
+<h2>AI Trade Assistant</h2>
+</div>
+<div class="content">
+<div class="chatWrap">
 <div class="scrollArea chatWindow" id="aiChat"></div>
-
-              <div class="chatComposer">
-                <input id="aiChatInput" class="input" placeholder="Message the assistant…" />
-                <button class="btn" id="aiChatSend">Send</button>
-                <button id="clearChatBtn" class="ghostBtn" id="aiChatClear">Clear Chat</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-  <!-- ==========================
+<div class="chatComposer">
+<input class="input" id="aiChatInput" placeholder="Message the assistant…"/>
+<button class="btn" id="aiChatSend">Send</button>
+<button class="ghostBtn" id="aiChatClear">Clear Chat</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ==========================
        PnL Input Modal (in-page)
        ========================== -->
-  <div class="pnModal" id="pnModal" aria-hidden="true">
-    <div class="pnModalBack" id="pnModalBack"></div>
-
-    <div class="pnModalCard" role="dialog" aria-modal="true" aria-labelledby="pnModalTitle">
-      <div class="pnModalHead">
-        <div class="left">
-          <h3 class="pnModalTitle" id="pnModalTitle">Set PnL</h3>
-          <div class="pnModalSub" id="pnModalDate">—</div>
-        </div>
-        <button class="pnModalClose" id="pnModalClose" title="Close">✕</button>
-      </div>
-
-      
+<div aria-hidden="true" class="pnModal" id="pnModal">
+<div class="pnModalBack" id="pnModalBack"></div>
+<div aria-labelledby="pnModalTitle" aria-modal="true" class="pnModalCard" role="dialog">
+<div class="pnModalHead">
+<div class="left">
+<h3 class="pnModalTitle" id="pnModalTitle">Set PnL</h3>
+<div class="pnModalSub" id="pnModalDate">—</div>
+</div>
+<button class="pnModalClose" id="pnModalClose" title="Close">✕</button>
+</div>
 <div class="pnModalBody">
-
-        <!-- 4-field entry grid -->
-        <div class="pnFieldRow" style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-          <div class="pnFieldRow" style="gap: 8px;">
-            <div class="pnLabel">Gross Profit</div>
-            <input class="pnInput" id="pnModalGrossProfit" type="text" inputmode="decimal" placeholder="0.00" />
-          </div>
-          <div class="pnFieldRow" style="gap: 8px;">
-            <div class="pnLabel">Gross Loss</div>
-            <input class="pnInput" id="pnModalGrossLoss" type="text" inputmode="decimal" placeholder="0.00" />
-          </div>
-          <div class="pnFieldRow" style="gap: 8px;">
-            <div class="pnLabel">Winning trades</div>
-            <input class="pnInput" id="pnModalWins" type="number" inputmode="numeric" min="0" step="1" placeholder="0" />
-          </div>
-          <div class="pnFieldRow" style="gap: 8px;">
-            <div class="pnLabel">Losing trades</div>
-            <input class="pnInput" id="pnModalLosses" type="number" inputmode="numeric" min="0" step="1" placeholder="0" />
-          </div>
-        </div>
-
-
-        <div class="pnErr" id="pnModalErr">Please enter a valid number.</div>
-
-        </div>
-
-      <div class="pnModalFoot">
-        <button class="pnBtn" id="pnModalCancel">Cancel</button>
-        <button class="pnBtn primary" id="pnModalSave">Save</button>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ==========================
+<!-- 4-field entry grid -->
+<div class="pnFieldRow" style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+<div class="pnFieldRow" style="gap: 8px;">
+<div class="pnLabel">Gross Profit</div>
+<input class="pnInput" id="pnModalGrossProfit" inputmode="decimal" placeholder="0.00" type="text"/>
+</div>
+<div class="pnFieldRow" style="gap: 8px;">
+<div class="pnLabel">Gross Loss</div>
+<input class="pnInput" id="pnModalGrossLoss" inputmode="decimal" placeholder="0.00" type="text"/>
+</div>
+<div class="pnFieldRow" style="gap: 8px;">
+<div class="pnLabel">Winning trades</div>
+<input class="pnInput" id="pnModalWins" inputmode="numeric" min="0" placeholder="0" step="1" type="number"/>
+</div>
+<div class="pnFieldRow" style="gap: 8px;">
+<div class="pnLabel">Losing trades</div>
+<input class="pnInput" id="pnModalLosses" inputmode="numeric" min="0" placeholder="0" step="1" type="number"/>
+</div>
+</div>
+<div class="pnErr" id="pnModalErr">Please enter a valid number.</div>
+</div>
+<div class="pnModalFoot">
+<button class="pnBtn" id="pnModalCancel">Cancel</button>
+<button class="pnBtn primary" id="pnModalSave">Save</button>
+</div>
+</div>
+</div>
+<!-- ==========================
        PnL Feedback Overlay
        ========================== -->
-  <div class="pnFeedback" id="pnFeedback" aria-hidden="true">
-    <div class="pnFeedbackBack" id="pnFeedbackBack"></div>
-    <div class="pnFeedbackCard" id="pnFeedbackCard" role="status" aria-live="polite">
-      <div class="pnFeedbackMsg" id="pnFeedbackMsg"></div>
-      <div class="pnFeedbackSub" id="pnFeedbackSub"></div>
-      <div class="pnBurst" id="pnBurst" aria-hidden="true"></div>
-    </div>
-  </div>
-
-
-
+<div aria-hidden="true" class="pnFeedback" id="pnFeedback">
+<div class="pnFeedbackBack" id="pnFeedbackBack"></div>
+<div aria-live="polite" class="pnFeedbackCard" id="pnFeedbackCard" role="status">
+<div class="pnFeedbackMsg" id="pnFeedbackMsg"></div>
+<div class="pnFeedbackSub" id="pnFeedbackSub"></div>
+<div aria-hidden="true" class="pnBurst" id="pnBurst"></div>
+</div>
+</div>
 <script>
   const { DateTime } = luxon;
 
@@ -13189,18 +13044,15 @@ drawLineChart(yearChart, pts, `Year ${year}`);
   setInterval(tickFeed, 5000);
   setInterval(updateSessions, 1000);
 </script>
-
 <!-- ===== Custom Clear Chat Modal ===== -->
-<div id="clearChatModal" class="ccModal" aria-hidden="true">
-  <div class="ccModalBack" id="clearChatModalBack"></div>
-
-  <div class="ccModalCard" role="dialog" aria-modal="true" aria-labelledby="clearChatTitle">
-    <div id="clearChatTitle" style="font-weight:950;font-size:18px;margin-bottom:18px;">
+<div aria-hidden="true" class="ccModal" id="clearChatModal">
+<div class="ccModalBack" id="clearChatModalBack"></div>
+<div aria-labelledby="clearChatTitle" aria-modal="true" class="ccModalCard" role="dialog">
+<div id="clearChatTitle" style="font-weight:950;font-size:18px;margin-bottom:18px;">
       Are you sure you want to clear the chat?
     </div>
-
-    <div style="display:flex;gap:14px;justify-content:center;">
-      <button id="cancelClearChat" style="
+<div style="display:flex;gap:14px;justify-content:center;">
+<button id="cancelClearChat" style="
         padding:10px 16px;
         border-radius:12px;
         border:1px solid rgba(255,255,255,0.18);
@@ -13209,7 +13061,7 @@ drawLineChart(yearChart, pts, `Year ${year}`);
         cursor:pointer;">
         Cancel
       </button>
-      <button id="confirmClearChat" style="
+<button id="confirmClearChat" style="
         padding:10px 16px;
         border-radius:12px;
         border:1px solid rgba(255,77,109,0.45);
@@ -13218,11 +13070,9 @@ drawLineChart(yearChart, pts, `Year ${year}`);
         cursor:pointer;">
         Clear
       </button>
-    </div>
-  </div>
 </div>
-
-
+</div>
+</div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("clearChatModal");
@@ -13305,8 +13155,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
-
-
 <script>
 /* ============================
    Yearly View: Robust Renderer
@@ -13656,8 +13504,6 @@ try{ if(typeof window.renderMonthView === "function") window.renderMonthView(); 
 
 });
 </script>
-
-
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const applyCalendarStyle = (containerId) => {
@@ -13672,8 +13518,6 @@ document.addEventListener("DOMContentLoaded", function() {
   applyCalendarStyle("yearMonthGrid");
 });
 </script>
-
-
 <script id="year-selection-dot-script">
 (function(){
   function refreshYearDots(){
@@ -13718,8 +13562,6 @@ document.addEventListener("DOMContentLoaded", function() {
   window.refreshYearSelectionDots = run;
 })();
 </script>
-
-
 <style id="daily-cells-reference-colors">
 /* Reference-style daily cell colors from uploaded screenshot */
 .dayCell{
@@ -13764,8 +13606,6 @@ document.addEventListener("DOMContentLoaded", function() {
   box-shadow:none !important;
 }
 </style>
-
-
 <script>
 (function(){
   function syncMonthlyPnlPill(){
@@ -13802,11 +13642,8 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 })();
 </script>
-
-</body>
+</div></body>
 </html>
-
-
 <style id="remove-hover-illumination-final">
 .tabBtn:hover,
 .subTabBtn:hover,
@@ -13853,5 +13690,104 @@ document.addEventListener("DOMContentLoaded", function() {
 .monthTile:hover{
   background-image: none !important;
   filter: none !important;
+}
+</style>
+<style id="monthly-performance-matte-fix">
+/* Monthly Performance widgets: lock the 5 sidebar widgets to the same matte shade they showed on hover. */
+#monthWidgetsCard .pnlMini,
+#monthWidgetsCard #dailyPnlWidget{
+  background: #111111 !important;
+  background-image: none !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  box-shadow: var(--shadow) !important;
+  filter: none !important;
+}
+
+/* Remove the radial highlight/sheen that made the widgets look glossy. */
+#monthWidgetsCard .pnlMini::before,
+#monthWidgetsCard #dailyPnlWidget::before{
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+  background: none !important;
+}
+
+/* Keep hover visually identical to the resting state. */
+#monthWidgetsCard .pnlMini:hover,
+#monthWidgetsCard #dailyPnlWidget:hover{
+  background: #111111 !important;
+  background-image: none !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  filter: none !important;
+}
+</style>
+<style id="weekly-zero-matte-final-fix">
+/* Weekly Totals: $0 / neutral weeks use the same dark matte base as the calendar.
+   Positive and negative weeks keep their existing green/red highlight states. */
+.weekCard.neutral{
+  background: #111111 !important;
+  background-image: none !important;
+  border: 1px solid #2b2b2b !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.weekCard.neutral:hover{
+  background: #111111 !important;
+  background-image: none !important;
+  border: 1px solid #2b2b2b !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.weekCard.neutral .wkSum{
+  color: #f5f5f5 !important;
+}
+
+.weekCard.neutral .wkTitle{
+  color: #f3f5f7 !important;
+}
+
+.weekCard.neutral .wkDays{
+  background: #111111 !important;
+  background-image: none !important;
+  border: 1px solid #2b2b2b !important;
+  color: #f3f5f7 !important;
+}
+</style>
+<style id="yearly-performance-matte-fix">
+/* Yearly Performance widgets: use the same dark matte base as the calendar/resting weekly $0 cells. */
+#yearlyPerformanceCard .pnlMini{
+  background: #111111 !important;
+  background-image: none !important;
+  border: 1px solid #2b2b2b !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+#yearlyPerformanceCard .pnlMini:hover{
+  background: #111111 !important;
+  background-image: none !important;
+  border: 1px solid #2b2b2b !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Remove the radial highlight/sheen that made these yearly widgets look light/glossy. */
+#yearlyPerformanceCard .pnlMini::before{
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+  background: none !important;
+}
+
+#yearlyPerformanceCard .pnlMiniTitle,
+#yearlyPerformanceCard .pnlWidgetTitle{
+  color: #f3f5f7 !important;
+}
+
+#yearlyPerformanceCard .pnlMiniValue,
+#yearlyPerformanceCard .pnlWidgetValue{
+  color: #f5f5f5;
 }
 </style>
