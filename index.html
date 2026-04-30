@@ -3311,7 +3311,7 @@ mask: radial-gradient(farthest-side,
       justify-content:space-between;
     }
 
-/* Net daily P&L: match Trade expectancy widget footprint */
+/* Equity curve: match Trade expectancy widget footprint */
 #dailyPnlWidget{
   grid-column: span 1 !important;
   grid-row: span 1 !important;
@@ -3321,7 +3321,7 @@ mask: radial-gradient(farthest-side,
   height: 140px !important;
 }
 
-/* Net daily P&L: match vertical spacing of other widgets (old pnlWide had margin-top:12px) */
+/* Equity curve: match vertical spacing of other widgets (old pnlWide had margin-top:12px) */
 #dailyPnlWidget{
   margin-top: 12px !important;
 }
@@ -9016,12 +9016,66 @@ body{
     }
 
     /* Let the daily chart occupy available space inside its tile */
+    #yDailyPnlWidget{
+      min-height: 0 !important;
+      height: auto !important;
+      overflow: hidden;
+    }
     #yDailyPnlWidget .pnlMiniBody{
       flex: 1 1 auto !important;
+      min-height: 0 !important;
+      height: 100% !important;
+      gap: 6px !important;
     }
     #yDailyPnlChart{
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      height: auto !important;
+      max-height: 100% !important;
+    }
+
+    /* Yearly equity curve: use the full widget interior without changing box height */
+    #yDailyPnlWidget .pnlMiniBody{
+      position: relative;
+      justify-content: stretch !important;
+    }
+    #yDailyPnlWidget .equityMiniHead{
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+    #yDailyPnlChart{
+      position: absolute !important;
+      inset: 0;
+      width: 100% !important;
       height: 100% !important;
-      max-height: none !important;
+    }
+
+    #dailyPnlWidget .equityMiniHead,
+    #yDailyPnlWidget .equityMiniHead{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; position:relative; z-index:1; }
+    #dailyPnlWidget .equityMiniValue,
+    #yDailyPnlWidget .equityMiniValue{ font-family: var(--mono); font-weight:950; font-size:13px; letter-spacing:.2px; padding:6px 9px; border-radius:999px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.11); color:rgba(255,255,255,0.88); white-space:nowrap; box-shadow:0 10px 24px rgba(0,0,0,0.20); }
+    #dailyPnlWidget .equityMiniValue.pos,
+    #yDailyPnlWidget .equityMiniValue.pos{ color:var(--good); background:rgba(43,213,118,0.08); border-color:rgba(43,213,118,0.28); }
+    #dailyPnlWidget .equityMiniValue.neg,
+    #yDailyPnlWidget .equityMiniValue.neg{ color:var(--bad); background:rgba(255,77,109,0.08); border-color:rgba(255,77,109,0.28); }
+    #dailyPnlWidget .equityMiniSub,
+    #yDailyPnlWidget .equityMiniSub{ display:none !important; }
+    #dailyPnlWidget .pnlMiniBody,
+    #yDailyPnlWidget .pnlMiniBody{
+      min-width: 0;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    #dailyPnlWidget canvas,
+    #yDailyPnlWidget canvas{
+      border-radius:12px;
+      max-width: 100%;
+      overflow: hidden;
+      display: block;
     }
 
 
@@ -9884,8 +9938,12 @@ body{
 </div>
 <div class="pnlMini" id="dailyPnlWidget">
 <div class="pnlMiniBody" style="flex-direction:column; align-items:stretch; justify-content:flex-start; gap:10px;">
-<div class="pnlWidgetTitle">Net daily P&amp;L</div>
+<div class="equityMiniHead">
+<div class="pnlWidgetTitle">Equity curve</div>
+<div class="equityMiniValue" id="dailyEquityValue">$0.00</div>
+</div>
 <canvas id="dailyPnlChart" style="width:100%; height:140px; display:block;"></canvas>
+<div class="equityMiniSub" id="dailyEquitySub"></div>
 </div>
 </div>
 </div>
@@ -10047,11 +10105,15 @@ body{
 <div class="pnlMiniValue mono" id="yExpectancy">—</div>
 </div>
 </div>
-<!-- Net daily P&L -->
+<!-- Equity curve -->
 <div class="pnlMini pnlMiniTall" id="yDailyPnlWidget">
 <div class="pnlMiniBody" style="flex-direction:column; align-items:stretch; justify-content:flex-start; gap:10px;">
-<div class="pnlMiniTitle">Net daily P&amp;L</div>
-<canvas id="yDailyPnlChart" style="width:100%; height:140px; display:block;"></canvas>
+<div class="equityMiniHead">
+<div class="pnlMiniTitle">Equity curve</div>
+<div class="equityMiniValue" id="yDailyEquityValue">$0.00</div>
+</div>
+<canvas id="yDailyPnlChart" style="width:100%; height:100%; display:block;"></canvas>
+<div class="equityMiniSub" id="yDailyEquitySub"></div>
 </div>
 </div>
 </div>
@@ -12153,6 +12215,181 @@ function resetMonthlyNumberAnimationState(){
   }
 
 
+
+
+  const __equityCurvePrevValues = new WeakMap();
+
+  function buildEquityCurveFromDaily(values){
+    let cum = 0;
+    return (Array.isArray(values) ? values : []).map((v, i) => {
+      cum += Number(v) || 0;
+      return { x: i + 1, y: cum };
+    });
+  }
+
+  function updateEquityMiniValue(valueEl, subEl, values, periodLabel){
+    if(!valueEl) return;
+    const total = (Array.isArray(values) ? values : []).reduce((sum, v) => sum + (Number(v) || 0), 0);
+    valueEl.classList.remove("pos","neg");
+    if(total > 0) valueEl.classList.add("pos");
+    if(total < 0) valueEl.classList.add("neg");
+    if(valueEl.dataset.lastNum === undefined) valueEl.dataset.lastNum = "0";
+    animateCount(valueEl, total, (v)=>fmtMoneyNoSign(v));
+    if(subEl){ subEl.textContent = ""; }
+  }
+
+  function drawMiniEquityCurve(canvas, values, scaleOverride){
+    if(!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const dpr = window.devicePixelRatio || 1;
+    const w = canvas.width = Math.max(1, Math.round(canvas.clientWidth * dpr));
+    const h = canvas.height = Math.max(1, Math.round(canvas.clientHeight * dpr));
+    ctx.clearRect(0,0,w,h);
+
+    const isYearlyEquity = canvas.id === "yDailyPnlChart";
+    const padL = (isYearlyEquity ? 7 : 16)*dpr;
+    const padR = (isYearlyEquity ? 7 : 16)*dpr;
+    const padT = (isYearlyEquity ? 6 : 16)*dpr;
+    const padB = (isYearlyEquity ? 6 : 18)*dpr;
+    const strokeGuard = (isYearlyEquity ? 5.5 : 7)*dpr;
+    const innerW = Math.max(1, w-padL-padR);
+    const innerH = Math.max(1, h-padT-padB);
+    const curve = buildEquityCurveFromDaily(values);
+    if(!curve.length){ return; }
+
+    const ys = curve.map(p => Number(p.y) || 0);
+    let minY = Math.min(...ys);
+    let maxY = Math.max(...ys);
+    if(scaleOverride && isFinite(scaleOverride.minY) && isFinite(scaleOverride.maxY) && scaleOverride.maxY > scaleOverride.minY){
+      minY = scaleOverride.minY;
+      maxY = scaleOverride.maxY;
+    }else if(maxY === minY){
+      const bump = Math.max(Math.abs(maxY) * 0.08, 1);
+      minY -= bump;
+      maxY += bump;
+    }
+    const spanY = Math.max(1, maxY - minY);
+    const n = curve.length;
+    const pxX = i => padL + (n <= 1 ? innerW/2 : (i/(n-1))*innerW);
+    const plotTop = padT + strokeGuard;
+    const plotBottom = h - padB - strokeGuard;
+    const plotH = Math.max(1, plotBottom - plotTop);
+    const pxY = y => {
+      const raw = plotTop + (1 - ((y-minY)/spanY))*plotH;
+      return Math.min(plotBottom, Math.max(plotTop, raw));
+    };
+    function smoothPath(points){
+      if(!points.length) return;
+      ctx.moveTo(points[0].x, points[0].y);
+      if(points.length === 1) return;
+      for(let i=0;i<points.length-1;i++){
+        const p0 = points[Math.max(0, i-1)];
+        const p1 = points[i];
+        const p2 = points[i+1];
+        const p3 = points[Math.min(points.length-1, i+2)];
+        const cp1x = p1.x + (p2.x - p0.x) / 6;
+        const cp1y = p1.y + (p2.y - p0.y) / 6;
+        const cp2x = p2.x - (p3.x - p1.x) / 6;
+        const cp2y = p2.y - (p3.y - p1.y) / 6;
+        ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
+      }
+    }
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(padL, padT, innerW, innerH);
+    ctx.clip();
+
+    ctx.lineWidth = 1*dpr;
+    for(let i=0;i<=3;i++){
+      const gy = padT + innerH*(i/3);
+      ctx.strokeStyle = "rgba(255,255,255,0.055)";
+      ctx.beginPath(); ctx.moveTo(padL, gy); ctx.lineTo(w-padR, gy); ctx.stroke();
+    }
+    const zeroY = pxY(0);
+    ctx.strokeStyle = "rgba(255,255,255,0.16)";
+    ctx.beginPath(); ctx.moveTo(padL, zeroY); ctx.lineTo(w-padR, zeroY); ctx.stroke();
+
+    const pts = curve.map((p,i)=>({x:pxX(i), y:pxY(p.y), rawY:p.y}));
+    const green = "rgba(43,213,118,0.96)";
+    const red = "rgba(255,77,109,0.96)";
+
+    const fillGrad = ctx.createLinearGradient(0, padT, 0, h-padB);
+    fillGrad.addColorStop(0, "rgba(43,213,118,0.15)");
+    fillGrad.addColorStop(Math.min(1, Math.max(0, (zeroY - padT) / innerH)), "rgba(255,255,255,0.015)");
+    fillGrad.addColorStop(1, "rgba(255,77,109,0.14)");
+    ctx.fillStyle = fillGrad;
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, zeroY);
+    smoothPath(pts);
+    ctx.lineTo(pts[pts.length-1].x, zeroY);
+    ctx.closePath();
+    ctx.fill();
+
+    const strokeWidth = (isYearlyEquity ? 3.65 : 2.2) * dpr;
+    const glowBlur = (isYearlyEquity ? 13 : 8) * dpr;
+    const pointRadius = (isYearlyEquity ? 4.8 : 4) * dpr;
+
+    function strokeClipped(y, height, color, shadow){
+      if(height <= 0) return;
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(padL, y, innerW, height);
+      ctx.clip();
+      ctx.lineWidth = strokeWidth;
+      ctx.strokeStyle = color;
+      ctx.shadowColor = shadow;
+      ctx.shadowBlur = glowBlur;
+      ctx.beginPath();
+      smoothPath(pts);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    strokeClipped(padT, Math.max(0, zeroY - padT), green, isYearlyEquity ? "rgba(43,213,118,0.34)" : "rgba(43,213,118,0.24)");
+    strokeClipped(Math.min(h - padB, Math.max(padT, zeroY)), Math.max(0, (h - padB) - zeroY), red, isYearlyEquity ? "rgba(255,77,109,0.34)" : "rgba(255,77,109,0.24)");
+
+    const last = pts[pts.length-1];
+    const lastColor = last.rawY >= 0 ? green : red;
+    ctx.fillStyle = "rgba(7,9,12,0.95)";
+    ctx.strokeStyle = lastColor;
+    ctx.lineWidth = Math.max(2*dpr, strokeWidth * 0.85);
+    ctx.beginPath(); ctx.arc(last.x,last.y,pointRadius,0,Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.restore();
+    ctx.restore();
+  }
+  function animateEquityCurveTransition(canvas, nextValues, durationMs=900){
+    if(!canvas) return;
+    const target = (Array.isArray(nextValues) ? nextValues : []).map(v => Number(v) || 0);
+    const n = target.length;
+    const prevRaw = __equityCurvePrevValues.get(canvas) || [];
+    const startVals = __resampleArrayLinear(prevRaw, n);
+    const startCurve = buildEquityCurveFromDaily(startVals).map(p=>p.y);
+    const targetCurve = buildEquityCurveFromDaily(target).map(p=>p.y);
+    let minY = Math.min(...targetCurve);
+    let maxY = Math.max(...targetCurve);
+    if(!targetCurve.length){ minY = -1; maxY = 1; }
+    if(maxY === minY){
+      const bump = Math.max(Math.abs(maxY) * 0.08, 1);
+      minY -= bump;
+      maxY += bump;
+    }
+    const fixedScale = { minY, maxY };
+    if(!prevRaw.length){ drawMiniEquityCurve(canvas, target, fixedScale); __equityCurvePrevValues.set(canvas, target.slice()); return; }
+    if(canvas.__equityAnimRaf){ cancelAnimationFrame(canvas.__equityAnimRaf); canvas.__equityAnimRaf = null; }
+    const t0 = performance.now();
+    const frame = now => {
+      const t = (now - t0) / Math.max(1, durationMs);
+      const e = __easeOutCubic(t);
+      const cur = new Array(n);
+      for(let i=0;i<n;i++) cur[i] = startVals[i] + (target[i] - startVals[i]) * e;
+      drawMiniEquityCurve(canvas, cur, fixedScale);
+      if(t < 1){ canvas.__equityAnimRaf = requestAnimationFrame(frame); }
+      else{ canvas.__equityAnimRaf = null; drawMiniEquityCurve(canvas, target, fixedScale); __equityCurvePrevValues.set(canvas, target.slice()); }
+    };
+    canvas.__equityAnimRaf = requestAnimationFrame(frame);
+  }
+
   function calcMonthStreaks(year, month){
     const { daysInMonth } = getMonthDays(year, month);
     let bestWin = 0, bestLoss = 0;
@@ -12623,10 +12860,11 @@ function updateWinRateGauge(wins, losses, ties=0){
       yExp.style.color = expectancy >= 0 ? "var(--good)" : "var(--bad)";
     }
 
-    // Net daily P&L chart
+    // Equity curve
     const yChart = document.getElementById("yDailyPnlChart");
     if(yChart){
-      animateBarChartTransition(yChart, daily, null);
+      animateEquityCurveTransition(yChart, daily);
+      updateEquityMiniValue(document.getElementById("yDailyEquityValue"), document.getElementById("yDailyEquitySub"), daily, String(year));
     }
   }
 
@@ -12782,8 +13020,11 @@ if(wWinRateSub){
       wExpectancySub.textContent = totalTrades > 0 ? `≈ per trade • Win rate ${(winRate*100).toFixed(1)}%` : "Log wins/losses to estimate expectancy";
     }
 
-    // Daily PnL chart
-animateBarChartTransition(dailyPnlChart, daily, null);
+    // Equity curve
+if(dailyPnlChart){
+  animateEquityCurveTransition(dailyPnlChart, daily);
+  updateEquityMiniValue(document.getElementById("dailyEquityValue"), document.getElementById("dailyEquitySub"), daily, monthName(year, month));
+}
   }
 
   function renderMonthChart(){
