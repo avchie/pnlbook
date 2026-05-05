@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" class="popup-font-hold">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
@@ -903,17 +903,18 @@ function formatCompactNumber(value){
     .calendarStageInner{
       position:relative;
       z-index:1;
-      transition: filter .45s cubic-bezier(.2,.8,.2,1), transform .45s cubic-bezier(.2,.8,.2,1), opacity .35s ease;
+      transition: filter .45s cubic-bezier(.2,.8,.2,1), opacity .35s ease;
+      transform: none !important;
       transform-origin: 50% 10%;
     }
     .calendarStage.demo-overlay-open .calendarStageInner{
-      filter: blur(2px) saturate(.94);
-      transform: scale(.992);
+      filter: none !important;
+      transform: none !important;
     }
     .demoOverlay{
-      position:absolute;
+      position:fixed;
       inset:0;
-      z-index:3;
+      z-index:9999;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -928,12 +929,15 @@ function formatCompactNumber(value){
       visibility:visible;
       pointer-events:auto;
     }
+
+    /* Tutorial overlay is fixed and detached; it must not change calendar sizing. */
+
     .demoOverlayBack{
       position:absolute;
       inset:0;
-      border-radius: 18px;
+      border-radius: 0;
       background: linear-gradient(180deg, rgba(7,9,12,0.40), rgba(7,9,12,0.82));
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(8px);
     }
     .demoOverlayCard{
       position:relative;
@@ -943,13 +947,13 @@ function formatCompactNumber(value){
       border:1px solid rgba(255,255,255,0.12);
       background: linear-gradient(180deg, rgba(19,24,31,0.96), rgba(10,13,17,0.96));
       box-shadow: 0 24px 80px rgba(0,0,0,0.48), 0 0 0 1px rgba(255,255,255,0.04) inset;
-      transform: translateY(16px) scale(.985);
+      transform: translateY(16px);
       opacity:0;
       transition: transform .46s cubic-bezier(.2,.8,.2,1), opacity .34s ease;
       overflow:hidden;
     }
     .demoOverlay.show .demoOverlayCard{
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
       opacity:1;
     }
     .demoOverlayCard::before{
@@ -1223,6 +1227,13 @@ function formatCompactNumber(value){
       flex-wrap:wrap;
     }
     .chartTitle{
+      font-weight:950;
+      color: rgba(255,255,255,0.92);
+      letter-spacing:0.2px;
+      font-size:14px;
+      font-family: var(--mono);
+    }
+.chartTitle{
       font-weight:950;
       color: rgba(255,255,255,0.92);
       letter-spacing:0.2px;
@@ -3111,7 +3122,7 @@ mask: radial-gradient(farthest-side,
   justify-content: space-between !important;
   gap: 0 !important;
   padding: 0 2px !important;
-  margin-top: -6px !important;
+  margin-top: -10px !important;
 }
 #winRateWidget .winGaugeNums .mid{
   display: none !important;
@@ -3693,8 +3704,8 @@ mask: radial-gradient(farthest-side,
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   font-family: var(--mono);
   font-weight: 950;
   letter-spacing: 0.2px;
@@ -4044,7 +4055,7 @@ mask: radial-gradient(farthest-side,
 
     /* === Trade Win %: move win/loss pills slightly upward === */
     #winRateWidget .winGaugeCounts{
-      margin-top: -6px !important;
+      margin-top: -10px !important;
     }
 
 
@@ -4090,6 +4101,56 @@ mask: radial-gradient(farthest-side,
       border-color: rgba(170,176,190,.30) !important;
       color: rgba(235,238,245,0.96) !important;
     }
+
+
+/* Align yearly Equity curve title */
+#yDailyPnlWidget .yearlyEquityCurveTitleFix{
+  margin-left: 6px !important;
+}
+
+
+
+/* === Yearly width alignment fix (non-layout breaking) === */
+#yearlySection,
+.yearSection,
+.yearContainer {
+  width: 100%;
+}
+
+#yearlySection .content {
+  width: 100%;
+  max-width: 1720px;
+  margin: 0 auto;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+/* Ensure cards stretch evenly */
+#yearlySection .card {
+  width: 100%;
+}
+
+/* Year label styled like month pill */
+.yearTileLabel{
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+
+  padding: 6px 10px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+
+  color: rgba(255,255,255,0.90);
+
+  backdrop-filter: blur(6px);
+}
 
 </style>
 <style>
@@ -4288,8 +4349,8 @@ mask: radial-gradient(farthest-side,
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   font-family: var(--mono);
   font-weight: 950;
   letter-spacing: 0.2px;
@@ -4700,8 +4761,8 @@ mask: radial-gradient(farthest-side,
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   font-family: var(--mono);
   font-weight: 950;
   letter-spacing: 0.2px;
@@ -5084,8 +5145,8 @@ mask: radial-gradient(farthest-side,
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   font-family: var(--mono);
   font-weight: 950;
   letter-spacing: 0.2px;
@@ -5484,8 +5545,8 @@ mask: radial-gradient(farthest-side,
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   font-family: var(--mono);
   font-weight: 950;
   letter-spacing: 0.2px;
@@ -5851,8 +5912,8 @@ mask: radial-gradient(farthest-side,
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   font-family: var(--mono);
   font-weight: 950;
   letter-spacing: 0.2px;
@@ -6227,8 +6288,8 @@ mask: radial-gradient(farthest-side,
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   font-family: var(--mono);
   font-weight: 950;
   letter-spacing: 0.2px;
@@ -6593,8 +6654,8 @@ mask: radial-gradient(farthest-side,
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   font-family: var(--mono);
   font-weight: 950;
   letter-spacing: 0.2px;
@@ -6972,8 +7033,8 @@ mask: radial-gradient(farthest-side,
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   font-family: var(--mono);
   font-weight: 950;
   letter-spacing: 0.2px;
@@ -7161,8 +7222,8 @@ mask: radial-gradient(farthest-side,
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   pointer-events: none;
   white-space: nowrap;
   opacity: 0.98;
@@ -7366,8 +7427,8 @@ mask: radial-gradient(farthest-side,
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   font-family: var(--mono);
   font-weight: 950;
   letter-spacing: 0.2px;
@@ -7734,8 +7795,8 @@ mask: radial-gradient(farthest-side,
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   font-family: var(--mono);
   font-weight: 950;
   letter-spacing: 0.2px;
@@ -8118,8 +8179,8 @@ mask: radial-gradient(farthest-side,
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   font-family: var(--mono);
   font-weight: 950;
   letter-spacing: 0.2px;
@@ -8483,8 +8544,8 @@ mask: radial-gradient(farthest-side,
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
   background: rgba(10,12,15,0.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   font-family: var(--mono);
   font-weight: 950;
   letter-spacing: 0.2px;
@@ -8717,6 +8778,13 @@ body{
 .pnlMiniTitle,
 .pnlWidgetTitle,
 .pnlWideTitle,
+.chartTitle{
+      font-weight:950;
+      color: rgba(255,255,255,0.92);
+      letter-spacing:0.2px;
+      font-size:14px;
+      font-family: var(--mono);
+    }
 .chartTitle{
   color: rgba(255,255,255,0.62);
 }
@@ -9661,7 +9729,1464 @@ body{
 #monthlyTotalLabel{
   color: #ffffff !important;
 }
-</style></head>
+</style>
+<style id="monthly-totals-widget-redesign-v3">
+/* Monthly totals / yearly month tiles redesign */
+body #yearlyTopRow .yearMonthBtn{
+  position: relative !important;
+  min-height: 128px !important;
+  padding: 14px 14px 16px !important;
+}
+body #yearlyTopRow .yearMonthBtn .date{
+  display: none !important;
+}
+body #yearlyTopRow .yearMonthBtn .pnl.yearMonthTile{
+  position: static !important;
+  inset: auto !important;
+  height: 100% !important;
+  min-height: 96px !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 18px 4px 0 !important;
+  text-align: center !important;
+}
+body #yearlyTopRow .yearMonthBtn .ymMonth{
+  position: absolute !important;
+  top: 10px !important;
+  right: 12px !important;
+  margin: 0 !important;
+  font-family: var(--mono) !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  font-weight: 950 !important;
+  letter-spacing: 0.2px !important;
+  color: rgba(255,255,255,0.62) !important;
+  text-transform: none !important;
+  max-width: calc(100% - 24px) !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+body #yearlyTopRow .yearMonthBtn .pnlAmt{
+  display: block !important;
+  margin: 0 0 2px !important;
+  font-family: var(--mono) !important;
+  font-size: 26px !important;
+  line-height: 1.05 !important;
+  font-weight: 950 !important;
+  letter-spacing: 0.25px !important;
+  color: rgba(255,255,255,0.96) !important;
+}
+body #yearlyTopRow .yearMonthBtn .ymTrades,
+body #yearlyTopRow .yearMonthBtn .ymWin{
+  margin: 0 !important;
+  font-family: var(--mono) !important;
+  font-size: 12px !important;
+  line-height: 1.15 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.2px !important;
+  color: rgba(255,255,255,0.62) !important;
+}
+body #yearlyTopRow .yearMonthBtn.green .pnlAmt,
+body #yearlyTopRow .yearMonthBtn.red .pnlAmt,
+body #yearlyTopRow .yearMonthBtn.neutral .pnlAmt{
+  color: rgba(255,255,255,0.96) !important;
+}
+@media (max-width: 760px){
+  body #yearlyTopRow .yearMonthBtn .pnlAmt{ font-size: 22px !important; }
+}
+</style>
+<style id="monthly-totals-compact-real-fix">
+/* Real compact pass for the Yearly tab Monthly Totals tiles.
+   This overrides earlier aspect-ratio/min-height rules that were keeping the boxes large. */
+body #yearlyTopRow #yearMonthGrid{
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(104px, 132px)) !important;
+  gap: 8px !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn,
+body #yearlyTopRow #yearMonthGrid .monthTile{
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 88px !important;
+  height: 88px !important;
+  aspect-ratio: auto !important;
+  padding: 9px 10px !important;
+  border-radius: 13px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  overflow: hidden !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnl.yearMonthTile,
+body #yearlyTopRow #yearMonthGrid .monthTile{
+  min-height: 0 !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnl.yearMonthTile{
+  position: static !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 3px !important;
+  padding: 12px 0 0 !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .ymMonth,
+body #yearlyTopRow #yearMonthGrid .monthTile .mName{
+  position: absolute !important;
+  top: 7px !important;
+  right: 9px !important;
+  max-width: calc(100% - 18px) !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+  letter-spacing: 0.15px !important;
+  color: rgba(255,255,255,0.58) !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnlAmt,
+body #yearlyTopRow #yearMonthGrid .monthTile .mSum{
+  display: block !important;
+  margin: 0 0 1px !important;
+  font-size: 18px !important;
+  line-height: 1.05 !important;
+  font-weight: 950 !important;
+  letter-spacing: 0.1px !important;
+  color: rgba(255,255,255,0.96) !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .ymTrades,
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .ymWin,
+body #yearlyTopRow #yearMonthGrid .monthTile .mMeta{
+  margin: 0 !important;
+  font-size: 10px !important;
+  line-height: 1.1 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.1px !important;
+  color: rgba(255,255,255,0.60) !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .monthTile .mMeta{
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+}
+
+@media (max-width: 1250px){
+  body #yearlyTopRow #yearMonthGrid{ grid-template-columns: repeat(4, minmax(104px, 132px)) !important; }
+}
+@media (max-width: 760px){
+  body #yearlyTopRow #yearMonthGrid{ grid-template-columns: repeat(3, minmax(96px, 1fr)) !important; }
+  body #yearlyTopRow #yearMonthGrid .yearMonthBtn,
+  body #yearlyTopRow #yearMonthGrid .monthTile{ height: 84px !important; min-height: 84px !important; }
+  body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnlAmt,
+  body #yearlyTopRow #yearMonthGrid .monthTile .mSum{ font-size: 16px !important; }
+}
+@media (max-width: 520px){
+  body #yearlyTopRow #yearMonthGrid{ grid-template-columns: repeat(2, minmax(104px, 1fr)) !important; }
+}
+</style>
+<style id="monthly-totals-balanced-real-fix">
+/* Balanced sizing for Yearly tab Monthly Totals tiles.
+   Larger than the previous compact pass, but still smaller than the original square cards. */
+body #yearlyTopRow #yearMonthGrid{
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(140px, 170px)) !important;
+  gap: 12px !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn,
+body #yearlyTopRow #yearMonthGrid .monthTile{
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 118px !important;
+  height: 118px !important;
+  aspect-ratio: auto !important;
+  padding: 14px 14px 12px !important;
+  border-radius: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  overflow: hidden !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnl.yearMonthTile,
+body #yearlyTopRow #yearMonthGrid .monthTile{
+  min-height: 0 !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnl.yearMonthTile{
+  position: static !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 14px 0 0 !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .ymMonth,
+body #yearlyTopRow #yearMonthGrid .monthTile .mName{
+  position: absolute !important;
+  top: 10px !important;
+  right: 12px !important;
+  max-width: calc(100% - 24px) !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  font-weight: 950 !important;
+  letter-spacing: 0.16px !important;
+  color: rgba(255,255,255,0.66) !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnlAmt,
+body #yearlyTopRow #yearMonthGrid .monthTile .mSum{
+  display: block !important;
+  margin: 2px 0 2px !important;
+  font-size: 24px !important;
+  line-height: 1.05 !important;
+  font-weight: 950 !important;
+  letter-spacing: 0.12px !important;
+  color: rgba(255,255,255,0.96) !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .ymTrades,
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .ymWin,
+body #yearlyTopRow #yearMonthGrid .monthTile .mMeta{
+  margin: 0 !important;
+  font-size: 12px !important;
+  line-height: 1.22 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.12px !important;
+  color: rgba(255,255,255,0.66) !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .monthTile .mMeta{
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+}
+
+@media (max-width: 1250px){
+  body #yearlyTopRow #yearMonthGrid{ grid-template-columns: repeat(4, minmax(140px, 170px)) !important; }
+}
+@media (max-width: 860px){
+  body #yearlyTopRow #yearMonthGrid{ grid-template-columns: repeat(3, minmax(130px, 1fr)) !important; }
+  body #yearlyTopRow #yearMonthGrid .yearMonthBtn,
+  body #yearlyTopRow #yearMonthGrid .monthTile{ height: 112px !important; min-height: 112px !important; }
+  body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnlAmt,
+  body #yearlyTopRow #yearMonthGrid .monthTile .mSum{ font-size: 22px !important; }
+}
+@media (max-width: 560px){
+  body #yearlyTopRow #yearMonthGrid{ grid-template-columns: repeat(2, minmax(130px, 1fr)) !important; }
+}
+</style>
+<style id="yearly-totals-match-monthly-balanced-fix">
+/* Yearly total tiles: match the current Monthly Totals tile size and hierarchy. */
+body #yearlyTopRow #yearPicker.yearPicker,
+body #yearView #yearPicker.yearPicker{
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(140px, 170px)) !important;
+  gap: 12px !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+  overflow: visible !important;
+}
+
+body #yearlyTopRow #yearPicker .yearBtn,
+body #yearView #yearPicker .yearBtn,
+body #yearPicker .yearBtn{
+  position: relative !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 118px !important;
+  height: 118px !important;
+  aspect-ratio: auto !important;
+  padding: 14px 14px 12px !important;
+  border-radius: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  overflow: hidden !important;
+  font-family: var(--mono) !important;
+}
+
+body #yearPicker .yearBtn .date,
+body #yearPicker .yearBtn .pnl,
+body #yearPicker .yearBtn .yNum,
+body #yearPicker .yearBtn .yTotal{
+  display: none !important;
+}
+
+body #yearPicker .yearBtn .yearTileLabel{
+  position: absolute !important;
+  top: 10px !important;
+  right: 12px !important;
+  max-width: calc(100% - 24px) !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  font-weight: 950 !important;
+  letter-spacing: 0.16px !important;
+  color: rgba(255,255,255,0.66) !important;
+}
+
+body #yearPicker .yearBtn .yearTileBody{
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 14px 0 0 !important;
+}
+
+body #yearPicker .yearBtn .yearTileTotal{
+  display: block !important;
+  margin: 2px 0 2px !important;
+  font-size: 24px !important;
+  line-height: 1.05 !important;
+  font-weight: 950 !important;
+  letter-spacing: 0.12px !important;
+  color: rgba(255,255,255,0.96) !important;
+}
+
+body #yearPicker .yearBtn .yearTileMeta{
+  margin: 0 !important;
+  font-size: 12px !important;
+  line-height: 1.22 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.12px !important;
+  color: rgba(255,255,255,0.66) !important;
+}
+
+@media (max-width: 1250px){
+  body #yearlyTopRow #yearPicker.yearPicker,
+  body #yearView #yearPicker.yearPicker,
+  body #yearPicker.yearPicker{ grid-template-columns: repeat(4, minmax(140px, 170px)) !important; }
+}
+@media (max-width: 860px){
+  body #yearlyTopRow #yearPicker.yearPicker,
+  body #yearView #yearPicker.yearPicker,
+  body #yearPicker.yearPicker{ grid-template-columns: repeat(3, minmax(130px, 1fr)) !important; }
+  body #yearPicker .yearBtn{ height: 112px !important; min-height: 112px !important; }
+  body #yearPicker .yearBtn .yearTileTotal{ font-size: 22px !important; }
+}
+@media (max-width: 560px){
+  body #yearlyTopRow #yearPicker.yearPicker,
+  body #yearView #yearPicker.yearPicker,
+  body #yearPicker.yearPicker{ grid-template-columns: repeat(2, minmax(130px, 1fr)) !important; }
+}
+</style>
+<style id="monthly-yearly-total-colour-fix">
+/* Colour dollar totals only: green for positive, red for negative.
+   Applies to both Monthly Totals tiles and Yearly Total tiles. */
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn.green .pnlAmt,
+body #yearlyTopRow #yearMonthGrid .monthTile.green .mSum,
+body #yearlyTopRow #yearMonthGrid .pnlAmt.pos,
+body #yearlyTopRow #yearMonthGrid .mSum.pos,
+body #yearPicker .yearBtn .yearTileTotal.pos,
+body #yearView #yearPicker .yearBtn .yearTileTotal.pos{
+  color: var(--good) !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn.red .pnlAmt,
+body #yearlyTopRow #yearMonthGrid .monthTile.red .mSum,
+body #yearlyTopRow #yearMonthGrid .pnlAmt.neg,
+body #yearlyTopRow #yearMonthGrid .mSum.neg,
+body #yearPicker .yearBtn .yearTileTotal.neg,
+body #yearView #yearPicker .yearBtn .yearTileTotal.neg{
+  color: var(--bad) !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn.neutral .pnlAmt,
+body #yearlyTopRow #yearMonthGrid .monthTile.neutral .mSum,
+body #yearPicker .yearBtn .yearTileTotal.neu,
+body #yearView #yearPicker .yearBtn .yearTileTotal.neu{
+  color: rgba(255,255,255,0.88) !important;
+}
+</style>
+<style id="tiles-non-total-text-white-fix">
+/* Keep dollar totals dynamic red/green, force all other tile text to white. */
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .ymMonth,
+body #yearlyTopRow #yearMonthGrid .monthTile .mName,
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .ymTrades,
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .ymWin,
+body #yearlyTopRow #yearMonthGrid .monthTile .mMeta,
+body #yearlyTopRow #yearMonthGrid .monthTile .mMeta .mWin,
+body #yearPicker .yearBtn .yearTileLabel,
+body #yearView #yearPicker .yearBtn .yearTileLabel,
+body #yearPicker .yearBtn .yearTileMeta,
+body #yearView #yearPicker .yearBtn .yearTileMeta{
+  color: rgba(255,255,255,0.95) !important;
+}
+
+/* Explicitly preserve the conditional total colours. */
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn.green .pnlAmt,
+body #yearlyTopRow #yearMonthGrid .monthTile.green .mSum,
+body #yearlyTopRow #yearMonthGrid .pnlAmt.pos,
+body #yearlyTopRow #yearMonthGrid .mSum.pos,
+body #yearPicker .yearBtn .yearTileTotal.pos,
+body #yearView #yearPicker .yearBtn .yearTileTotal.pos{
+  color: var(--good) !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn.red .pnlAmt,
+body #yearlyTopRow #yearMonthGrid .monthTile.red .mSum,
+body #yearlyTopRow #yearMonthGrid .pnlAmt.neg,
+body #yearlyTopRow #yearMonthGrid .mSum.neg,
+body #yearPicker .yearBtn .yearTileTotal.neg,
+body #yearView #yearPicker .yearBtn .yearTileTotal.neg{
+  color: var(--bad) !important;
+}
+</style>
+<style id="monthly-yearly-compact-4x3-final-fix">
+/* Final compact alignment pass: monthly tiles remain 4 across (3 rows),
+   and yearly total tiles use the same size, spacing, and text layout. */
+body #yearlyTopRow #yearMonthGrid{
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(130px, 158px)) !important;
+  gap: 10px !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+  overflow: visible !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn,
+body #yearlyTopRow #yearMonthGrid .monthTile,
+body #yearlyTopRow #yearPicker .yearBtn,
+body #yearView #yearPicker .yearBtn,
+body #yearPicker .yearBtn{
+  position: relative !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 108px !important;
+  height: 108px !important;
+  aspect-ratio: auto !important;
+  padding: 12px 12px 10px !important;
+  border-radius: 15px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  overflow: hidden !important;
+  font-family: var(--mono) !important;
+}
+
+body #yearlyTopRow #yearPicker.yearPicker,
+body #yearView #yearPicker.yearPicker,
+body #yearPicker.yearPicker{
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(130px, 158px)) !important;
+  gap: 10px !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+  overflow: visible !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnl.yearMonthTile,
+body #yearlyTopRow #yearMonthGrid .monthTile,
+body #yearPicker .yearBtn .yearTileBody{
+  min-height: 0 !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnl.yearMonthTile,
+body #yearPicker .yearBtn .yearTileBody{
+  position: static !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  padding: 12px 0 0 !important;
+  text-align: center !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .ymMonth,
+body #yearlyTopRow #yearMonthGrid .monthTile .mName,
+body #yearPicker .yearBtn .yearTileLabel,
+body #yearView #yearPicker .yearBtn .yearTileLabel{
+  position: absolute !important;
+  top: 9px !important;
+  right: 11px !important;
+  max-width: calc(100% - 22px) !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  font-weight: 950 !important;
+  letter-spacing: 0.15px !important;
+  color: rgba(255,255,255,0.95) !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnlAmt,
+body #yearlyTopRow #yearMonthGrid .monthTile .mSum,
+body #yearPicker .yearBtn .yearTileTotal,
+body #yearView #yearPicker .yearBtn .yearTileTotal{
+  display: block !important;
+  margin: 1px 0 1px !important;
+  font-size: 22px !important;
+  line-height: 1.05 !important;
+  font-weight: 950 !important;
+  letter-spacing: 0.1px !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .ymTrades,
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .ymWin,
+body #yearlyTopRow #yearMonthGrid .monthTile .mMeta,
+body #yearlyTopRow #yearMonthGrid .monthTile .mMeta .mWin,
+body #yearPicker .yearBtn .yearTileMeta,
+body #yearView #yearPicker .yearBtn .yearTileMeta{
+  margin: 0 !important;
+  font-size: 11px !important;
+  line-height: 1.16 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.1px !important;
+  color: rgba(255,255,255,0.95) !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .monthTile .mMeta{
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 3px !important;
+}
+
+/* Preserve conditional dollar colours on both monthly and yearly totals. */
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn.green .pnlAmt,
+body #yearlyTopRow #yearMonthGrid .monthTile.green .mSum,
+body #yearlyTopRow #yearMonthGrid .pnlAmt.pos,
+body #yearlyTopRow #yearMonthGrid .mSum.pos,
+body #yearPicker .yearBtn .yearTileTotal.pos,
+body #yearView #yearPicker .yearBtn .yearTileTotal.pos{
+  color: var(--good) !important;
+}
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn.red .pnlAmt,
+body #yearlyTopRow #yearMonthGrid .monthTile.red .mSum,
+body #yearlyTopRow #yearMonthGrid .pnlAmt.neg,
+body #yearlyTopRow #yearMonthGrid .mSum.neg,
+body #yearPicker .yearBtn .yearTileTotal.neg,
+body #yearView #yearPicker .yearBtn .yearTileTotal.neg{
+  color: var(--bad) !important;
+}
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn.neutral .pnlAmt,
+body #yearlyTopRow #yearMonthGrid .monthTile.neutral .mSum,
+body #yearPicker .yearBtn .yearTileTotal.neu,
+body #yearView #yearPicker .yearBtn .yearTileTotal.neu{
+  color: rgba(255,255,255,0.88) !important;
+}
+
+@media (max-width: 920px){
+  body #yearlyTopRow #yearMonthGrid,
+  body #yearlyTopRow #yearPicker.yearPicker,
+  body #yearView #yearPicker.yearPicker,
+  body #yearPicker.yearPicker{
+    grid-template-columns: repeat(3, minmax(126px, 1fr)) !important;
+  }
+}
+@media (max-width: 560px){
+  body #yearlyTopRow #yearMonthGrid,
+  body #yearlyTopRow #yearPicker.yearPicker,
+  body #yearView #yearPicker.yearPicker,
+  body #yearPicker.yearPicker{
+    grid-template-columns: repeat(2, minmax(126px, 1fr)) !important;
+  }
+}
+</style>
+<style id="year-by-year-cells-left-nudge">
+/* Nudge only the Year by Year Overview cells left; tabs/navigation stay untouched. */
+#yearView .yearPicker,
+#yearlyTopRow .yearPicker{
+  transform: translateX(-6px) !important;
+}
+
+@media (max-width: 720px){
+  #yearView .yearPicker,
+  #yearlyTopRow .yearPicker{
+    transform: translateX(-4px) !important;
+  }
+}
+</style>
+<style>
+/* extra left shift for year overview cells */
+.yearPicker .cell{
+  transform: translateX(-6px);
+}
+</style>
+<style>
+/* force shift entire year grid left */
+.yearPicker{
+  margin-left: -52px !important;
+}
+</style>
+<style id="yearly-page-overhaul-final">
+/* ============================================================
+   YEARLY PAGE OVERHAUL
+   Goal: reduce cramped feel, remove old left nudges, increase spacing,
+   and make Year Overview / Monthly Totals / Yearly Performance breathe.
+   ============================================================ */
+
+/* Page-level layout: stack sections instead of squeezing overview + stats side-by-side */
+body #yearlyTopRow.yearlyRevampGrid{
+  display: grid;
+  grid-template-columns: 1fr !important;
+  gap: 22px !important;
+  align-items: stretch !important;
+  max-width: 1480px !important;
+  margin: 0 auto !important;
+  padding: 2px 0 10px !important;
+}
+
+/* Left stack becomes normal full-width flow */
+body #yearlyTopRow .yearlyLeftStack{
+  display: grid !important;
+  grid-template-rows: auto auto !important;
+  gap: 22px !important;
+}
+
+/* Card spacing */
+body #yearView,
+body #monthTotalsPanel,
+body #yearlyPerformanceCard{
+  border-radius: 22px !important;
+  overflow: hidden !important;
+}
+
+body #yearView .cardHead,
+body #monthTotalsPanel .cardHead,
+body #yearlyPerformanceCard .cardHead{
+  padding: 18px 20px 14px !important;
+}
+
+body #yearView .cardHead h2,
+body #monthTotalsPanel .cardHead h2,
+body #yearlyPerformanceCard .cardHead h2{
+  font-size: 16px !important;
+  letter-spacing: .25px !important;
+}
+
+body #yearView .content,
+body #monthTotalsPanel .content,
+body #yearlyPerformanceCard .content{
+  padding: 20px !important;
+}
+
+/* Kill every old nudge/negative margin that was used for the year cells */
+body #yearView .yearPicker,
+body #yearlyTopRow .yearPicker,
+body #yearPicker.yearPicker{
+  transform: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Year overview: bigger tiles, more whitespace, cleaner row wrapping */
+body #yearlyTopRow #yearPicker.yearPicker,
+body #yearView #yearPicker.yearPicker,
+body #yearPicker.yearPicker{
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)) !important;
+  gap: 16px !important;
+  justify-content: stretch !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
+
+/* Year tiles: larger and calmer */
+body #yearlyTopRow #yearPicker .yearBtn,
+body #yearView #yearPicker .yearBtn,
+body #yearPicker .yearBtn{
+  height: 138px !important;
+  min-height: 138px !important;
+  padding: 18px 18px 16px !important;
+  border-radius: 20px !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  text-align: left !important;
+  overflow: hidden !important;
+  transform: none !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 14px 38px rgba(0,0,0,0.26) !important;
+}
+
+/* Year tile inner content: left-aligned rather than crammed centered */
+body #yearPicker .yearBtn .yearTileBody,
+body #yearView #yearPicker .yearBtn .yearTileBody{
+  position: static !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  gap: 9px !important;
+  text-align: left !important;
+}
+
+/* Year label becomes an eyebrow */
+body #yearPicker .yearBtn .yearTileLabel,
+body #yearView #yearPicker .yearBtn .yearTileLabel,
+body #yearlyTopRow #yearPicker .yearBtn .yearTileLabel{
+  position: static !important;
+  max-width: 100% !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  letter-spacing: .45px !important;
+  text-transform: uppercase !important;
+  color: rgba(255,255,255,0.64) !important;
+}
+
+/* Main yearly total gets room */
+body #yearPicker .yearBtn .yearTileTotal,
+body #yearView #yearPicker .yearBtn .yearTileTotal,
+body #yearlyTopRow #yearPicker .yearBtn .yearTileTotal{
+  font-size: 30px !important;
+  line-height: 1.02 !important;
+  letter-spacing: .1px !important;
+  margin: 0 !important;
+}
+
+/* Meta text below total */
+body #yearPicker .yearBtn .yearTileMeta,
+body #yearView #yearPicker .yearBtn .yearTileMeta,
+body #yearlyTopRow #yearPicker .yearBtn .yearTileMeta{
+  font-size: 12px !important;
+  line-height: 1.25 !important;
+  color: rgba(255,255,255,0.62) !important;
+  margin: 0 !important;
+}
+
+/* Monthly totals: larger, more relaxed tiles */
+body #yearlyTopRow #yearMonthGrid,
+body #yearMonthGrid{
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)) !important;
+  gap: 16px !important;
+  justify-content: stretch !important;
+  align-items: stretch !important;
+  width: 100% !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn,
+body #yearlyTopRow #yearMonthGrid .monthTile,
+body #yearMonthGrid .yearMonthBtn,
+body #yearMonthGrid .monthTile{
+  height: 132px !important;
+  min-height: 132px !important;
+  aspect-ratio: auto !important;
+  padding: 18px !important;
+  border-radius: 20px !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  text-align: left !important;
+  overflow: hidden !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 14px 38px rgba(0,0,0,0.24) !important;
+}
+
+/* Month tile inner content */
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnl.yearMonthTile{
+  position: static !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+  text-align: left !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .ymMonth,
+body #yearlyTopRow #yearMonthGrid .monthTile .mName{
+  position: static !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  letter-spacing: .45px !important;
+  text-transform: uppercase !important;
+  color: rgba(255,255,255,0.64) !important;
+  max-width: 100% !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnlAmt,
+body #yearlyTopRow #yearMonthGrid .monthTile .mSum{
+  font-size: 26px !important;
+  line-height: 1.02 !important;
+  margin: 0 !important;
+  letter-spacing: .1px !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .ymTrades,
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .ymWin,
+body #yearlyTopRow #yearMonthGrid .monthTile .mMeta{
+  font-size: 12px !important;
+  line-height: 1.25 !important;
+  color: rgba(255,255,255,0.62) !important;
+  margin: 0 !important;
+}
+
+/* Yearly performance: no more tall cramped sidebar; use a dashboard grid */
+body #yearlyPerformanceCard{
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+body #yearlyPerformanceCard .content.yearlyPerfContent{
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(240px, 1fr)) !important;
+  grid-template-rows: none !important;
+  gap: 16px !important;
+  align-content: stretch !important;
+}
+
+body #yearlyPerformanceCard .pnlMini,
+body #yearlyPerformanceCard .pnlMini.pnlMiniTall{
+  min-height: 158px !important;
+  height: auto !important;
+  border-radius: 20px !important;
+  padding: 18px !important;
+}
+
+/* Let chart-style yearly widgets span wider if present */
+body #yearlyPerformanceCard #yDailyPnlWidget,
+body #yearlyPerformanceCard #yEquityCurveWidget,
+body #yearlyPerformanceCard #yMonthlyPnlWidget{
+  grid-column: span 2 !important;
+}
+
+/* Preserve total colours */
+body #yearPicker .yearBtn .yearTileTotal.pos,
+body #yearView #yearPicker .yearBtn .yearTileTotal.pos,
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn.green .pnlAmt,
+body #yearlyTopRow #yearMonthGrid .monthTile.green .mSum,
+body #yearlyTopRow #yearMonthGrid .pnlAmt.pos,
+body #yearlyTopRow #yearMonthGrid .mSum.pos{
+  color: var(--good) !important;
+}
+
+body #yearPicker .yearBtn .yearTileTotal.neg,
+body #yearView #yearPicker .yearBtn .yearTileTotal.neg,
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn.red .pnlAmt,
+body #yearlyTopRow #yearMonthGrid .monthTile.red .mSum,
+body #yearlyTopRow #yearMonthGrid .pnlAmt.neg,
+body #yearlyTopRow #yearMonthGrid .mSum.neg{
+  color: var(--bad) !important;
+}
+
+/* Responsive */
+@media (max-width: 1150px){
+  body #yearlyPerformanceCard .content.yearlyPerfContent{
+    grid-template-columns: repeat(2, minmax(220px, 1fr)) !important;
+  }
+}
+
+@media (max-width: 720px){
+  body #yearlyTopRow.yearlyRevampGrid{
+    gap: 16px !important;
+  }
+
+  body #yearView .content,
+  body #monthTotalsPanel .content,
+  body #yearlyPerformanceCard .content{
+    padding: 16px !important;
+  }
+
+  body #yearlyTopRow #yearPicker.yearPicker,
+  body #yearView #yearPicker.yearPicker,
+  body #yearPicker.yearPicker,
+  body #yearlyTopRow #yearMonthGrid,
+  body #yearMonthGrid{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  body #yearlyTopRow #yearPicker .yearBtn,
+  body #yearView #yearPicker .yearBtn,
+  body #yearPicker .yearBtn,
+  body #yearlyTopRow #yearMonthGrid .yearMonthBtn,
+  body #yearlyTopRow #yearMonthGrid .monthTile{
+    height: 124px !important;
+    min-height: 124px !important;
+    padding: 14px !important;
+  }
+
+  body #yearlyPerformanceCard .content.yearlyPerfContent{
+    grid-template-columns: 1fr !important;
+  }
+
+  body #yearlyPerformanceCard #yDailyPnlWidget,
+  body #yearlyPerformanceCard #yEquityCurveWidget,
+  body #yearlyPerformanceCard #yMonthlyPnlWidget{
+    grid-column: span 1 !important;
+  }
+}
+</style>
+<style id="yearly-horizontal-layout-final">
+/* ============================================================
+   YEARLY PAGE HORIZONTAL LAYOUT — FINAL
+   The yearly page has this markup:
+   #yearlyTopRow
+     .yearlyLeftStack
+       #yearView
+       #monthTotalsPanel
+     #yearlyPerformanceCard
+
+   To make all 3 panels horizontal, the wrapper must be flattened.
+   ============================================================ */
+
+body #yearlyTopRow.yearlyRevampGrid{
+  display: grid !important;
+  grid-template-columns: minmax(300px, .9fr) minmax(420px, 1.35fr) minmax(340px, 1fr) !important;
+  gap: 22px !important;
+  align-items: stretch !important;
+  max-width: 1640px !important;
+  margin: 0 auto !important;
+  padding: 2px 0 10px !important;
+}
+
+/* Critical fix: make Overview + Monthly Totals behave as direct grid siblings */
+body #yearlyTopRow.yearlyRevampGrid > .yearlyLeftStack{
+  display: contents !important;
+}
+
+/* Explicit placement: Overview left, Monthly Totals middle, Performance right */
+body #yearlyTopRow #yearView{
+  grid-column: 1 !important;
+  min-width: 0 !important;
+  height: 100% !important;
+}
+
+body #yearlyTopRow #monthTotalsPanel{
+  grid-column: 2 !important;
+  min-width: 0 !important;
+  height: 100% !important;
+}
+
+body #yearlyTopRow #yearlyPerformanceCard{
+  grid-column: 3 !important;
+  min-width: 0 !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+/* Keep the redesigned breathing room, but make each panel fit horizontally */
+body #yearlyTopRow #yearPicker.yearPicker{
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 14px !important;
+  width: 100% !important;
+  margin: 0 !important;
+  transform: none !important;
+  justify-content: stretch !important;
+}
+
+/* In a narrow left column, yearly overview works better as a vertical list of spacious cards */
+body #yearlyTopRow #yearPicker .yearBtn{
+  height: 118px !important;
+  min-height: 118px !important;
+  width: 100% !important;
+  padding: 18px !important;
+  border-radius: 20px !important;
+}
+
+/* Monthly totals: use a clean 3-column month grid in the wider middle panel */
+body #yearlyTopRow #yearMonthGrid{
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  width: 100% !important;
+  margin: 0 !important;
+  justify-content: stretch !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn,
+body #yearlyTopRow #yearMonthGrid .monthTile{
+  height: 118px !important;
+  min-height: 118px !important;
+  width: 100% !important;
+  padding: 16px !important;
+  border-radius: 20px !important;
+}
+
+/* Performance panel: restore vertical dashboard stack so it fits the right column */
+body #yearlyPerformanceCard .content.yearlyPerfContent{
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  align-content: stretch !important;
+}
+
+body #yearlyPerformanceCard .pnlMini,
+body #yearlyPerformanceCard .pnlMini.pnlMiniTall{
+  min-height: 126px !important;
+  height: auto !important;
+  border-radius: 20px !important;
+  padding: 18px !important;
+}
+
+body #yearlyPerformanceCard #yDailyPnlWidget,
+body #yearlyPerformanceCard #yEquityCurveWidget,
+body #yearlyPerformanceCard #yMonthlyPnlWidget{
+  grid-column: auto !important;
+}
+
+/* Keep header/card spacing consistent */
+body #yearlyTopRow #yearView .cardHead,
+body #yearlyTopRow #monthTotalsPanel .cardHead,
+body #yearlyTopRow #yearlyPerformanceCard .cardHead{
+  padding: 18px 20px 14px !important;
+}
+
+body #yearlyTopRow #yearView .content,
+body #yearlyTopRow #monthTotalsPanel .content,
+body #yearlyTopRow #yearlyPerformanceCard .content{
+  padding: 20px !important;
+}
+
+/* Medium screens: two columns, performance below */
+@media (max-width: 1350px){
+  body #yearlyTopRow.yearlyRevampGrid{
+    grid-template-columns: minmax(280px, .85fr) minmax(420px, 1.15fr) !important;
+  }
+
+  body #yearlyTopRow #yearView{
+    grid-column: 1 !important;
+  }
+
+  body #yearlyTopRow #monthTotalsPanel{
+    grid-column: 2 !important;
+  }
+
+  body #yearlyTopRow #yearlyPerformanceCard{
+    grid-column: 1 / -1 !important;
+  }
+
+  body #yearlyPerformanceCard .content.yearlyPerfContent{
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(220px, 1fr)) !important;
+    gap: 14px !important;
+  }
+
+  body #yearlyPerformanceCard #yDailyPnlWidget{
+    grid-column: span 2 !important;
+  }
+}
+
+/* Small screens: normal stacked layout */
+@media (max-width: 860px){
+  body #yearlyTopRow.yearlyRevampGrid{
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  body #yearlyTopRow #yearView,
+  body #yearlyTopRow #monthTotalsPanel,
+  body #yearlyTopRow #yearlyPerformanceCard{
+    grid-column: 1 !important;
+  }
+
+  body #yearlyTopRow #yearMonthGrid{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  body #yearlyPerformanceCard .content.yearlyPerfContent{
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  body #yearlyPerformanceCard #yDailyPnlWidget{
+    grid-column: 1 !important;
+  }
+}
+</style>
+<style id="yearly-subtle-width-and-upward-alignment-final">
+/* === Final yearly alignment adjustment: no rearranging, only subtle width + vertical nudge === */
+
+/* Widen the existing yearly row to match the monthly/topbar edges more closely */
+body #yearlyTopRow.yearlyRevampGrid{
+  max-width: 100% !important;
+  width: 100% !important;
+  gap: 16px !important;
+  margin: -14px auto 0 !important;
+  padding: 0 0 8px !important;
+}
+
+/* Keep the same three-column structure, just let each panel breathe slightly more */
+body #yearlyTopRow.yearlyRevampGrid{
+  grid-template-columns: minmax(310px, .92fr) minmax(440px, 1.38fr) minmax(360px, 1.04fr) !important;
+}
+
+/* Slightly tighten internal vertical spacing so the yearly widgets sit higher */
+body #yearlyTopRow #yearView .content,
+body #yearlyTopRow #monthTotalsPanel .content,
+body #yearlyTopRow #yearlyPerformanceCard .content{
+  padding-top: 16px !important;
+}
+
+/* Preserve existing responsive behavior, only reduce the widened desktop override on smaller screens */
+@media (max-width: 1350px){
+  body #yearlyTopRow.yearlyRevampGrid{
+    margin-top: -10px !important;
+    gap: 14px !important;
+    grid-template-columns: minmax(280px, .85fr) minmax(420px, 1.15fr) !important;
+  }
+}
+
+@media (max-width: 860px){
+  body #yearlyTopRow.yearlyRevampGrid{
+    margin-top: 0 !important;
+    gap: 16px !important;
+    grid-template-columns: 1fr !important;
+  }
+}
+</style>
+<style id="year-label-bottom-right-fix">
+/* Move year label to bottom right */
+body #yearPicker .yearBtn .yearTileLabel,
+body #yearView #yearPicker .yearBtn .yearTileLabel,
+body #yearlyTopRow #yearPicker .yearBtn .yearTileLabel{
+  position: absolute !important;
+  top: auto !important;
+  bottom: 10px !important;
+  right: 12px !important;
+  left: auto !important;
+}
+</style>
+<style id="tutorial-popup-no-calendar-effect-final">
+/* Tutorial popup: fixed overlay only. No calendar blur, scale, sizing, animation, or font mutation. */
+#demoOverlay.demoOverlay{
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  padding: 24px !important;
+  margin: 0 !important;
+  contain: layout paint style !important;
+}
+#demoOverlayBack.demoOverlayBack{
+  position: fixed !important;
+  inset: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+#calendarStage,
+#calendarStage .calendarStageInner,
+#calendarStage #calGrid,
+#calendarStage.demo-overlay-open,
+#calendarStage.demo-overlay-open .calendarStageInner,
+#calendarStage.demo-overlay-open #calGrid{
+  transform: none !important;
+  scale: 1 !important;
+  zoom: 1 !important;
+  filter: none !important;
+  animation: none !important;
+}
+#calendarStage .dayCell .pnlVal{
+  font-size: 20px !important;
+}
+#calendarStage .dayCell .pnlSub,
+#calendarStage .dayCell .date{
+  font-size: 12px !important;
+}
+</style>
+
+<style id="tutorial-popup-text-glitch-fix">
+/* Final tutorial popup fix: blur background only, keep popup text stable and single-rendered. */
+#demoOverlay.demoOverlay{
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  padding: 24px !important;
+  margin: 0 !important;
+  contain: none !important;
+  isolation: isolate !important;
+}
+
+#demoOverlayBack.demoOverlayBack{
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(7,9,12,0.56) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* Stop the launch animation from briefly rendering the text twice/stacked. */
+#demoOverlay .demoOverlayCard,
+#demoOverlay .demoEyebrow,
+#demoOverlay .demoTitle,
+#demoOverlay .demoLead,
+#demoOverlay .demoSteps,
+#demoOverlay .demoStep,
+#demoOverlay .demoStepNum,
+#demoOverlay .demoStepTitle,
+#demoOverlay .demoStepText,
+#demoOverlay .demoOverlayFooter,
+#demoOverlay .demoFooterText,
+#demoOverlay .demoActions{
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+  -webkit-font-smoothing: antialiased !important;
+  text-rendering: geometricPrecision !important;
+}
+
+#demoOverlay:not(.show) .demoOverlayCard{
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+#demoOverlay.show .demoOverlayCard{
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Keep decorative overlay layer behind content only. */
+#demoOverlay .demoOverlayCard::before{
+  z-index: 0 !important;
+}
+#demoOverlay .demoOverlayCard > *{
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Popup must not touch the calendar. */
+#calendarStage,
+#calendarStage .calendarStageInner,
+#calendarStage #calGrid,
+#calendarStage.demo-overlay-open,
+#calendarStage.demo-overlay-open .calendarStageInner,
+#calendarStage.demo-overlay-open #calGrid{
+  transform: none !important;
+  scale: 1 !important;
+  zoom: 1 !important;
+  filter: none !important;
+  animation: none !important;
+}
+</style>
+
+
+<style id="popup-font-ready-no-snap">
+/* Prevent popup text snapping caused by late webfont/layout swap. */
+html.popup-font-hold #demoOverlay.demoOverlay{
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Only reveal after fonts have loaded and layout has been forced. */
+html.popup-font-ready #demoOverlay.demoOverlay.show{
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* Keep the overlay independent and the calendar untouched. */
+#demoOverlay.demoOverlay{
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  padding: 24px !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+#demoOverlayBack.demoOverlayBack{
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(7,9,12,0.56) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* Remove entrance motion that can expose intermediate wrapping. */
+#demoOverlay .demoOverlayCard,
+#demoOverlay.show .demoOverlayCard{
+  transform: none !important;
+  animation: none !important;
+  transition: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Stable text and grid layout from first visible frame. */
+#demoOverlay .demoTitle{
+  font-size: 34px !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.03em !important;
+  margin: 14px 0 10px !important;
+}
+
+#demoOverlay .demoLead{
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  margin: 0 0 18px !important;
+}
+
+#demoOverlay .demoSteps{
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+  margin: 0 0 18px !important;
+}
+
+#demoOverlay .demoStepText{
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+}
+
+@media (max-width: 760px){
+  #demoOverlay.demoOverlay{ padding: 16px !important; }
+  #demoOverlay .demoOverlayCard{
+    padding: 22px 18px 18px !important;
+    border-radius: 22px !important;
+  }
+  #demoOverlay .demoTitle{ font-size: 28px !important; }
+  #demoOverlay .demoSteps{ grid-template-columns: 1fr !important; }
+}
+
+/* Calendar remains untouched by popup. */
+#calendarStage,
+#calendarStage .calendarStageInner,
+#calendarStage #calGrid,
+#calendarStage.demo-overlay-open,
+#calendarStage.demo-overlay-open .calendarStageInner,
+#calendarStage.demo-overlay-open #calGrid{
+  transform: none !important;
+  scale: 1 !important;
+  zoom: 1 !important;
+  filter: none !important;
+  animation: none !important;
+}
+</style>
+
+
+<script id="popup-font-ready-no-snap-script">
+(function(){
+  function markPopupReady(){
+    var root = document.documentElement;
+    var overlay = document.getElementById('demoOverlay');
+    var card = overlay && overlay.querySelector('.demoOverlayCard');
+
+    /* Force final layout while still hidden. */
+    if (overlay) void overlay.offsetWidth;
+    if (card) void card.offsetWidth;
+
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        root.classList.remove('popup-font-hold');
+        root.classList.add('popup-font-ready');
+      });
+    });
+  }
+
+  function waitForFontsThenReady(){
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(markPopupReady).catch(markPopupReady);
+    } else {
+      window.addEventListener('load', markPopupReady, { once: true });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', waitForFontsThenReady, { once: true });
+  } else {
+    waitForFontsThenReady();
+  }
+})();
+</script>
+
+
+<style id="pnl-book-cache-warning-final">
+#pnlBookTitle{
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+}
+#pnlBookTitle .pnlBookCacheWarning{
+  color: #ff4d6d !important;
+  font-size: 13px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.1px !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+}
+@media (max-width: 640px){
+  #pnlBookTitle .pnlBookCacheWarning{
+    font-size: 11px !important;
+    white-space: normal !important;
+  }
+}
+</style>
+
+</head>
 <body class="tab-dashboard">
 <div id="mobileBlocker">
 <div id="mobileBlockerInner">
@@ -9818,7 +11343,7 @@ body{
 <div class="layout">
 <div class="card">
 <div class="cardHead">
-<h2 id="pnlBookTitle">PNL Book</h2>
+<h2 id="pnlBookTitle">PNL Book <span class="pnlBookCacheWarning">(All data saved locally. Do not clear cache).</span></h2>
 <div class="subTabs">
 <button class="subTabBtn active" id="pnlTabMonth">Monthly</button>
 <button class="subTabBtn" id="pnlTabYear">Yearly</button>
@@ -9939,8 +11464,7 @@ body{
 <div class="pnlMini" id="dailyPnlWidget">
 <div class="pnlMiniBody" style="flex-direction:column; align-items:stretch; justify-content:flex-start; gap:10px;">
 <div class="equityMiniHead">
-<div class="pnlWidgetTitle">Equity curve</div>
-<div class="equityMiniValue" id="dailyEquityValue">$0.00</div>
+<div class="pnlWidgetTitle monthlyEquityCurveTitleFix">Equity curve</div>
 </div>
 <canvas id="dailyPnlChart" style="width:100%; height:140px; display:block;"></canvas>
 <div class="equityMiniSub" id="dailyEquitySub"></div>
@@ -10109,8 +11633,7 @@ body{
 <div class="pnlMini pnlMiniTall" id="yDailyPnlWidget">
 <div class="pnlMiniBody" style="flex-direction:column; align-items:stretch; justify-content:flex-start; gap:10px;">
 <div class="equityMiniHead">
-<div class="pnlMiniTitle">Equity curve</div>
-<div class="equityMiniValue" id="yDailyEquityValue">$0.00</div>
+<div class="pnlMiniTitle yearlyEquityCurveTitleFix">Equity curve</div>
 </div>
 <canvas id="yDailyPnlChart" style="width:100%; height:100%; display:block;"></canvas>
 <div class="equityMiniSub" id="yDailyEquitySub"></div>
@@ -11311,11 +12834,14 @@ const yearChart = document.getElementById("yearChart");
     }catch(e){}
   }
   function syncDemoUi(){
-    const isOpen = !!(demoOverlay && demoOverlay.classList.contains("show"));
-    if(calendarStage) calendarStage.classList.toggle("demo-overlay-open", isOpen);
+    /* Tutorial overlay must not modify the calendar container. */
+    if(calendarStage) calendarStage.classList.remove("demo-overlay-open");
   }
   function showDemoOverlay(){
     if(!demoOverlay) return;
+    if(demoOverlay.parentElement !== document.body){
+      document.body.appendChild(demoOverlay);
+    }
     demoOverlay.setAttribute("aria-hidden", "false");
     demoOverlay.classList.add("show");
     syncDemoUi();
@@ -11336,7 +12862,6 @@ const yearChart = document.getElementById("yearChart");
   }
   function exitDemoMode(opts = {}){
     hideDemoOverlay();
-    renderMonthView();
     renderMonthChart();
     renderYearIfNeeded();
     syncDemoUi();
@@ -11669,10 +13194,12 @@ const pnlState = loadPnLState();
 
 
 
-  // Smooth Monthly <-> Yearly sub-tab transitions (fade + drop)
+  // Monthly <-> Yearly sub-tab switch: smooth but atomic.
+  // Fade the current layout out first, swap display states, then fade the new layout in.
+  // This keeps only one layout interactive/visible at a time and avoids the old overlap flicker.
   let pnlSubSwapBusy = false;
   function animatePnLSubTabSwap(which, run){
-    if(pnlSubSwapBusy){ run(); return; }
+    if(pnlSubSwapBusy){ return; }
     pnlSubSwapBusy = true;
 
     const targets = [
@@ -11686,25 +13213,42 @@ const pnlState = loadPnLState();
       document.getElementById("yearlyTopRow")
     ].filter(Boolean);
 
-    // Fade/drop out currently visible panels
-    const currentlyVisible = targets.filter(el => el.style.display !== "none");
-    currentlyVisible.forEach(el => el.classList.add("subTabSwitchOut"));
+    const shell = document.getElementById("profitMonthShell") || document.getElementById("sectionProfit");
+    if(shell) shell.classList.add("is-switching");
+
+    targets.forEach(el => {
+      el.classList.remove("subTabSwitchIn");
+      if(el.offsetParent !== null || getComputedStyle(el).display !== "none"){
+        el.classList.add("subTabSwitchOut");
+      }
+    });
 
     setTimeout(() => {
-      try{ run(); } finally {
-        // Prepare new visible panels for fade-in
-        const nowVisible = targets.filter(el => el.style.display !== "none");
-        nowVisible.forEach(el => el.classList.add("subTabSwitchOut"));
-        // Force reflow so the transition reliably triggers
-        void document.body.offsetWidth;
+      try{
+        run();
+        if(typeof window.__pnlHardVisibilitySync === "function") window.__pnlHardVisibilitySync();
+        if(typeof window.syncMonthlyTopbarVisibility === "function") window.syncMonthlyTopbarVisibility();
+      } finally {
+        targets.forEach(el => {
+          el.classList.remove("subTabSwitchOut");
+          if(getComputedStyle(el).display !== "none"){
+            el.classList.add("subTabSwitchIn");
+          }
+        });
 
         requestAnimationFrame(() => {
-          nowVisible.forEach(el => el.classList.remove("subTabSwitchOut"));
-          // release after the fade-in finishes
-          setTimeout(() => { pnlSubSwapBusy = false; }, 240);
+          requestAnimationFrame(() => {
+            targets.forEach(el => el.classList.remove("subTabSwitchIn"));
+            setTimeout(() => {
+              if(shell) shell.classList.remove("is-switching");
+              pnlSubSwapBusy = false;
+              if(typeof window.__pnlHardVisibilitySync === "function") window.__pnlHardVisibilitySync();
+              if(typeof window.syncMonthlyTopbarVisibility === "function") window.syncMonthlyTopbarVisibility();
+            }, 190);
+          });
         });
       }
-    }, 140);
+    }, 110);
   }
 
   // Smooth month-to-month transitions for the calendar + chart
@@ -11800,6 +13344,22 @@ prevBtn.addEventListener("click", () => {
       const rec = normalizeDayRec(getActiveDailyStore()[k]);
       wins += (rec.wins|0);
       losses += (rec.losses|0);
+    }
+    const trades = wins + losses;
+    const winPct = trades > 0 ? (wins / trades) * 100 : 0;
+    const winPctText = trades > 0 ? `${winPct.toFixed(0)}%` : `—`;
+    return { wins, losses, trades, winPct, winPctText };
+  }
+
+  function yearTradeStats(year){
+    let wins = 0, losses = 0;
+    const store = getActiveDailyStore();
+    for(const k of Object.keys(store)){
+      if(k.startsWith(`${year}-`)){
+        const rec = normalizeDayRec(store[k]);
+        wins += (rec.wins|0);
+        losses += (rec.losses|0);
+      }
     }
     const trades = wins + losses;
     const winPct = trades > 0 ? (wins / trades) * 100 : 0;
@@ -12351,11 +13911,17 @@ function resetMonthlyNumberAnimationState(){
 
     const last = pts[pts.length-1];
     const lastColor = last.rawY >= 0 ? green : red;
+
+    // Draw the final equity marker outside the plot clipping region.
+    // The last point sits on the right edge of the plot; keeping the clip
+    // active cuts the marker in half. The canvas padding already leaves
+    // enough physical room, so we only need to release the clip first.
+    ctx.restore();
+
     ctx.fillStyle = "rgba(7,9,12,0.95)";
     ctx.strokeStyle = lastColor;
     ctx.lineWidth = Math.max(2*dpr, strokeWidth * 0.85);
     ctx.beginPath(); ctx.arc(last.x,last.y,pointRadius,0,Math.PI*2); ctx.fill(); ctx.stroke();
-    ctx.restore();
     ctx.restore();
   }
   function animateEquityCurveTransition(canvas, nextValues, durationMs=900){
@@ -13093,7 +14659,15 @@ drawLineChart(yearChart, pts, `Year ${year}`);
         const txtCls = sum > 0 ? "pos" : (sum < 0 ? "neg" : "neu");
         const stateCls = sum > 0 ? "green" : (sum < 0 ? "red" : "neutral");
         btn.classList.add(stateCls);
-        btn.innerHTML = `<div class="date"></div><div class="pnl"><div class="pnlVal">${y}</div><div class="pnlSub ${txtCls}">${fmtMoney(sum)}</div></div>`;
+        const ys = (typeof yearTradeStats === "function") ? yearTradeStats(y) : { trades: 0, winPctText: "—" };
+        btn.innerHTML = `
+          <div class="yearTileLabel">${y}</div>
+          <div class="yearTileBody">
+            <div class="yearTileTotal ${txtCls}">${fmtMoney(sum)}</div>
+            <div class="yearTileMeta">${ys.trades} trades</div>
+            <div class="yearTileMeta">${ys.winPctText}</div>
+          </div>
+        `;
         btn.addEventListener("click", () => {
           pnlState.year = y;
           // keep month within year if possible
@@ -13124,10 +14698,11 @@ drawLineChart(yearChart, pts, `Year ${year}`);
         <div class="date"></div>
         <div class="pnl yearMonthTile">
           <div class="ymMonth">${DateTime.local(year, m, 1).toFormat("LLLL")}</div>
-          <!-- monthly PnL (driven by existing updater) -->
           <div class="pnlVal pnlAmt" data-num="0">+$0.00</div>
-          <div class="ymWin"><b>${ms.winPctText}</b></div>
+          <div class="ymTrades">${ms.trades} trades</div>
+          <div class="ymWin">${ms.winPctText}</div>
         </div>
+        <span class="monthCornerMarker">${DateTime.local(year, m, 1).toFormat("LLL")}</span>
       `;
 
       // Premium "count" animation for Monthly Totals tiles
@@ -13178,11 +14753,15 @@ drawLineChart(yearChart, pts, `Year ${year}`);
           try{ monthView.style.display = ""; }catch(_){}
           try{ document.getElementById("monthWidgetsCard").style.display = ""; }catch(_){}
           try{ document.getElementById("monthChartCard").style.display = ""; }catch(_){}
+          try{ document.querySelector(".pnlTopbar").style.display = ""; }catch(_){}
+          try{ document.querySelector(".pnlLeftControls").style.display = ""; }catch(_){}
+          try{ document.querySelector(".pnlRightStats").style.display = ""; }catch(_){}
 
           // Ensure tab buttons reflect Monthly
           try{
             pnlTabMonth?.classList?.add?.("active");
             pnlTabYear?.classList?.remove?.("active");
+            window.syncMonthlyTopbarVisibility?.();
           }catch(_){}
 
           // Clear any lingering transition classes that could hide the calendar
@@ -13200,40 +14779,24 @@ drawLineChart(yearChart, pts, `Year ${year}`);
           try{ yearView.style.display = "none"; }catch(_){}
           try{ document.getElementById("yearlyTopRow").style.display = "none"; }catch(_){}
 
-          // Bring the calendar into view
-          try{
-            setTimeout(() => {
-              (document.getElementById("monthView") || document.getElementById("profitMonthShell"))?.scrollIntoView?.({behavior:"smooth", block:"start"});
-            }, 60);
-          }catch(_){}
         };
 
-        // Prefer the real Month tab click (so any other listeners run), but keep a fallback.
+        // Direct month drilldown: avoid the generic sub-tab fade here because the calendar
+        // is re-rendered at the same time, which can produce a small flash.
+        try{ setPnLSubTab?.("month"); }catch(_){}
         try{
-          if(pnlTabMonth && typeof pnlTabMonth.click === "function"){
-            // Run through the sub-tab swap animation if available
-            if(typeof animatePnLSubTabSwap === "function"){
-              animatePnLSubTabSwap("month", () => {
-                try{ setPnLSubTab?.("month"); }catch(_){}
-                goMonth();
-              });
-            }else{
-              pnlTabMonth.click();
-              // After click, enforce state + render
-              goMonth();
-            }
-            return;
-          }
-        }catch(_){}
-
-        // Fallback path (no tab button for some reason)
-        if(typeof animatePnLSubTabSwap === "function"){
-          animatePnLSubTabSwap("month", () => {
-            try{ setPnLSubTab?.("month"); }catch(_){}
-            goMonth();
+          const shell = document.getElementById("profitMonthShell") || document.getElementById("sectionProfit");
+          shell?.classList?.add?.("monthDrillLock");
+          goMonth();
+          requestAnimationFrame(() => {
+            const mv = document.getElementById("monthView");
+            mv?.classList?.add?.("monthDrillIn");
+            setTimeout(() => {
+              mv?.classList?.remove?.("monthDrillIn");
+              shell?.classList?.remove?.("monthDrillLock");
+            }, 320);
           });
-        }else{
-          try{ setPnLSubTab?.("month"); }catch(_){}
+        }catch(_){
           goMonth();
         }
       });
@@ -13554,37 +15117,10 @@ document.addEventListener("DOMContentLoaded", function(){
   }
 
   function _pnlSwitchShell(doSwap){
+    // Immediate swap: prevents opacity fade from revealing stale monthly/yearly panels.
     const shell = document.getElementById("profitMonthShell");
-    if(!shell){
-      try{ doSwap && doSwap(); }catch(e){}
-      return;
-    }
-    // Fade out first (so we never show both layouts on the same paint)
-    shell.classList.add("is-switching");
-
-    const finish = () => requestAnimationFrame(() => shell.classList.remove("is-switching"));
-
-    // Wait a tick (and at most the transition length) before swapping DOM visibility
-    let done = false;
-    const runOnce = () => {
-      if(done) return;
-      done = true;
-      try{ doSwap && doSwap(); }catch(e){}
-      finish();
-    };
-
-    // Use transitionend when available, but also timeout as a safety net.
-    const onEnd = (e) => {
-      if(e && e.target !== shell) return;
-      shell.removeEventListener("transitionend", onEnd);
-      runOnce();
-    };
-    shell.addEventListener("transitionend", onEnd, { once:false });
-
-    setTimeout(() => {
-      shell.removeEventListener("transitionend", onEnd);
-      runOnce();
-    }, 160);
+    if(shell) shell.classList.remove("is-switching");
+    try{ doSwap && doSwap(); }catch(e){}
   }
 
   function showYearPanels(){
@@ -13599,6 +15135,12 @@ document.addEventListener("DOMContentLoaded", function(){
       try{ yearView?.classList?.remove?.("subTabSwitchOut"); }catch(_){ }
       try{ monthTotalsPanel?.classList?.remove?.("subTabSwitchOut"); }catch(_){ }
       try{ yearChartCard?.classList?.remove?.("subTabSwitchOut"); }catch(_){ }
+
+      // Hide monthly-only topbar controls while on Yearly
+      const pnlLeftControls = document.querySelector(".pnlLeftControls");
+      const pnlRightStats = document.querySelector(".pnlRightStats");
+      if(pnlLeftControls) pnlLeftControls.style.display = "none";
+      if(pnlRightStats) pnlRightStats.style.display = "none";
 
       // Show yearly panels
       document.getElementById("yearlyTopRow").style.display = "";
@@ -13624,6 +15166,12 @@ document.addEventListener("DOMContentLoaded", function(){
       try{ monthWidgetsCard?.classList?.remove?.("subTabSwitchOut"); }catch(_){ }
       try{ monthChartCard?.classList?.remove?.("subTabSwitchOut"); }catch(_){ }
 
+      // Show monthly-only topbar controls while on Monthly
+      const pnlLeftControls = document.querySelector(".pnlLeftControls");
+      const pnlRightStats = document.querySelector(".pnlRightStats");
+      if(pnlLeftControls) pnlLeftControls.style.display = "";
+      if(pnlRightStats) pnlRightStats.style.display = "";
+
       // Show month panels
       if(monthView) monthView.style.display = "";
       if(monthWidgetsCard) monthWidgetsCard.style.display = "";
@@ -13648,7 +15196,15 @@ document.addEventListener("DOMContentLoaded", function(){
       btn.type = "button";
       btn.className = "yearBtn" + (y === sel.year ? " active" : "");
       const cls = total > 0 ? "pos" : (total < 0 ? "neg" : "neu");
-      btn.innerHTML = `<span class="yNum">${y}</span><span class="yTotal ${cls}">${fmtMoney(total)}</span>`;
+      const ys = (typeof yearTradeStats === "function") ? yearTradeStats(y) : { trades: 0, winPctText: "—" };
+      btn.innerHTML = `
+        <div class="yearTileLabel">${y}</div>
+        <div class="yearTileBody">
+          <div class="yearTileTotal ${cls}">${fmtMoney(total)}</div>
+          <div class="yearTileMeta">${ys.trades} trades</div>
+          <div class="yearTileMeta">${ys.winPctText}</div>
+        </div>
+      `;
       btn.addEventListener("click", function(){
         saveSelectedYearMonth(y, 1);
         // Re-render with updated selection
@@ -13665,7 +15221,7 @@ document.addEventListener("DOMContentLoaded", function(){
       const sum = sumMonth(daily, sel.year, m);
       const tile = document.createElement("button");
       tile.className = "monthTile " + (sum > 0 ? "green" : (sum < 0 ? "red" : "neutral"));
-      tile.innerHTML = `<div class="mName">${monthName(sel.year, m)}</div><div class="mSum">${fmtMoney(sum)}</div>`;
+      tile.innerHTML = `<div class="mName">${monthName(sel.year, m)}</div><div class="mSum">${fmtMoney(sum)}</div><span class="monthCornerMarker">${monthName(sel.year, m).slice(0,3)}</span>`;
       tile.addEventListener("click", function(ev){
         // Jump to the clicked month in Month view (calendar)
         try{
@@ -13690,18 +15246,45 @@ document.addEventListener("DOMContentLoaded", function(){
         try{ if(monthTotalsPanel) monthTotalsPanel.style.display = "none"; }catch(e){}
         try{ if(yearChartCard) yearChartCard.style.display = "none"; }catch(e){}
 
-        // 4) Show month panels (calendar)
-        try{ showMonthPanels(); }catch(e){}
-
-        // 5) Render the calendar + chart using whichever functions exist in this build
+        // 4) Show month panels directly. Avoid the generic fade here because this path also
+        // re-renders the calendar, which can cause a slight flash on month-tile drilldown.
         try{
+          const shell = document.getElementById("profitMonthShell") || document.getElementById("sectionProfit");
+          shell?.classList?.add?.("monthDrillLock");
+          if(monthView) monthView.style.display = "";
+          if(monthWidgetsCard) monthWidgetsCard.style.display = "";
+          if(monthChartCard) monthChartCard.style.display = "";
+          document.querySelector(".pnlLeftControls")?.style?.removeProperty?.("display");
+          document.querySelector(".pnlRightStats")?.style?.removeProperty?.("display");
+          try{ monthView?.classList?.remove?.("subTabSwitchOut", "subTabSwitchIn"); }catch(_){}
+          try{ monthWidgetsCard?.classList?.remove?.("subTabSwitchOut", "subTabSwitchIn"); }catch(_){}
+          try{ monthChartCard?.classList?.remove?.("subTabSwitchOut", "subTabSwitchIn", "monthSwitchOut"); }catch(_){}
+
           if(typeof renderMonthView === "function") renderMonthView();
           else if(typeof window.renderMonthView === "function") window.renderMonthView();
-        }catch(e){}
-        try{
-          if(typeof renderMonthChart === "function") renderMonthChart();
-          else if(typeof window.renderMonthChart === "function") window.renderMonthChart();
-        }catch(e){}
+
+          requestAnimationFrame(() => {
+            monthView?.classList?.add?.("monthDrillIn");
+            try{
+              if(typeof renderMonthChart === "function") renderMonthChart();
+              else if(typeof window.renderMonthChart === "function") window.renderMonthChart();
+            }catch(_){}
+            setTimeout(() => {
+              monthView?.classList?.remove?.("monthDrillIn");
+              shell?.classList?.remove?.("monthDrillLock");
+            }, 320);
+          });
+        }catch(e){
+          try{ showMonthPanels(); }catch(_){}
+          try{
+            if(typeof renderMonthView === "function") renderMonthView();
+            else if(typeof window.renderMonthView === "function") window.renderMonthView();
+          }catch(_){}
+          try{
+            if(typeof renderMonthChart === "function") renderMonthChart();
+            else if(typeof window.renderMonthChart === "function") window.renderMonthChart();
+          }catch(_){}
+        }
       });
       yearMonthGrid.appendChild(tile);
     }
@@ -13883,7 +15466,398 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 })();
 </script>
-</div></body>
+</div>
+<script id="monthly-topbar-visibility-fix">
+(function(){
+  function isMonthlyActive(){
+    const monthTab = document.getElementById("pnlTabMonth");
+    const yearTab = document.getElementById("pnlTabYear");
+    const yearView = document.getElementById("yearView");
+    const yearlyTopRow = document.getElementById("yearlyTopRow");
+
+    if(monthTab && monthTab.classList.contains("active")) return true;
+    if(yearTab && yearTab.classList.contains("active")) return false;
+
+    const yearlyVisible =
+      (yearView && yearView.style.display !== "none" && yearView.offsetParent !== null) ||
+      (yearlyTopRow && yearlyTopRow.style.display !== "none" && yearlyTopRow.offsetParent !== null);
+
+    return !yearlyVisible;
+  }
+
+  function syncMonthlyTopbarVisibility(){
+    const topbar = document.querySelector(".pnlTopbar");
+    const left = document.querySelector(".pnlLeftControls");
+    const stats = document.querySelector(".pnlRightStats");
+    const showMonthly = isMonthlyActive();
+
+    // The monthly topbar lives outside #profitMonthShell, so yearly -> month drilldowns
+    // must explicitly restore it after yearly code has hidden it.
+    if(topbar) topbar.style.display = "";
+    if(left) left.style.display = showMonthly ? "" : "none";
+    if(stats) stats.style.display = showMonthly ? "" : "none";
+  }
+
+  function delayedSync(){
+    syncMonthlyTopbarVisibility();
+    requestAnimationFrame(syncMonthlyTopbarVisibility);
+    setTimeout(syncMonthlyTopbarVisibility, 80);
+    setTimeout(syncMonthlyTopbarVisibility, 220);
+  }
+
+  document.addEventListener("DOMContentLoaded", delayedSync);
+  window.addEventListener("load", delayedSync);
+
+  document.addEventListener("click", function(e){
+    if(e.target.closest("#pnlTabYear, #pnlTabMonth, #yearMonthGrid .monthTile, .monthTile")){
+      delayedSync();
+    }
+  }, true);
+
+  // Expose a small hook for inline yearly drilldown handlers.
+  window.syncMonthlyTopbarVisibility = delayedSync;
+})();
+</script>
+<style id="monthly-grid-4x3-real-fix">
+/* Monthly totals: force an even desktop layout of 3 rows x 4 columns. */
+body #yearlyTopRow #yearMonthGrid,
+body #yearMonthGrid{
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(140px, 170px)) !important;
+  justify-content: center !important;
+  gap: 12px !important;
+}
+
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn,
+body #yearlyTopRow #yearMonthGrid .monthTile,
+body #yearMonthGrid .yearMonthBtn,
+body #yearMonthGrid .monthTile{
+  width: 100% !important;
+  max-width: 170px !important;
+  height: 112px !important;
+  min-height: 112px !important;
+}
+
+@media (max-width: 980px){
+  body #yearlyTopRow #yearMonthGrid,
+  body #yearMonthGrid{
+    grid-template-columns: repeat(3, minmax(130px, 1fr)) !important;
+  }
+}
+
+@media (max-width: 720px){
+  body #yearlyTopRow #yearMonthGrid,
+  body #yearMonthGrid{
+    grid-template-columns: repeat(2, minmax(130px, 1fr)) !important;
+  }
+}
+</style>
+<style id="hard-month-year-visibility-lock">
+/* Hard lock: prevent the Yearly page from bleeding under the Monthly calendar.
+   Earlier layout CSS forces #yearlyTopRow to display:grid!important, so this
+   late rule intentionally wins unless the Yearly tab is truly active. */
+html body:not(.pnl-year-active) #yearlyTopRow.yearlyRevampGrid,
+html body.pnl-month-active #yearlyTopRow.yearlyRevampGrid{
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+html body.pnl-year-active:not(.pnl-month-active) #yearlyTopRow.yearlyRevampGrid{
+  display: grid !important;
+  visibility: visible !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  pointer-events: auto !important;
+}
+</style>
+<script id="hard-month-year-visibility-lock-js">
+(function(){
+  const YEAR_CLASS = "pnl-year-active";
+  const MONTH_CLASS = "pnl-month-active";
+
+  function byId(id){ return document.getElementById(id); }
+
+  function setImportant(el, prop, value){
+    if(el && el.style) el.style.setProperty(prop, value, "important");
+  }
+
+  function clearImportant(el, prop){
+    if(el && el.style) el.style.removeProperty(prop);
+  }
+
+  function hideYearly(){
+    const body = document.body;
+    const top = byId("yearlyTopRow");
+    const yearView = byId("yearView");
+    const totals = byId("monthTotalsPanel");
+    const yearlyPerf = byId("yearlyPerformanceCard");
+    const yearChart = byId("yearChartCard");
+
+    body.classList.add(MONTH_CLASS);
+    body.classList.remove(YEAR_CLASS);
+
+    [top, yearView, totals, yearlyPerf, yearChart].forEach(el => {
+      setImportant(el, "display", "none");
+      setImportant(el, "visibility", "hidden");
+      setImportant(el, "pointer-events", "none");
+    });
+
+    [byId("monthView"), byId("monthWidgetsCard"), byId("monthChartCard")].forEach(el => {
+      if(!el) return;
+      clearImportant(el, "visibility");
+      clearImportant(el, "pointer-events");
+      clearImportant(el, "height");
+      clearImportant(el, "max-height");
+      setImportant(el, "display", "block");
+    });
+  }
+
+  function showYearly(){
+    const body = document.body;
+    const top = byId("yearlyTopRow");
+    const yearView = byId("yearView");
+    const totals = byId("monthTotalsPanel");
+    const yearlyPerf = byId("yearlyPerformanceCard");
+    const yearChart = byId("yearChartCard");
+
+    body.classList.add(YEAR_CLASS);
+    body.classList.remove(MONTH_CLASS);
+
+    setImportant(top, "display", "grid");
+    [top, yearView, totals, yearlyPerf].forEach(el => {
+      if(!el) return;
+      setImportant(el, "visibility", "visible");
+      setImportant(el, "pointer-events", "auto");
+    });
+    setImportant(yearView, "display", "block");
+    setImportant(totals, "display", "block");
+    setImportant(yearlyPerf, "display", "block");
+    if(yearChart) setImportant(yearChart, "display", "none");
+
+    [byId("monthView"), byId("monthWidgetsCard"), byId("monthChartCard")].forEach(el => {
+      setImportant(el, "display", "none");
+      setImportant(el, "visibility", "hidden");
+      setImportant(el, "pointer-events", "none");
+    });
+  }
+
+  function syncFromTabs(){
+    const yearTab = byId("pnlTabYear");
+    const monthTab = byId("pnlTabMonth");
+    const yearActive = !!(yearTab && yearTab.classList.contains("active"));
+    const monthActive = !!(monthTab && monthTab.classList.contains("active"));
+    if(yearActive && !monthActive) showYearly();
+    else hideYearly();
+  }
+
+  document.addEventListener("click", function(e){
+    if(e.target.closest("#pnlTabYear")){
+      document.body.classList.add(YEAR_CLASS);
+      document.body.classList.remove(MONTH_CLASS);
+      setTimeout(syncFromTabs, 0);
+      setTimeout(syncFromTabs, 180);
+    }
+    if(e.target.closest("#pnlTabMonth, #yearMonthGrid .monthTile, #yearMonthGrid .yearMonthBtn")){
+      hideYearly();
+      setTimeout(syncFromTabs, 0);
+      setTimeout(syncFromTabs, 180);
+    }
+  }, true);
+
+  document.addEventListener("DOMContentLoaded", function(){
+    hideYearly();
+    setTimeout(syncFromTabs, 0);
+    setTimeout(syncFromTabs, 200);
+  });
+  window.addEventListener("load", function(){
+    setTimeout(syncFromTabs, 0);
+    setTimeout(syncFromTabs, 200);
+  });
+
+  const observer = new MutationObserver(function(){ syncFromTabs(); });
+  document.addEventListener("DOMContentLoaded", function(){
+    [byId("pnlTabMonth"), byId("pnlTabYear")].forEach(el => {
+      if(el) observer.observe(el, { attributes:true, attributeFilter:["class"] });
+    });
+  });
+
+  window.__pnlHardVisibilitySync = syncFromTabs;
+})();
+</script>
+<style id="month-drilldown-no-flicker-fix">
+/* Month tile -> Monthly view: keep the no-flash lock, but restore a subtle committed-state animation. */
+#profitMonthShell.monthDrillLock,
+#sectionProfit.monthDrillLock{
+  overflow: hidden;
+}
+.monthDrillLock .subTabSwitchOut,
+.monthDrillLock .subTabSwitchIn,
+.monthDrillLock .monthSwitchOut{
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+#monthView.monthDrillIn{
+  animation: monthDrillInSoft 240ms cubic-bezier(.22,1,.36,1) both;
+  will-change: opacity, transform;
+}
+#monthView.monthDrillIn .dayCell,
+#monthView.monthDrillIn .weekCard,
+#monthView.monthDrillIn .dow{
+  animation: monthGridDrillInSoft 260ms cubic-bezier(.22,1,.36,1) both;
+  will-change: opacity, transform;
+}
+#monthView.monthDrillIn .dayCell:nth-child(7n+1),
+#monthView.monthDrillIn .weekCard:nth-child(7n+1){ animation-delay: 10ms; }
+#monthView.monthDrillIn .dayCell:nth-child(7n+2),
+#monthView.monthDrillIn .weekCard:nth-child(7n+2){ animation-delay: 18ms; }
+#monthView.monthDrillIn .dayCell:nth-child(7n+3),
+#monthView.monthDrillIn .weekCard:nth-child(7n+3){ animation-delay: 26ms; }
+#monthView.monthDrillIn .dayCell:nth-child(7n+4),
+#monthView.monthDrillIn .weekCard:nth-child(7n+4){ animation-delay: 34ms; }
+@keyframes monthDrillInSoft{
+  from{ opacity: .965; transform: translateY(4px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+@keyframes monthGridDrillInSoft{
+  from{ opacity: .94; transform: translateY(5px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce){
+  #monthView.monthDrillIn,
+  #monthView.monthDrillIn .dayCell,
+  #monthView.monthDrillIn .weekCard,
+  #monthView.monthDrillIn .dow{ animation: none !important; }
+}
+</style>
+<style id="month-select-animation-v2">
+/* Explicit, subtle animation for Yearly month tile -> Monthly calendar drilldown. */
+#profitMonthShell.monthSelectAnim #monthView,
+#sectionProfit.monthSelectAnim #monthView{
+  animation: pnlMonthSelectViewIn 300ms cubic-bezier(.22,1,.36,1) both !important;
+  will-change: opacity, transform;
+}
+#profitMonthShell.monthSelectAnim #calGrid > *,
+#sectionProfit.monthSelectAnim #calGrid > *{
+  animation: pnlMonthSelectCellIn 320ms cubic-bezier(.22,1,.36,1) both !important;
+  will-change: opacity, transform;
+}
+#profitMonthShell.monthSelectAnim #calGrid > *:nth-child(7n+1){ animation-delay: 6ms !important; }
+#profitMonthShell.monthSelectAnim #calGrid > *:nth-child(7n+2){ animation-delay: 12ms !important; }
+#profitMonthShell.monthSelectAnim #calGrid > *:nth-child(7n+3){ animation-delay: 18ms !important; }
+#profitMonthShell.monthSelectAnim #calGrid > *:nth-child(7n+4){ animation-delay: 24ms !important; }
+#profitMonthShell.monthSelectAnim #calGrid > *:nth-child(7n+5){ animation-delay: 30ms !important; }
+@keyframes pnlMonthSelectViewIn{
+  from{ opacity:.90; transform: translateY(6px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+@keyframes pnlMonthSelectCellIn{
+  from{ opacity:.88; transform: translateY(7px) scale(.995); }
+  to{ opacity:1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce){
+  #profitMonthShell.monthSelectAnim #monthView,
+  #sectionProfit.monthSelectAnim #monthView,
+  #profitMonthShell.monthSelectAnim #calGrid > *,
+  #sectionProfit.monthSelectAnim #calGrid > *{ animation:none !important; }
+}
+</style>
+<script id="month-select-animation-v2-js">
+(function(){
+  const PNL_KEY = "ts_profit_tracking_v1";
+  const monthNames = ["january","february","march","april","may","june","july","august","september","october","november","december"];
+  function byId(id){ return document.getElementById(id); }
+  function parseMonth(tile){
+    const name = (tile.querySelector('.mName, .ymMonth')?.textContent || tile.textContent || '').trim().toLowerCase();
+    const idx = monthNames.findIndex(m => name.includes(m));
+    return idx >= 0 ? idx + 1 : null;
+  }
+  function selectedYear(){
+    const active = document.querySelector('#yearPicker .yearBtn.active, #yearPicker .monthTile.active, #yearlyTopRow .yearBtn.active');
+    const txt = (active?.textContent || '').match(/20\d{2}|19\d{2}/);
+    if(txt) return Number(txt[0]);
+    try{ if(window.pnlState && Number(window.pnlState.year)) return Number(window.pnlState.year); }catch(_){ }
+    try{ const obj = JSON.parse(localStorage.getItem(PNL_KEY)||'{}'); if(Number(obj.year)) return Number(obj.year); }catch(_){ }
+    return new Date().getFullYear();
+  }
+  function saveYM(year, month){
+    try{ if(typeof pnlState === 'object' && pnlState){ pnlState.year = year; pnlState.month = month; if(typeof savePnLState === 'function') savePnLState(); } }catch(_){ }
+    try{ if(window.pnlState){ window.pnlState.year = year; window.pnlState.month = month; if(typeof window.savePnLState === 'function') window.savePnLState(); } }catch(_){ }
+    try{
+      const obj = JSON.parse(localStorage.getItem(PNL_KEY)||'{}');
+      obj.year = year; obj.month = month; if(!obj.daily) obj.daily = {};
+      localStorage.setItem(PNL_KEY, JSON.stringify(obj));
+    }catch(_){ }
+  }
+  function hideYearlyShowMonthly(){
+    document.body.classList.add('pnl-month-active');
+    document.body.classList.remove('pnl-year-active');
+    byId('pnlTabMonth')?.classList.add('active');
+    byId('pnlTabYear')?.classList.remove('active');
+    ['yearlyTopRow','yearView','monthTotalsPanel','yearlyPerformanceCard','yearChartCard'].forEach(id => {
+      const el = byId(id); if(!el) return;
+      el.style.setProperty('display','none','important');
+      el.style.setProperty('visibility','hidden','important');
+      el.style.setProperty('pointer-events','none','important');
+    });
+    ['monthView','monthWidgetsCard','monthChartCard'].forEach(id => {
+      const el = byId(id); if(!el) return;
+      el.style.setProperty('display','block','important');
+      el.style.removeProperty('visibility');
+      el.style.removeProperty('pointer-events');
+    });
+    document.querySelector('.pnlLeftControls')?.style?.removeProperty('display');
+    document.querySelector('.pnlRightStats')?.style?.removeProperty('display');
+  }
+  function renderMonthly(){
+    try{ if(typeof renderMonthView === 'function') renderMonthView(); else if(window.renderMonthView) window.renderMonthView(); }catch(_){ }
+    try{ if(typeof renderMonthChart === 'function') renderMonthChart(); else if(window.renderMonthChart) window.renderMonthChart(); }catch(_){ }
+    try{ if(window.syncMonthlyTopbarVisibility) window.syncMonthlyTopbarVisibility(); }catch(_){ }
+    try{ if(window.__pnlHardVisibilitySync) window.__pnlHardVisibilitySync(); }catch(_){ }
+  }
+  document.addEventListener('click', function(e){
+    const tile = e.target.closest('#yearMonthGrid .monthTile, #yearMonthGrid .yearMonthBtn');
+    if(!tile) return;
+    const month = parseMonth(tile);
+    if(!month) return;
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    const year = selectedYear();
+    const shell = byId('profitMonthShell') || byId('sectionProfit');
+    saveYM(year, month);
+    hideYearlyShowMonthly();
+    shell?.classList.remove('monthSelectAnim', 'monthDrillIn', 'monthDrillLock');
+    void (shell && shell.offsetHeight);
+    shell?.classList.add('monthSelectAnim');
+    renderMonthly();
+    setTimeout(() => shell?.classList.remove('monthSelectAnim'), 460);
+  }, true);
+})();
+</script>
+<script>
+// ===== Auto Font Resize for Dollar Values =====
+function adjustMoneyFont(){
+  // Disabled: the tutorial popup must not trigger any calendar/font resizing.
+  return;
+}
+
+// Run on load + slight delay for dynamic rendering
+window.addEventListener('load', ()=>{
+  adjustMoneyFont();
+  setTimeout(adjustMoneyFont, 500);
+});
+</script>
+
+</body>
 </html>
 <style id="remove-hover-illumination-final">
 .tabBtn:hover,
@@ -14031,4 +16005,568 @@ document.addEventListener("DOMContentLoaded", function() {
 #yearlyPerformanceCard .pnlWidgetValue{
   color: #f5f5f5;
 }
+
+/* Target ONLY the monthly Equity curve title */
+#dailyPnlWidget .monthlyEquityCurveTitleFix{
+  margin-left: 6px !important;
+}
+
+</style>
+<style>#monthView #yearlyPerformanceCard{display:none !important;}</style>
+<style id="hard-month-year-visibility-lock-final-pass">
+/* Final pass: this is intentionally last in the file so no earlier yearly layout rule can override it. */
+html body:not(.pnl-year-active) #yearlyTopRow.yearlyRevampGrid,
+html body.pnl-month-active #yearlyTopRow.yearlyRevampGrid{
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+html body.pnl-year-active:not(.pnl-month-active) #yearlyTopRow.yearlyRevampGrid{
+  display: grid !important;
+  visibility: visible !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  pointer-events: auto !important;
+}
+</style>
+<script id="hard-month-year-visibility-lock-final-pass-js">
+(function(){
+  const YEAR_CLASS = "pnl-year-active";
+  const MONTH_CLASS = "pnl-month-active";
+  function byId(id){ return document.getElementById(id); }
+  function setImp(el, prop, value){ if(el && el.style) el.style.setProperty(prop, value, "important"); }
+  function clear(el, prop){ if(el && el.style) el.style.removeProperty(prop); }
+  function hideYearly(){
+    if(!document.body) return;
+    document.body.classList.add(MONTH_CLASS);
+    document.body.classList.remove(YEAR_CLASS);
+    ["yearlyTopRow","yearView","monthTotalsPanel","yearlyPerformanceCard","yearChartCard"].forEach(id => {
+      const el = byId(id);
+      setImp(el, "display", "none");
+      setImp(el, "visibility", "hidden");
+      setImp(el, "pointer-events", "none");
+    });
+    ["monthView","monthWidgetsCard","monthChartCard"].forEach(id => {
+      const el = byId(id);
+      if(!el) return;
+      clear(el, "visibility");
+      clear(el, "pointer-events");
+      setImp(el, "display", "block");
+    });
+  }
+  function showYearly(){
+    if(!document.body) return;
+    document.body.classList.add(YEAR_CLASS);
+    document.body.classList.remove(MONTH_CLASS);
+    setImp(byId("yearlyTopRow"), "display", "grid");
+    ["yearlyTopRow","yearView","monthTotalsPanel","yearlyPerformanceCard"].forEach(id => {
+      const el = byId(id);
+      setImp(el, "visibility", "visible");
+      setImp(el, "pointer-events", "auto");
+    });
+    setImp(byId("yearView"), "display", "block");
+    setImp(byId("monthTotalsPanel"), "display", "block");
+    setImp(byId("yearlyPerformanceCard"), "display", "block");
+    setImp(byId("yearChartCard"), "display", "none");
+    ["monthView","monthWidgetsCard","monthChartCard"].forEach(id => {
+      const el = byId(id);
+      setImp(el, "display", "none");
+      setImp(el, "visibility", "hidden");
+      setImp(el, "pointer-events", "none");
+    });
+  }
+  function sync(){
+    const y = byId("pnlTabYear");
+    const m = byId("pnlTabMonth");
+    if(y && y.classList.contains("active") && !(m && m.classList.contains("active"))) showYearly();
+    else hideYearly();
+  }
+  document.addEventListener("click", function(e){
+    if(e.target.closest("#pnlTabYear")){
+      if(document.body){ document.body.classList.add(YEAR_CLASS); document.body.classList.remove(MONTH_CLASS); }
+      setTimeout(sync, 0); setTimeout(sync, 200);
+    }
+    if(e.target.closest("#pnlTabMonth, #yearMonthGrid .monthTile, #yearMonthGrid .yearMonthBtn")){
+      hideYearly(); setTimeout(sync, 0); setTimeout(sync, 200);
+    }
+  }, true);
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", function(){ hideYearly(); setTimeout(sync, 0); setTimeout(sync, 200); });
+  else { hideYearly(); setTimeout(sync, 0); setTimeout(sync, 200); }
+  window.addEventListener("load", function(){ setTimeout(sync, 0); setTimeout(sync, 200); });
+  window.__pnlHardVisibilitySync = sync;
+})();
+</script>
+<style id="smooth-month-year-tab-switch-final">
+/* Smooth Monthly <-> Yearly transition without allowing both layouts to visibly stack. */
+#monthView,
+#monthWidgetsCard,
+#monthChartCard,
+#profitMonthShell,
+#yearView,
+#monthTotalsPanel,
+#yearChartCard,
+#yearlyPerformanceCard,
+#yearlyTopRow{
+  transition:
+    opacity 0.18s cubic-bezier(.22,1,.36,1) !important,
+    transform 0.18s cubic-bezier(.22,1,.36,1) !important,
+    filter 0.18s cubic-bezier(.22,1,.36,1) !important;
+  will-change: opacity, transform, filter;
+}
+.subTabSwitchOut{
+  opacity: 0 !important;
+  transform: translateY(4px) !important;
+  filter: blur(0.6px) !important;
+  pointer-events: none !important;
+}
+.subTabSwitchIn{
+  opacity: 0 !important;
+  transform: translateY(4px) !important;
+  filter: blur(0.6px) !important;
+  pointer-events: none !important;
+}
+#profitMonthShell.is-switching{
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: reduce){
+  #monthView,
+  #monthWidgetsCard,
+  #monthChartCard,
+  #profitMonthShell,
+  #yearView,
+  #monthTotalsPanel,
+  #yearChartCard,
+  #yearlyPerformanceCard,
+  #yearlyTopRow{
+    transition: none !important;
+  }
+  .subTabSwitchOut,
+  .subTabSwitchIn{
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+</style>
+<!-- FINAL PATCH: visible Monthly <-> Yearly transition controller -->
+<style id="pnl-visible-month-year-transition-patch">
+/* Subtle version: reduced movement, blur, and duration. */
+  #sectionProfit .pnlTopbar,
+  #sectionProfit #profitMonthShell,
+  #sectionProfit #yearlyTopRow,
+  #sectionProfit #yearView,
+  #sectionProfit #monthTotalsPanel,
+  #sectionProfit #yearlyPerformanceCard,
+  #sectionProfit #monthWidgetsCard,
+  #sectionProfit #monthChartCard{
+    transition:
+      opacity 180ms cubic-bezier(.22,1,.36,1),
+      transform 180ms cubic-bezier(.22,1,.36,1),
+      filter 180ms cubic-bezier(.22,1,.36,1) !important;
+    will-change: opacity, transform, filter;
+  }
+
+  body.pnl-subtab-fading #sectionProfit .pnlTopbar,
+  body.pnl-subtab-fading #sectionProfit #profitMonthShell,
+  body.pnl-subtab-fading #sectionProfit #yearlyTopRow,
+  body.pnl-subtab-fading #sectionProfit #yearView,
+  body.pnl-subtab-fading #sectionProfit #monthTotalsPanel,
+  body.pnl-subtab-fading #sectionProfit #yearlyPerformanceCard,
+  body.pnl-subtab-fading #sectionProfit #monthWidgetsCard,
+  body.pnl-subtab-fading #sectionProfit #monthChartCard{
+    opacity: 0 !important;
+    transform: translateY(4px) !important;
+    filter: blur(0.6px) !important;
+    pointer-events: none !important;
+  }
+
+  body.pnl-subtab-entering #sectionProfit .pnlTopbar,
+  body.pnl-subtab-entering #sectionProfit #profitMonthShell,
+  body.pnl-subtab-entering #sectionProfit #yearlyTopRow,
+  body.pnl-subtab-entering #sectionProfit #yearView,
+  body.pnl-subtab-entering #sectionProfit #monthTotalsPanel,
+  body.pnl-subtab-entering #sectionProfit #yearlyPerformanceCard,
+  body.pnl-subtab-entering #sectionProfit #monthWidgetsCard,
+  body.pnl-subtab-entering #sectionProfit #monthChartCard{
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+    filter: blur(0) !important;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    #sectionProfit .pnlTopbar,
+    #sectionProfit #profitMonthShell,
+    #sectionProfit #yearlyTopRow,
+    #sectionProfit #yearView,
+    #sectionProfit #monthTotalsPanel,
+    #sectionProfit #yearlyPerformanceCard,
+    #sectionProfit #monthWidgetsCard,
+    #sectionProfit #monthChartCard{
+      transition: none !important;
+    }
+    body.pnl-subtab-fading #sectionProfit .pnlTopbar,
+    body.pnl-subtab-fading #sectionProfit #profitMonthShell,
+    body.pnl-subtab-fading #sectionProfit #yearlyTopRow,
+    body.pnl-subtab-fading #sectionProfit #yearView,
+    body.pnl-subtab-fading #sectionProfit #monthTotalsPanel,
+    body.pnl-subtab-fading #sectionProfit #yearlyPerformanceCard,
+    body.pnl-subtab-fading #sectionProfit #monthWidgetsCard,
+    body.pnl-subtab-fading #sectionProfit #monthChartCard{
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+  }
+</style>
+<script id="pnl-visible-month-year-transition-controller">
+(function(){
+  let bypass = false;
+  let busy = false;
+
+  function isMonthlyActive(){
+    const m = document.getElementById("pnlTabMonth");
+    return !!(m && m.classList.contains("active"));
+  }
+
+  function currentTabForButton(btn){
+    if(!btn) return null;
+    if(btn.id === "pnlTabMonth") return "month";
+    if(btn.id === "pnlTabYear") return "year";
+    return null;
+  }
+
+  function runAfterSwap(){
+    if(typeof window.__pnlHardVisibilitySync === "function"){
+      try{ window.__pnlHardVisibilitySync(); }catch(_){ }
+    }
+    if(typeof window.syncMonthlyTopbarVisibility === "function"){
+      try{ window.syncMonthlyTopbarVisibility(); }catch(_){ }
+    }
+    window.dispatchEvent(new Event("resize"));
+  }
+
+  window.addEventListener("click", function(e){
+    const btn = e.target && e.target.closest ? e.target.closest("#pnlTabMonth, #pnlTabYear") : null;
+    if(!btn) return;
+
+    if(bypass){
+      bypass = false;
+      return;
+    }
+
+    const target = currentTabForButton(btn);
+    if(!target) return;
+    const alreadyThere = (target === "month" && isMonthlyActive()) || (target === "year" && !isMonthlyActive());
+    if(alreadyThere || busy) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+
+    busy = true;
+    document.body.classList.remove("pnl-subtab-entering");
+    document.body.classList.add("pnl-subtab-fading");
+
+    window.setTimeout(function(){
+      bypass = true;
+      btn.dispatchEvent(new MouseEvent("click", { bubbles:true, cancelable:true, view:window }));
+      runAfterSwap();
+
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){
+          document.body.classList.add("pnl-subtab-entering");
+          document.body.classList.remove("pnl-subtab-fading");
+          window.setTimeout(function(){
+            document.body.classList.remove("pnl-subtab-entering");
+            runAfterSwap();
+            busy = false;
+          }, 190);
+        });
+      });
+    }, 120);
+  }, true);
+})();
+</script>
+<style id="month-corner-marker-final">
+/* Bottom-right Jan/Feb/etc markers on the 12 Monthly Totals icons. */
+body #yearMonthGrid .yearMonthBtn,
+body #yearMonthGrid .monthTile,
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn,
+body #yearlyTopRow #yearMonthGrid .monthTile{
+  position: relative !important;
+}
+
+body #yearMonthGrid .monthCornerMarker,
+body #yearlyTopRow #yearMonthGrid .monthCornerMarker{
+  position: absolute !important;
+  right: 8px !important;
+  bottom: 7px !important;
+  z-index: 30 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 34px !important;
+  height: 20px !important;
+  padding: 0 7px !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(255,255,255,0.16) !important;
+  background: rgba(7,9,12,0.72) !important;
+  color: rgba(255,255,255,0.82) !important;
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  font-weight: 950 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.2px !important;
+  pointer-events: none !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.26) !important;
+}
+</style>
+<script id="month-corner-marker-safety-js">
+(function(){
+  const labels = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  function applyMonthCornerMarkers(){
+    const grid = document.getElementById("yearMonthGrid");
+    if(!grid) return;
+    const tiles = Array.from(grid.querySelectorAll(".yearMonthBtn, .monthTile"));
+    tiles.slice(0,12).forEach((tile, idx) => {
+      if(!tile.querySelector(".monthCornerMarker")){
+        const s = document.createElement("span");
+        s.className = "monthCornerMarker";
+        s.textContent = labels[idx] || "";
+        tile.appendChild(s);
+      }else{
+        tile.querySelector(".monthCornerMarker").textContent = labels[idx] || tile.querySelector(".monthCornerMarker").textContent;
+      }
+    });
+  }
+  document.addEventListener("DOMContentLoaded", applyMonthCornerMarkers);
+  window.addEventListener("load", applyMonthCornerMarkers);
+  document.addEventListener("click", function(e){
+    if(e.target.closest("#pnlTabYear, #pnlTabMonth, #yearMonthGrid .monthTile, #yearMonthGrid .yearMonthBtn")){
+      requestAnimationFrame(applyMonthCornerMarkers);
+      setTimeout(applyMonthCornerMarkers, 80);
+      setTimeout(applyMonthCornerMarkers, 250);
+    }
+  }, true);
+  window.applyMonthCornerMarkers = applyMonthCornerMarkers;
+})();
+</script>
+<style id="monthly-total-auto-font-size-final">
+/* Auto-shrink Monthly Totals dollar values when they reach 4–5+ figures. */
+body #yearMonthGrid .monthTile .mSum.money-4-fig,
+body #yearlyTopRow #yearMonthGrid .monthTile .mSum.money-4-fig,
+body #yearMonthGrid .yearMonthBtn .pnlAmt.money-4-fig,
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnlAmt.money-4-fig{
+  font-size: 23px !important;
+  letter-spacing: -0.15px !important;
+  white-space: nowrap !important;
+  max-width: 100% !important;
+}
+
+body #yearMonthGrid .monthTile .mSum.money-5-fig,
+body #yearlyTopRow #yearMonthGrid .monthTile .mSum.money-5-fig,
+body #yearMonthGrid .yearMonthBtn .pnlAmt.money-5-fig,
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnlAmt.money-5-fig{
+  font-size: 20px !important;
+  letter-spacing: -0.35px !important;
+  white-space: nowrap !important;
+  max-width: 100% !important;
+}
+</style>
+<script id="monthly-total-auto-font-size-final-js">
+(function(){
+  function digitCountFromMoneyText(text){
+    // Count only digits before the decimal point so ".00" does not force shrink.
+    const s = String(text || '').replace(/,/g, '');
+    const beforeDecimal = (s.split('.')[0] || '').replace(/[^0-9]/g, '');
+    return beforeDecimal.length;
+  }
+
+  function resizeMonthlyTotalDollarValues(){
+    const values = document.querySelectorAll(
+      '#yearMonthGrid .monthTile .mSum, #yearlyTopRow #yearMonthGrid .monthTile .mSum, ' +
+      '#yearMonthGrid .yearMonthBtn .pnlAmt, #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnlAmt'
+    );
+
+    values.forEach(function(el){
+      const digits = digitCountFromMoneyText(el.textContent);
+      el.classList.remove('money-4-fig', 'money-5-fig');
+
+      if(digits >= 5){
+        el.classList.add('money-5-fig');
+      }else if(digits >= 4){
+        el.classList.add('money-4-fig');
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', resizeMonthlyTotalDollarValues);
+  window.addEventListener('load', function(){
+    resizeMonthlyTotalDollarValues();
+    setTimeout(resizeMonthlyTotalDollarValues, 100);
+    setTimeout(resizeMonthlyTotalDollarValues, 400);
+  });
+
+  document.addEventListener('click', function(e){
+    if(e.target.closest('#pnlTabYear, #pnlTabMonth, #yearMonthGrid, .monthTile, .yearMonthBtn, .navBtn')){
+      requestAnimationFrame(resizeMonthlyTotalDollarValues);
+      setTimeout(resizeMonthlyTotalDollarValues, 120);
+      setTimeout(resizeMonthlyTotalDollarValues, 350);
+    }
+  }, true);
+
+  const obs = new MutationObserver(function(){
+    resizeMonthlyTotalDollarValues();
+  });
+
+  function startObserver(){
+    const grid = document.getElementById('yearMonthGrid');
+    if(grid) obs.observe(grid, { childList: true, subtree: true, characterData: true });
+    resizeMonthlyTotalDollarValues();
+  }
+
+  document.addEventListener('DOMContentLoaded', startObserver);
+  window.addEventListener('load', startObserver);
+  window.resizeMonthlyTotalDollarValues = resizeMonthlyTotalDollarValues;
+})();
+</script>
+<style id="hide-month-name-labels-only">
+/* Hide only the top month-name label in Monthly Totals tiles.
+   Do not hide the .pnl/yearMonthTile wrapper, totals, trades, win%, or corner badge. */
+body #yearMonthGrid .yearMonthBtn .ymMonth,
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .ymMonth,
+body #yearMonthGrid .monthTile .mName,
+body #yearlyTopRow #yearMonthGrid .monthTile .mName{
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Re-center the remaining content after removing the top label. */
+body #yearMonthGrid .yearMonthBtn .pnl.yearMonthTile,
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnl.yearMonthTile{
+  justify-content: center !important;
+  gap: 4px !important;
+  padding-top: 0 !important;
+}
+
+body #yearMonthGrid .monthTile,
+body #yearlyTopRow #yearMonthGrid .monthTile{
+  justify-content: center !important;
+}
+
+/* Keep the actual monthly dollar totals visible above all tile text. */
+body #yearMonthGrid .yearMonthBtn .pnlAmt,
+body #yearlyTopRow #yearMonthGrid .yearMonthBtn .pnlAmt,
+body #yearMonthGrid .monthTile .mSum,
+body #yearlyTopRow #yearMonthGrid .monthTile .mSum{
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+
+/* ===== Tutorial overlay: fully detached, no calendar sizing/transform side effects ===== */
+.demoOverlay{
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  padding: 24px !important;
+  margin: 0 !important;
+  contain: layout paint !important;
+}
+.demoOverlayBack{
+  position: fixed !important;
+  inset: 0 !important;
+  border-radius: 0 !important;
+}
+.calendarStage,
+.calendarStageInner,
+.calendarStage.demo-overlay-open,
+.calendarStage.demo-overlay-open .calendarStageInner,
+.calendarStage.demo-overlay-open .calGrid{
+  transform: none !important;
+  filter: none !important;
+  width: auto !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  animation: none !important;
+}
+.calendarStageInner{
+  transition: none !important;
+}
+</style>
+<script id="hide-month-name-labels-only-js">
+(function(){
+  function hideMonthNameLabelsOnly(){
+    document
+      .querySelectorAll('#yearMonthGrid .yearMonthBtn .ymMonth, #yearMonthGrid .monthTile .mName')
+      .forEach(function(el){
+        el.style.setProperty('display', 'none', 'important');
+        el.style.setProperty('opacity', '0', 'important');
+        el.style.setProperty('visibility', 'hidden', 'important');
+      });
+
+    document
+      .querySelectorAll('#yearMonthGrid .yearMonthBtn .pnlAmt, #yearMonthGrid .monthTile .mSum')
+      .forEach(function(el){
+        el.style.setProperty('display', 'block', 'important');
+        el.style.setProperty('opacity', '1', 'important');
+        el.style.setProperty('visibility', 'visible', 'important');
+        el.style.setProperty('position', 'relative', 'important');
+        el.style.setProperty('z-index', '5', 'important');
+      });
+  }
+
+  document.addEventListener('DOMContentLoaded', hideMonthNameLabelsOnly);
+  window.addEventListener('load', function(){
+    hideMonthNameLabelsOnly();
+    setTimeout(hideMonthNameLabelsOnly, 100);
+    setTimeout(hideMonthNameLabelsOnly, 400);
+  });
+
+  document.addEventListener('click', function(e){
+    if(e.target.closest('#pnlTabYear, #pnlTabMonth, #yearMonthGrid, .monthTile, .yearMonthBtn, .navBtn')){
+      requestAnimationFrame(hideMonthNameLabelsOnly);
+      setTimeout(hideMonthNameLabelsOnly, 120);
+      setTimeout(hideMonthNameLabelsOnly, 350);
+    }
+  }, true);
+
+  const obs = new MutationObserver(hideMonthNameLabelsOnly);
+  function startObserver(){
+    const grid = document.getElementById('yearMonthGrid');
+    if(grid) obs.observe(grid, { childList: true, subtree: true, characterData: true });
+    hideMonthNameLabelsOnly();
+  }
+
+  document.addEventListener('DOMContentLoaded', startObserver);
+  window.addEventListener('load', startObserver);
+})();
+</script>
+
+<style>
+
+/* Override: make year label match black month pill */
+.yearTileLabel{
+  background: #111111 !important;
+  border: 1px solid #2b2b2b !important;
+  color: #f3f5f7 !important;
+  backdrop-filter: none !important;
+}
+
 </style>
