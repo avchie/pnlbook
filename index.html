@@ -11186,6 +11186,26 @@ html.popup-font-ready #demoOverlay.demoOverlay.show{
 }
 </style>
 
+
+<style id="pnlImportExportStyles">
+  .pnlTransferDivider{
+    width:1px;
+    height:24px;
+    align-self:center;
+    background:rgba(255,255,255,0.14);
+    margin:0 1px;
+  }
+  .pnlTransferBtn{
+    background:rgba(255,255,255,0.045);
+    border-color:rgba(255,255,255,0.14);
+  }
+  .pnlTransferBtn:hover{
+    background:rgba(255,255,255,0.09);
+  }
+  @media (max-width:680px){
+    .pnlTransferDivider{display:none;}
+  }
+</style>
 </head>
 <body class="tab-dashboard">
 <div id="mobileBlocker">
@@ -11347,6 +11367,10 @@ html.popup-font-ready #demoOverlay.demoOverlay.show{
 <div class="subTabs">
 <button class="subTabBtn active" id="pnlTabMonth">Monthly</button>
 <button class="subTabBtn" id="pnlTabYear">Yearly</button>
+<span class="pnlTransferDivider" aria-hidden="true"></span>
+<button class="subTabBtn pnlTransferBtn" id="pnlImportBtn" type="button" title="Import gross profit, gross loss, winning trades and losing trades from CSV">Import</button>
+<button class="subTabBtn pnlTransferBtn" id="pnlExportBtn" type="button" title="Export gross profit, gross loss, winning trades and losing trades to CSV">Export</button>
+<input id="pnlImportFile" type="file" accept=".csv,text/csv" hidden/>
 </div>
 </div>
 <div class="content">
@@ -15857,6 +15881,161 @@ window.addEventListener('load', ()=>{
 });
 </script>
 
+
+<script id="pnlImportExportLogic">
+(() => {
+  const importBtn = document.getElementById("pnlImportBtn");
+  const exportBtn = document.getElementById("pnlExportBtn");
+  const importFile = document.getElementById("pnlImportFile");
+
+  function csvEscape(value){
+    const s = String(value ?? "");
+    return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  }
+
+  function parseCsv(text){
+    const rows = [];
+    let row = [], field = "", quoted = false;
+    for(let i = 0; i < text.length; i++){
+      const ch = text[i];
+      if(quoted){
+        if(ch === '"' && text[i + 1] === '"'){ field += '"'; i++; }
+        else if(ch === '"'){ quoted = false; }
+        else field += ch;
+      }else{
+        if(ch === '"') quoted = true;
+        else if(ch === ','){ row.push(field); field = ""; }
+        else if(ch === '\n'){ row.push(field); rows.push(row); row = []; field = ""; }
+        else if(ch !== '\r') field += ch;
+      }
+    }
+    if(field.length || row.length){ row.push(field); rows.push(row); }
+    return rows.filter(r => r.some(v => String(v).trim() !== ""));
+  }
+
+  function canonicalHeader(value){
+    return String(value || "").trim().toLowerCase().replace(/[^a-z0-9]/g, "");
+  }
+
+  function parseImportedDate(raw){
+    const s = String(raw || "").trim();
+    let m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+    if(m){
+      const y=+m[1], mo=+m[2], d=+m[3];
+      const dt = DateTime.local(y,mo,d);
+      return dt.isValid ? dt.toISODate() : null;
+    }
+    m = s.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/);
+    if(m){
+      const d=+m[1], mo=+m[2], y=+m[3];
+      const dt = DateTime.local(y,mo,d);
+      return dt.isValid ? dt.toISODate() : null;
+    }
+    return null;
+  }
+
+  function getState(){
+    if(typeof pnlState === "object" && pnlState && pnlState.daily) return pnlState;
+    try{
+      const obj = JSON.parse(localStorage.getItem("ts_profit_tracking_v1") || "{}");
+      if(!obj.daily) obj.daily = {};
+      return obj;
+    }catch(_){ return {daily:{}}; }
+  }
+
+  function persistState(state){
+    try{
+      if(typeof savePnLState === "function" && state === pnlState){
+        savePnLState();
+      }else{
+        localStorage.setItem("ts_profit_tracking_v1", JSON.stringify(state));
+      }
+    }catch(e){
+      localStorage.setItem("ts_profit_tracking_v1", JSON.stringify(state));
+    }
+  }
+
+  exportBtn?.addEventListener("click", () => {
+    const state = getState();
+    const lines = [["date","gross_profit","gross_loss","winning_trades","losing_trades"]];
+    Object.keys(state.daily || {}).sort().forEach(date => {
+      const raw = state.daily[date];
+      const rec = typeof normalizeDayRec === "function" ? normalizeDayRec(raw) : (raw || {});
+      const gp = Math.max(0, Number(rec.gp ?? rec.grossProfit) || 0);
+      const gl = Math.max(0, Math.abs(Number(rec.gl ?? rec.grossLoss) || 0));
+      const wins = Math.max(0, parseInt(rec.wins,10) || 0);
+      const losses = Math.max(0, parseInt(rec.losses,10) || 0);
+      if(gp === 0 && gl === 0 && wins === 0 && losses === 0) return;
+      lines.push([date, gp.toFixed(2), gl.toFixed(2), wins, losses]);
+    });
+    const csv = lines.map(row => row.map(csvEscape).join(",")).join("\r\n") + "\r\n";
+    const blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `pnl-book-data-${DateTime.local().toISODate()}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+
+  importBtn?.addEventListener("click", () => {
+    if(importFile){ importFile.value = ""; importFile.click(); }
+  });
+
+  importFile?.addEventListener("change", async () => {
+    const file = importFile.files?.[0];
+    if(!file) return;
+    try{
+      const rows = parseCsv(await file.text());
+      if(rows.length < 2) throw new Error("The CSV contains no data rows.");
+
+      const headers = rows[0].map(canonicalHeader);
+      const find = (...names) => headers.findIndex(h => names.includes(h));
+      const idxDate = find("date");
+      const idxGp = find("grossprofit","gp");
+      const idxGl = find("grossloss","gl");
+      const idxWins = find("winningtrades","wins","winningtrade");
+      const idxLosses = find("losingtrades","losses","losingtrade");
+      if([idxDate,idxGp,idxGl,idxWins,idxLosses].some(i => i < 0)){
+        throw new Error("CSV needs these columns: date, gross_profit, gross_loss, winning_trades, losing_trades.");
+      }
+
+      const state = getState();
+      if(!state.daily) state.daily = {};
+      let imported = 0, skipped = 0;
+      for(const row of rows.slice(1)){
+        const date = parseImportedDate(row[idxDate]);
+        const gp = Number(String(row[idxGp] ?? "").replace(/[$,]/g,""));
+        const gl = Number(String(row[idxGl] ?? "").replace(/[$,]/g,""));
+        const wins = Number(row[idxWins]);
+        const losses = Number(row[idxLosses]);
+        if(!date || !Number.isFinite(gp) || !Number.isFinite(gl) || gp < 0 || gl < 0 ||
+           !Number.isInteger(wins) || wins < 0 || !Number.isInteger(losses) || losses < 0){
+          skipped++;
+          continue;
+        }
+        state.daily[date] = { pnl: gp - gl, gp, gl, wins, losses };
+        imported++;
+      }
+      if(imported === 0) throw new Error("No valid rows could be imported.");
+
+      persistState(state);
+      try{ if(typeof renderMonthView === "function") renderMonthView(); }catch(_){}
+      try{ if(typeof renderMonthChart === "function") renderMonthChart(); }catch(_){}
+      try{ if(typeof renderYearIfNeeded === "function") renderYearIfNeeded(); }catch(_){}
+      try{ if(typeof renderYearView === "function") renderYearView(); }catch(_){}
+
+      alert(`Imported ${imported} day${imported === 1 ? "" : "s"}.${skipped ? ` Skipped ${skipped} invalid row${skipped === 1 ? "" : "s"}.` : ""}`);
+    }catch(err){
+      alert(`Import failed: ${err?.message || err}`);
+    }finally{
+      importFile.value = "";
+    }
+  });
+})();
+</script>
 </body>
 </html>
 <style id="remove-hover-illumination-final">
